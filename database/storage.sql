@@ -26,6 +26,8 @@ CREATE TABLE Prodotto (
     immagine_url VARCHAR(255),
     fase_utilizzo VARCHAR(50), -- Es: Pre-Lavaggio, Lavaggio, Post-Asciugatura, Styling
     id_sottocategoria INT,
+    tipo_cute_target VARCHAR(50),
+    tipo_capello_target VARCHAR(50),
     FOREIGN KEY (id_sottocategoria) REFERENCES Sottocategoria(id_sottocategoria) ON DELETE SET NULL
 );
 
@@ -59,4 +61,16 @@ CREATE TABLE Dettaglio_Ordine (
     PRIMARY KEY (id_ordine, id_prodotto),
     FOREIGN KEY (id_ordine) REFERENCES Ordine(id_ordine) ON DELETE CASCADE,
     FOREIGN KEY (id_prodotto) REFERENCES Prodotto(id_prodotto) ON DELETE CASCADE
+);
+
+--7. Tabella Recensione
+CREATE TABLE Recensione (
+	id_recensione INT AUTO_INCREMENT PRIMARY KEY,
+	voto INT CHECK (voto >= 1 AND voto <=5),
+	testo TEXT,
+	data_recensione TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	id_utente INT,
+	id_prodotto INT,
+	FOREIIGN KEY (id_utente) REFERENCES Utente(id_utente),
+	FOREIGN KEY (id_prodotto) REFERENCES Prodotto(id_prodotto)
 );
