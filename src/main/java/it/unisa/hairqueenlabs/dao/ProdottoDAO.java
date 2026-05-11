@@ -33,6 +33,8 @@ public class ProdottoDAO {
                 p.setImmagineUrl(resultSet.getString("immagine_url"));
                 p.setFaseUtilizzo(resultSet.getString("fase_utilizzo"));
                 p.setIdSottocategoria(resultSet.getInt("id_sottocategoria"));
+                p.setTipoCuteTarget(resultSet.getString("tipo_cute_target"));
+                p.setTipoCapelloTarget(resultSet.getString("tipo_capello_target"));
                 
                 prodotti.add(p);
             }
@@ -69,7 +71,8 @@ public class ProdottoDAO {
                 p.setQuantitaMagazzino(resultSet.getInt("quantita_magazzino"));
                 p.setImmagineUrl(resultSet.getString("immagine_url"));
                 p.setFaseUtilizzo(resultSet.getString("fase_utilizzo"));
-                p.setIdSottocategoria(resultSet.getInt("id_sottocategoria"));
+                p.setIdSottocategoria(resultSet.getInt("id_sottocategoria"));p.setTipoCuteTarget(resultSet.getString("tipo_cute_target"));
+                p.setTipoCapelloTarget(resultSet.getString("tipo_capello_target"));
             }
         } finally {
             if (resultSet != null) resultSet.close();
