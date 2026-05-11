@@ -9,13 +9,15 @@ public class Prodotto {
 	private String immagineUrl;
 	private String faseUtilizzo;
 	private int idSottocategoria;
+	private String tipoCuteTarget;
+	private String tipoCapelloTarget;
 	
 	public Prodotto(){
 		
 	}
 
 	public Prodotto(int idProdotto, String nome, String descrizione, double prezzo, int quantitaMagazzino,
-			String immagineUrl, String faseUtilizzo, int idSottocategoria) {
+			String immagineUrl, String faseUtilizzo, int idSottocategoria, String tipoCuteTarget, String tipoCapelloTarget) {
 		super();
 		this.idProdotto = idProdotto;
 		this.nome = nome;
@@ -25,6 +27,8 @@ public class Prodotto {
 		this.immagineUrl = immagineUrl;
 		this.faseUtilizzo = faseUtilizzo;
 		this.idSottocategoria = idSottocategoria;
+		this.tipoCuteTarget = tipoCuteTarget;
+		this.tipoCapelloTarget = tipoCapelloTarget;
 	}
 
 	public int getIdProdotto() {
@@ -89,6 +93,22 @@ public class Prodotto {
 
 	public void setIdSottocategoria(int idSottocategoria) {
 		this.idSottocategoria = idSottocategoria;
+	}
+
+	public String getTipoCuteTarget() {
+		return tipoCuteTarget;
+	}
+
+	public void setTipoCuteTarget(String tipoCuteTarget) {
+		this.tipoCuteTarget = tipoCuteTarget;
+	}
+
+	public String getTipoCapelloTarget() {
+		return tipoCapelloTarget;
+	}
+
+	public void setTipoCapelloTarget(String tipoCapelloTarget) {
+		this.tipoCapelloTarget = tipoCapelloTarget;
 	}
 
 }
