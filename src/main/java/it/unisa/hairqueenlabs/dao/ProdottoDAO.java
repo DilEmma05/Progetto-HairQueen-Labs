@@ -78,4 +78,32 @@ public class ProdottoDAO {
         }
         return p; // Restituisce il prodotto trovato (o null se l'ID non esiste)
     }
+    
+    public synchronized List<Prodotto> doRetrieveRaccomandati(String cute, String capello) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Prodotto> raccomandati = new ArrayList<>();
+
+        // Cerchiamo i prodotti che corrispondono alle esigenze e ne prendiamo solo 3
+        String selectSQL = "SELECT * FROM Prodotto WHERE tipo_cute_target = ? AND tipo_capello_target = ? LIMIT 3";
+
+        try {
+            connection = DriverManagerConnectionPool.getConnection();
+            preparedStatement = connection.prepareStatement(selectSQL);
+            preparedStatement.setString(1, cute);
+            preparedStatement.setString(2, capello);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Prodotto p = new Prodotto();
+                raccomandati.add(p);
+            }
+        } finally {
+            if (resultSet != null) resultSet.close();
+            if (preparedStatement != null) preparedStatement.close();
+            DriverManagerConnectionPool.releaseConnection(connection);
+        }
+        return raccomandati;
+    }
 }
