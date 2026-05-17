@@ -10,7 +10,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import it.unisa.hairqueenlabs.dao.CategoriaDAO;
 import it.unisa.hairqueenlabs.dao.ProdottoDAO;
+import it.unisa.hairqueenlabs.model.Categoria;
 import it.unisa.hairqueenlabs.model.Prodotto;
 
 /**
@@ -38,6 +40,11 @@ public class HomeServlet extends HttpServlet {
 			//Recupero prodotti dal database
 			List<Prodotto> catalogo = prodottoDAO.doRetrieveAll();
 			request.setAttribute("listaProdotti", catalogo);
+
+	        CategoriaDAO categoriaDAO = new CategoriaDAO();
+	        List<Categoria> categorie = categoriaDAO.doRetrieveAllCategorie(); 
+	        request.setAttribute("listaCategorie", categorie);
+			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
 			dispatcher.forward(request, response);
 		}catch(SQLException e) {
