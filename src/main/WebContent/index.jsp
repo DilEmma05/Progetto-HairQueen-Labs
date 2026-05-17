@@ -139,10 +139,21 @@
     <nav>
         <ul>
             <li><a href="home">Tutti i Prodotti</a></li>
-            <li><a href="#">Shampoo</a></li>
-            <li><a href="#">Balsamo</a></li>
-            <li><a href="#">Trattamenti</a></li>
-            <li><a href="#">Trova Routine</a></li>
+            
+            <%
+                List<it.unisa.hairqueenlabs.model.Categoria> categorie = 
+                    (List<it.unisa.hairqueenlabs.model.Categoria>) request.getAttribute("listaCategorie");
+                
+                if (categorie != null && !categorie.isEmpty()) {
+                    for (it.unisa.hairqueenlabs.model.Categoria c : categorie) {
+            %>
+                        <li><a href="FiltroCatalogoServlet?id=<%= c.getIdCategoria() %>"><%= c.getNomeCategoria() %></a></li>
+            <%
+                    }
+                }
+            %>
+            
+            <li><a href="routine">Trova Routine</a></li>
         </ul>
     </nav>
 
