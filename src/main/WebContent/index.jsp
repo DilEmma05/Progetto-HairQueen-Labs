@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="it.unisa.hairqueenlabs.model.Prodotto" %>
+<%@ page import="it.unisa.hairqueenlabs.model.Categoria" %>
+<%@ page import="it.unisa.hairqueenlabs.dao.CategoriaDAO" %>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -127,6 +129,44 @@
         .btn-acquista:hover {
             background-color: #bfa030; /* Oro leggermente più scuro */
         }
+        
+        /* --- STILE DROPDOWN MENU --- */
+		nav ul li {
+    		position: relative; /* Necessario per posizionare il sottomenu */
+		}
+
+		/* Il sottomenu (nascosto di base) */
+		.dropdown-content {
+    		display: none;
+    		position: absolute;
+    		background-color: #1a1a1a;
+    		min-width: 200px;
+    		box-shadow: 0px 8px 16px rgba(0,0,0,0.5);
+    		z-index: 100;
+    		border-top: 2px solid var(--colore-primario); /* Riga viola in alto */
+    		padding: 10px 0;
+    		text-align: left;
+		}
+
+		/* Link dentro il sottomenu */
+		.dropdown-content a {
+    		padding: 12px 20px;
+    		display: block;
+    		font-size: 0.8rem;
+    		color: var(--testo-principale);
+    		text-transform: capitalize;
+		}
+
+		.dropdown-content a:hover {
+    		background-color: #2c2c2c;
+    		color: var(--colore-accento); /* Testo oro al passaggio */
+		}
+
+		/* MOSTRA IL MENU AL PASSAGGIO DEL MOUSE */
+		nav ul li:hover .dropdown-content {
+    		display: block;
+		}
+        
     </style>
 </head>
 <body>
@@ -138,23 +178,45 @@
 
     <nav>
         <ul>
-            <li><a href="home">Tutti i Prodotti</a></li>
-            
-            <%
-                List<it.unisa.hairqueenlabs.model.Categoria> categorie = 
-                    (List<it.unisa.hairqueenlabs.model.Categoria>) request.getAttribute("listaCategorie");
-                
-                if (categorie != null && !categorie.isEmpty()) {
-                    for (it.unisa.hairqueenlabs.model.Categoria c : categorie) {
-            %>
-                        <li><a href="FiltroCatalogoServlet?id=<%= c.getIdCategoria() %>"><%= c.getNomeCategoria() %></a></li>
-            <%
-                    }
+        <li><a href="home">Tutti i Prodotti</a></li>
+        
+        <%
+            // 1. Recuperiamo le macro-categorie
+            List<Categoria> macroCategorie = (List<Categoria>) request.getAttribute("listaCategorie");
+            it.unisa.hairqueenlabs.dao.CategoriaDAO catDAO = new CategoriaDAO();
+
+            if (macroCategorie != null) {
+                for (Categoria cat : macroCategorie) {
+        %>
+                    <li>
+                        <a href="FiltroCatalogoServlet?id=<%= cat.getIdCategoria() %>">
+                            <%= cat.getNomeCategoria() %> <i class="fa fa-caret-down"></i>
+                        </a>
+
+                        <div class="dropdown-content">
+                            <%
+                                // Per ogni macro-categoria, cerchiamo le sue sottocategorie nel DB
+                                List<it.unisa.hairqueenlabs.model.Sottocategoria> sottoCats = 
+                                    catDAO.doRetrieveSottocategorie(cat.getIdCategoria());
+                                
+                                if (sottoCats != null) {
+                                    for (it.unisa.hairqueenlabs.model.Sottocategoria s : sottoCats) {
+                            %>
+                                        <a href="FiltroSottocategoriaServlet?id=<%= s.getIdSottocategoria() %>">
+                                            <%= s.getNomeSottocategoria() %>
+                                        </a>
+                            <%
+                                    }
+                                }
+                            %>
+                        </div>
+                    </li>
+        <%
                 }
-            %>
-            
-            <li><a href="routine">Trova Routine</a></li>
-        </ul>
+            }
+        %>
+        <li><a href="routine">Trova Routine ✨</a></li>
+    </ul>
     </nav>
 
     <main class="contenitore-prodotti">
