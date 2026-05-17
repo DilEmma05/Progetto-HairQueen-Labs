@@ -109,4 +109,47 @@ public class ProdottoDAO {
         }
         return raccomandati;
     }
+    
+ // Recupera i prodotti appartenenti a una macro-categoria passando l'ID della categoria
+    public synchronized List<Prodotto> doRetrieveByCategoria(int idCategoria) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        
+        List<Prodotto> prodotti = new ArrayList<>();
+        
+        // Query SQL con JOIN: prende tutti i prodotti la cui sottocategoria appartiene alla macro-categoria specificata
+        String selectSQL = "SELECT p.* FROM Prodotto p " +
+                           "JOIN Sottocategoria s ON p.id_sottocategoria = s.id_sottocategoria " +
+                           "WHERE s.id_categoria = ?";
+
+        try {
+            connection = DriverManagerConnectionPool.getConnection();
+            preparedStatement = connection.prepareStatement(selectSQL);
+            preparedStatement.setInt(1, idCategoria);
+            
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Prodotto p = new Prodotto();
+                p.setIdProdotto(resultSet.getInt("id_prodotto"));
+                p.setNome(resultSet.getString("nome"));
+                p.setDescrizione(resultSet.getString("descrizione"));
+                p.setPrezzo(resultSet.getDouble("prezzo"));
+                p.setQuantitaMagazzino(resultSet.getInt("quantita_magazzino"));
+                p.setImmagineUrl(resultSet.getString("immagine_url"));
+                p.setFaseUtilizzo(resultSet.getString("fase_utilizzo"));
+                p.setIdSottocategoria(resultSet.getInt("id_sottocategoria"));
+                p.setTipoCuteTarget(resultSet.getString("tipo_cute_target"));
+                p.setTipoCapelloTarget(resultSet.getString("tipo_capello_target"));
+                
+                prodotti.add(p);
+            }
+        } finally {
+            if (resultSet != null) resultSet.close();
+            if (preparedStatement != null) preparedStatement.close();
+            DriverManagerConnectionPool.releaseConnection(connection);
+        }
+        return prodotti;
+    }
 }
