@@ -1,14 +1,178 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@ page import="it.unisa.hairqueenlabs.model.Prodotto" %>
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
-<meta charset="UTF-8">
-<title>HairQueen Labs</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HairQueen Labs</title>
+    
+    <style>
+        /* 1. VARIABILI CSS*/
+        :root {
+            --sfondo-principale: #121212;
+            --testo-principale: #F5F5F5;
+            --colore-primario: #8E44AD; /* Viola Ametista */
+            --colore-accento: #D4AF37;   /* Oro Luxury */
+            --sfondo-card: #1E1E1E;
+        }
+
+        /* Stile Globale */
+        body {
+            background-color: var(--sfondo-principale);
+            color: var(--testo-principale);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header e Logo */
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #2C2C2C;
+        }
+        header h1 {
+            color: var(--colore-accento);
+            margin: 0;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+        }
+
+        /* 2. BARRA CATEGORIE*/
+        nav {
+            background-color: #1a1a1a;
+            padding: 10px 0;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex; /* Flexbox per allineamento orizzontale */
+            justify-content: center;
+            gap: 30px;
+        }
+        nav ul li a {
+            color: var(--testo-principale);
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: color 0.3s ease; /* Transizione fluida dalle slide */
+        }
+        /* Pseudo-classe :hover dalle tue slide */
+        nav ul li a:hover {
+            color: var(--colore-primario);
+        }
+
+        /* 3. GRIGLIA PRODOTTI (CSS Grid avanzata) */
+        .contenitore-prodotti {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            /* Crea una griglia responsive automatica senza rompersi sui telefoni */
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        /* Card Singolo Prodotto */
+        .card-prodotto {
+            background-color: var(--sfondo-card);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #2C2C2C;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .card-prodotto:hover {
+            transform: translateY(-5px); /* Effetto sollevamento */
+            border-color: var(--colore-primario);
+        }
+
+        .card-prodotto img {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .card-prodotto h3 {
+            margin: 15px 0 10px 0;
+            font-size: 1.2rem;
+        }
+
+        .card-prodotto .prezzo {
+            color: var(--colore-accento);
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        /* Bottone Call to Action */
+        .btn-acquista {
+            background-color: var(--colore-accento);
+            color: var(--sfondo-principale);
+            border: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+        .btn-acquista:hover {
+            background-color: #bfa030; /* Oro leggermente più scuro */
+        }
+    </style>
 </head>
 <body>
 
-<h1>Benvenuti nel sito HaiQueen Labs!</h1>
+    <header>
+        <h1>HAIRQUEEN LABS</h1>
+        <p>Benvenuti nel tempio della cura dei tuoi capelli</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="home">Tutti i Prodotti</a></li>
+            <li><a href="#">Shampoo</a></li>
+            <li><a href="#">Balsamo</a></li>
+            <li><a href="#">Trattamenti</a></li>
+            <li><a href="#">Trova Routine</a></li>
+        </ul>
+    </nav>
+
+    <main class="contenitore-prodotti">
+        <%
+            // Recuperiamo la lista inserita nello zainetto dalla HomeServlet
+            List<Prodotto> prodotti = (List<Prodotto>) request.getAttribute("listaProdotti");
+            
+            // Protezione di sicurezza: se qualcuno visita index.jsp direttamente senza passare dalla Servlet
+            if (prodotti != null && !prodotti.isEmpty()) {
+                // Ciclo Java che genera l'HTML dinamicamente per ogni shampoo nel DB
+                for (Prodotto p : prodotti) {
+        %>
+                    <div class="card-prodotto">
+                        <img src="<%= (p.getImmagineUrl() != null && !p.getImmagineUrl().isEmpty()) ? p.getImmagineUrl() : "https://via.placeholder.com/250x200/1e1e1e/ffffff?text=HairQueen+Product" %>" alt="<%= p.getNome() %>">
+                        <h3><%= p.getNome() %></h3>
+                        <p class="prezzo"><%= String.format("%.2f", p.getPrezzo()) %> &euro;</p>
+                        <button class="btn-acquista">Aggiungi al Carrello</button>
+                    </div>
+        <%
+                }
+            } else {
+        %>
+                <p style="grid-column: 1/-1; text-align: center; color: #888;">
+                    Nessun prodotto disponibile nel catalogo. Assicurati di avviare il sito tramite l'URL della Servlet (/home)!
+                </p>
+        <%
+            }
+        %>
+    </main>
 
 </body>
 </html>
