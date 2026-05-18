@@ -100,6 +100,18 @@ public class ProdottoDAO {
 
             while (resultSet.next()) {
                 Prodotto p = new Prodotto();
+                //Riempiamo l'oggetto con i dati reali del DB
+                p.setIdProdotto(resultSet.getInt("id_prodotto"));
+                p.setNome(resultSet.getString("nome"));
+                p.setDescrizione(resultSet.getString("descrizione"));
+                p.setPrezzo(resultSet.getDouble("prezzo"));
+                p.setQuantitaMagazzino(resultSet.getInt("quantita_magazzino"));
+                p.setImmagineUrl(resultSet.getString("immagine_url"));
+                p.setFaseUtilizzo(resultSet.getString("fase_utilizzo"));
+                p.setIdSottocategoria(resultSet.getInt("id_sottocategoria"));
+                p.setTipoCuteTarget(resultSet.getString("tipo_cute_target"));
+                p.setTipoCapelloTarget(resultSet.getString("tipo_capello_target"));
+                
                 raccomandati.add(p);
             }
         } finally {
