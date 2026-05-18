@@ -244,7 +244,11 @@
             
             		<img src="<%= urlImmagine.startsWith("http") ? urlImmagine : request.getContextPath() + urlImmagine %>" alt="<%= p.getNome() %>">
             
-            		<h3><%= p.getNome() %></h3>
+            		<h3>
+    					<a href="prodotto?id=<%= p.getIdProdotto() %>" style="color: inherit; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='var(--colore-primario)'" onmouseout="this.style.color='inherit'">
+        				<%= p.getNome() %>
+    					</a>
+					</h3>
             		<p class="prezzo"><%= String.format("%.2f", p.getPrezzo()) %> &euro;</p>
             		<button class="btn-acquista">Aggiungi al Carrello</button>
         		</div>
