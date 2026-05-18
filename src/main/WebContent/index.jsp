@@ -230,11 +230,24 @@
                 for (Prodotto p : prodotti) {
         %>
                     <div class="card-prodotto">
-                        <img src="<%= (p.getImmagineUrl() != null && !p.getImmagineUrl().isEmpty()) ? p.getImmagineUrl() : "https://via.placeholder.com/250x200/1e1e1e/ffffff?text=HairQueen+Product" %>" alt="<%= p.getNome() %>">
-                        <h3><%= p.getNome() %></h3>
-                        <p class="prezzo"><%= String.format("%.2f", p.getPrezzo()) %> &euro;</p>
-                        <button class="btn-acquista">Aggiungi al Carrello</button>
-                    </div>
+            
+            		<% 
+                		String urlImmagine = (p.getImmagineUrl() != null && !p.getImmagineUrl().isEmpty()) 
+                                     		? p.getImmagineUrl() 
+                                     		: "https://via.placeholder.com/250x200/1e1e1e/ffffff?text=HairQueen+Product";
+                
+                		// 2. Aggiungiamo la barra iniziale se manca
+                		if(!urlImmagine.startsWith("/") && !urlImmagine.startsWith("http")) {
+                    		urlImmagine = "/" + urlImmagine; 
+                		}
+            		%>
+            
+            		<img src="<%= urlImmagine.startsWith("http") ? urlImmagine : request.getContextPath() + urlImmagine %>" alt="<%= p.getNome() %>">
+            
+            		<h3><%= p.getNome() %></h3>
+            		<p class="prezzo"><%= String.format("%.2f", p.getPrezzo()) %> &euro;</p>
+            		<button class="btn-acquista">Aggiungi al Carrello</button>
+        		</div>
         <%
                 }
             } else {
