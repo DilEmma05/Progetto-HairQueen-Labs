@@ -242,7 +242,9 @@
                 		}
             		%>
             
-            		<img src="<%= urlImmagine.startsWith("http") ? urlImmagine : request.getContextPath() + urlImmagine %>" alt="<%= p.getNome() %>">
+            		<a href="prodotto?id=<%= p.getIdProdotto() %>" style="display: block;">
+    				<img src="<%= urlImmagine.startsWith("http") ? urlImmagine : request.getContextPath() + urlImmagine %>" alt="<%= p.getNome() %>" style="max-width: 100%; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+					</a>
             
             		<h3>
     					<a href="prodotto?id=<%= p.getIdProdotto() %>" style="color: inherit; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='var(--colore-primario)'" onmouseout="this.style.color='inherit'">
@@ -250,7 +252,10 @@
     					</a>
 					</h3>
             		<p class="prezzo"><%= String.format("%.2f", p.getPrezzo()) %> &euro;</p>
-            		<button class="btn-acquista">Aggiungi al Carrello</button>
+            		<form action="CarrelloServlet" method="POST" style="margin-top: 15px;">
+    				<input type="hidden" name="idProdotto" value="<%= p.getIdProdotto() %>">
+    				<button type="submit" class="btn-acquista">Aggiungi al Carrello</button>
+					</form>
         		</div>
         <%
                 }
