@@ -128,7 +128,7 @@
                 </div>
 
                 <div class="azioni-carrello">
-    			<form action="svuota-carrello" method="POST" style="margin: 0;">
+    			<form action="SvuotaCarrello" method="POST" style="margin: 0;">
         		<button type="submit" class="btn btn-secondario">Svuota Carrello</button>
     			</form>
     
