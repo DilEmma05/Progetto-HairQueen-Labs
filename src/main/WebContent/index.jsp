@@ -250,7 +250,10 @@
     					</a>
 					</h3>
             		<p class="prezzo"><%= String.format("%.2f", p.getPrezzo()) %> &euro;</p>
-            		<button class="btn-acquista">Aggiungi al Carrello</button>
+            		<form action="CarrelloServlet" method="POST" style="margin-top: 15px;">
+    				<input type="hidden" name="idProdotto" value="<%= p.getIdProdotto() %>">
+    				<button type="submit" class="btn-acquista">Aggiungi al Carrello</button>
+					</form>
         		</div>
         <%
                 }
