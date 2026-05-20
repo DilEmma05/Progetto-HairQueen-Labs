@@ -172,7 +172,7 @@
                             : "Vizia i tuoi capelli con questo esclusivo trattamento HairQueen Labs. La descrizione dettagliata per questo prodotto di lusso sarà disponibile a breve." %>
                     </p>
                     
-                    <form action="AggiungiCarrelloServlet" method="POST">
+                    <form action="CarrelloServlet" method="POST">
                         <input type="hidden" name="idProdotto" value="<%= p.getIdProdotto() %>">
                         <button type="submit" class="btn-aggiungi">Aggiungi al Carrello</button>
                     </form>

@@ -68,7 +68,7 @@ public class CarrelloServlet extends HttpServlet {
         }
 
         //Una volta aggiunto, reindirizza l'utente alla pagina del carrello
-        response.sendRedirect("VisualizzaCarrelloServlet");
+        response.sendRedirect("carrello");
 	}
 	
 }
