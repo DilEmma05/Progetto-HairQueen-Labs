@@ -128,9 +128,12 @@
                 </div>
 
                 <div class="azioni-carrello">
-                    <button class="btn btn-secondario">Svuota Carrello</button>
-                    <button class="btn btn-primario">Procedi al Checkout</button>
-                </div>
+    			<form action="svuota-carrello" method="POST" style="margin: 0;">
+        		<button type="submit" class="btn btn-secondario">Svuota Carrello</button>
+    			</form>
+    
+    			<a href="checkout" class="btn btn-primario" style="text-decoration: none; display: inline-block; text-align: center;">Procedi al Checkout</a>
+				</div>
         <%
             }
         %>
