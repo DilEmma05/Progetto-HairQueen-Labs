@@ -70,4 +70,28 @@ public class UtenteDAO {
         }
         return utenti;
     }
+    
+    public Utente doRetrieveByEmailAndPassword(String email, String password) throws SQLException {
+        try (java.sql.Connection con = DriverManagerConnectionPool.getConnection()) {
+            java.sql.PreparedStatement ps = con.prepareStatement(
+                "SELECT * FROM Utente WHERE email = ? AND password = ?"
+            );
+            ps.setString(1, email);
+            ps.setString(2, password);
+            
+            java.sql.ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Utente u = new Utente();
+                u.setIdUtente(rs.getInt("id_utente"));
+                u.setNome(rs.getString("nome"));
+                u.setCognome(rs.getString("cognome"));
+                u.setEmail(rs.getString("email"));
+                u.setPassword(rs.getString("password"));
+                u.setIndirizzo(rs.getString("indirizzo"));
+                u.setRuolo(rs.getString("ruolo"));
+                return u;
+            }
+            return null;
+        }
+    }
 }
