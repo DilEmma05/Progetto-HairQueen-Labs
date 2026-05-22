@@ -114,12 +114,12 @@
             </div>
 
             <div class="gruppo-form">
-                <label for="password">Password *</label>
-                <div style="position: relative;">
-                    <input type="password" id="password" name="password" required style="padding-right: 40px;">
-                    <i id="togglePassword" class="fas fa-eye" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.1rem; color: #bbb; user-select: none; transition: 0.3s;"></i>
-                </div>
-            </div>
+    			<label for="password">Password *</label>
+    			<div style="position: relative;">
+        			<input type="password" id="password" name="password" required style="padding-right: 40px;">
+        			<i id="togglePassword" class="fas fa-eye" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.1rem; color: #bbb; user-select: none; transition: 0.3s;"></i>
+    			</div>
+			</div>
 
             <button type="submit" class="btn-login">Accedi</button>
         </form>
@@ -135,12 +135,20 @@
     const pwdInput = document.getElementById('password');
 
     togglePassword.addEventListener('click', function () {
-        // Controlla il tipo attuale: se è password diventa text, altrimenti torna password
+        // Alterna il tipo dell'input
         const type = pwdInput.getAttribute('type') === 'password' ? 'text' : 'password';
         pwdInput.setAttribute('type', type);
         
-        // Cambia l'icona (usa un'emoji diversa o un occhio sbarrato quando nascosta)
-        this.textContent = type === 'password' ? '👁️' : '🙈';
+        // Alterna le classi di FontAwesome
+        if (type === 'password') {
+            this.classList.remove('fa-eye-slash');
+            this.classList.add('fa-eye');
+            this.style.color = '#bbb'; // Colore neutro quando nascosta
+        } else {
+            this.classList.remove('fa-eye');
+            this.classList.add('fa-eye-slash');
+            this.style.color = 'var(--colore-accento)'; // Si colora di oro quando la password è visibile!
+        }
     });
     </script>
 
