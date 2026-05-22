@@ -123,10 +123,13 @@
 
             <div class="gruppo-form">
                 <label for="password">Password *</label>
-                <input type="password" id="password" name="password" required>
-                <div id="errore-password" class="messaggio-errore-js">La password deve contenere almeno 8 caratteri, una lettera maiuscola, un numero e un carattere speciale.</div>
+                <div style="position: relative;">
+                    <input type="password" id="password" name="password" required style="padding-right: 40px;">
+                    <span id="togglePassword" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.2rem; user-select: none;">👁️</span>
+                </div>
+                <div id="errore-password" class="messaggio-errore-js">La password deve contenere almeno 8 caratteri, una lettera MAIUSCOLA, un numero e un carattere speciale.</div>
             </div>
-
+            
             <div class="gruppo-form">
                 <label for="indirizzo">Indirizzo Completo *</label>
                 <input type="text" id="indirizzo" name="indirizzo" required>
@@ -176,6 +179,18 @@
         let isEmailValid = validaCampo(emailInput, emailError, emailRegex);
         let isPwdValid = validaCampo(pwdInput, pwdError, pwdRegex);
         let isTelValid = validaCampo(telInput, telError, telRegex);
+        
+        const togglePassword = document.getElementById('togglePassword');
+        const pwdInput = document.getElementById('password'); // (se l'avevi già definita, non c'è bisogno di dichiararla due volte)
+
+        togglePassword.addEventListener('click', function () {
+            // Controlla il tipo attuale: se è password diventa text, altrimenti torna password
+            const type = pwdInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            pwdInput.setAttribute('type', type);
+            
+            // Cambia l'icona (usa un'emoji diversa o un occhio sbarrato quando nascosta)
+            this.textContent = type === 'password' ? '👁️' : '🙈';
+        });
 
         const inputs = this.querySelectorAll('input[required]');
         inputs.forEach(input => {
