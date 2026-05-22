@@ -44,11 +44,13 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
         String password = request.getParameter("password");
+        
+        String passwordCriptata = it.unisa.hairqueenlabs.utils.PasswordUtils.hashPassword(password);
 
         UtenteDAO utenteDAO = new UtenteDAO();
 
         try {
-            Utente utente = utenteDAO.doRetrieveByEmailAndPassword(email, password);
+            Utente utente = utenteDAO.doRetrieveByEmailAndPassword(email, passwordCriptata);
 
             if (utente != null) {
                 // Login effettuato con successo: salva l'utente in sessione
