@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 import it.unisa.hairqueenlabs.model.Carrello;
+import it.unisa.hairqueenlabs.model.Utente;
 
 /**
  * Servlet implementation class CheckoutServlet
@@ -32,16 +33,20 @@ public class CheckoutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-        Carrello carrello = (Carrello) session.getAttribute("carrello");
-
-        // Controlla se il carrelo è vuoto
-        if (carrello == null || carrello.getElementi().isEmpty()) {
-            response.sendRedirect("carrello");
-            return;
-        }
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/checkout.jsp");
-        dispatcher.forward(request, response);
+		
+		Utente utenteLoggato = (Utente) session.getAttribute("utente");
+		if (utenteLoggato == null) {
+			request.setAttribute("errore", "Per procedere al checkout devi prima accedere o registrarti.");
+			request.getRequestDispatcher("/login.jsp").forward(request, response);
+			return; 
+		}
+		
+		Carrello carrello = (Carrello) session.getAttribute("carrello");
+		if (carrello == null || carrello.getElementi().isEmpty()) {
+			response.sendRedirect("carrello");
+			return;
+		}
+		request.getRequestDispatcher("/checkout.jsp").forward(request, response);
 	}
 
 	/**
