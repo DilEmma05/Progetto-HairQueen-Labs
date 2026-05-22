@@ -83,14 +83,28 @@
         <h2>Accedi al tuo account</h2>
 
         <% 
-            // Controllo per mostrare l'eventuale messaggio di errore generato dalla Servlet
+            // Recuperiamo ENTRAMBI i parametri una sola volta
             String errore = (String) request.getAttribute("errore");
+            String successo = (String) request.getAttribute("successo");
+            
+            // Se c'è un errore, stampiamo il blocco rosso
             if (errore != null) { 
         %>
             <div class="messaggio-errore">
                 <%= errore %>
             </div>
-        <% } %>
+        <% 
+            } 
+            
+            // Se c'è un successo, stampiamo il blocco verde
+            if (successo != null) { 
+        %>
+            <div style="background-color: rgba(46, 204, 113, 0.1); color: #2ecc71; padding: 10px; border: 1px solid #2ecc71; border-radius: 4px; margin-bottom: 20px; text-align: center; font-size: 0.9rem; font-weight: bold;">
+                <%= successo %>
+            </div>
+        <% 
+            } 
+        %>
 
         <form action="login" method="POST">
             <div class="gruppo-form">
