@@ -113,8 +113,12 @@
             </div>
 
             <div class="gruppo-form">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
+                <label for="password">Password *</label>
+                <div style="position: relative;">
+                    <input type="password" id="password" name="password" required style="padding-right: 40px;">
+                    <span id="togglePassword" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.2rem; user-select: none;">👁️</span>
+                </div>
+                <div id="errore-password" class="messaggio-errore-js">La password deve contenere almeno 8 caratteri, una lettera maiuscola, un numero e un carattere speciale.</div>
             </div>
 
             <button type="submit" class="btn-login">Accedi</button>
