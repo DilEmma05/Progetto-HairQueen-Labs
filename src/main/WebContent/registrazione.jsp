@@ -44,8 +44,17 @@
         .riga-doppia { display: flex; gap: 20px; }
         .riga-doppia .gruppo-form { flex: 1; }
 
-        .gruppo-form { margin-bottom: 20px; position: relative; }
-        .gruppo-form label { display: block; margin-bottom: 8px; color: #bbb; font-size: 0.9rem; }
+        .gruppo-form { 
+            margin-bottom: 35px; 
+            position: relative; 
+        }
+        
+        .gruppo-form label { 
+            display: block; 
+            margin-bottom: 8px; 
+            color: #bbb; 
+            font-size: 0.9rem; 
+        }
         
         .gruppo-form input {
             width: 100%; padding: 12px; border: 1px solid #333; background-color: #121212;
@@ -54,9 +63,19 @@
         }
         .gruppo-form input:focus { border-color: var(--colore-accento); outline: none; }
 
-        /* Stili attivati dal JavaScript in caso di errore */
         .input-errore { border-color: var(--colore-errore) !important; background-color: rgba(231, 76, 60, 0.05) !important; }
-        .messaggio-errore-js { color: var(--colore-errore); font-size: 0.85rem; margin-top: 5px; display: none; font-weight: bold; }
+
+        .messaggio-errore-js { 
+            color: var(--colore-errore); 
+            font-size: 0.8rem; 
+            display: none; 
+            font-weight: bold; 
+            position: absolute;
+            top: 100%;
+            left: 0;
+            margin-top: 4px;
+            line-height: 1.2;
+        }
 
         .btn-registrati {
             width: 100%; background-color: var(--colore-accento); color: var(--sfondo-principale);
