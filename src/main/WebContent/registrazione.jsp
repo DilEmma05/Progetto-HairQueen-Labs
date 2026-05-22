@@ -99,7 +99,7 @@
             <div class="gruppo-form">
                 <label for="password">Password *</label>
                 <input type="password" id="password" name="password" required>
-                <div id="errore-password" class="messaggio-errore-js">La password deve contenere almeno 8 caratteri, una lettera e un numero.</div>
+                <div id="errore-password" class="messaggio-errore-js">La password deve contenere almeno 8 caratteri, una lettera maiuscola, un numero e un carattere speciale.</div>
             </div>
 
             <div class="gruppo-form">
@@ -116,48 +116,68 @@
     </main>
 
     <script>
-        document.getElementById('form-registrazione').addEventListener('submit', function(event) {
-            let isValid = true;
-            
-            // 1. Constraint Validation API generica per i campi vuoti
-            if (!this.checkValidity()) {
-                isValid = false;
-            }
+    const form = document.getElementById('form-registrazione');
+    const emailInput = document.getElementById('email');
+    const emailError = document.getElementById('errore-email');
+    const pwdInput = document.getElementById('password');
+    const pwdError = document.getElementById('errore-password');
 
-            // 2. RegExp Validation per l'Email
-            const emailInput = document.getElementById('email');
-            const emailError = document.getElementById('errore-email');
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            
-            if (!emailRegex.test(emailInput.value)) {
-                emailInput.classList.add('input-errore');
-                emailError.style.display = 'block';
-                isValid = false;
-            } else {
-                emailInput.classList.remove('input-errore');
-                emailError.style.display = 'none';
-            }
+    // RegExp per l'Email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    // RegExp per la Password: 8 char, 1 maiuscola, 1 numero, 1 carattere speciale
+    const pwdRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
 
-            // 3. RegExp Validation per la Password
-            // Deve contenere almeno 8 caratteri, di cui almeno 1 lettera e 1 numero
-            const pwdInput = document.getElementById('password');
-            const pwdError = document.getElementById('errore-password');
-            const pwdRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    // Funzione di validazione LIVE per l'Email
+    function validaEmail() {
+        if (!emailRegex.test(emailInput.value)) {
+            emailInput.classList.add('input-errore');
+            emailError.style.display = 'block';
+            return false;
+        } else {
+            emailInput.classList.remove('input-errore');
+            emailError.style.display = 'none';
+            return true;
+        }
+    }
 
-            if (!pwdRegex.test(pwdInput.value)) {
-                pwdInput.classList.add('input-errore');
-                pwdError.style.display = 'block';
-                isValid = false;
-            } else {
-                pwdInput.classList.remove('input-errore');
-                pwdError.style.display = 'none';
-            }
+    // Funzione di validazione LIVE per la Password
+    function validaPassword() {
+        if (!pwdRegex.test(pwdInput.value)) {
+            pwdInput.classList.add('input-errore');
+            pwdError.style.display = 'block';
+            return false;
+        } else {
+            pwdInput.classList.remove('input-errore');
+            pwdError.style.display = 'none';
+            return true;
+        }
+    }
 
-            // Se ci sono errori, blocco l'invio del form alla Servlet
-            if (!isValid) {
-                event.preventDefault();
+    // Eventi live: Scattano ad ogni singolo tasto premuto
+    emailInput.addEventListener('input', validaEmail);
+    pwdInput.addEventListener('input', validaPassword);
+
+    form.addEventListener('submit', function(event) {
+        let isFormValid = this.checkValidity(); // Controlla i campi vuoti
+        let isEmailValid = validaEmail();
+        let isPwdValid = validaPassword();
+
+        const inputs = this.querySelectorAll('input[required]');
+        inputs.forEach(input => {
+            if (!input.value) {
+                input.classList.add('input-errore');
+                isFormValid = false;
+            } else if (input !== emailInput && input !== pwdInput) {
+                input.classList.remove('input-errore');
             }
         });
-    </script>
+
+        // Se anche solo una regola non è rispettata, blocca l'invio alla Servlet
+        if (!isFormValid || !isEmailValid || !isPwdValid) {
+            event.preventDefault();
+        }
+    });
+</script>
 </body>
 </html>
