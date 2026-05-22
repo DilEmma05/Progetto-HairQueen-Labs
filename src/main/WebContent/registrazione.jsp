@@ -114,6 +114,12 @@
                 <input type="email" id="email" name="email" required>
                 <div id="errore-email" class="messaggio-errore-js">Inserisci un'email valida (es. nome@dominio.it)</div>
             </div>
+            
+            <div class="gruppo-form">
+                <label for="telefono">Numero di Cellulare *</label>
+                <input type="tel" id="telefono" name="telefono" required>
+                <div id="errore-telefono" class="messaggio-errore-js">Inserisci un numero valido di 10 cifre.</div>
+            </div>
 
             <div class="gruppo-form">
                 <label for="password">Password *</label>
@@ -140,63 +146,51 @@
     const emailError = document.getElementById('errore-email');
     const pwdInput = document.getElementById('password');
     const pwdError = document.getElementById('errore-password');
+    const telInput = document.getElementById('telefono');
+    const telError = document.getElementById('errore-telefono');
 
-    // RegExp per l'Email
+    // RegExp
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    
-    // RegExp per la Password: 8 char, 1 maiuscola, 1 numero, 1 carattere speciale
     const pwdRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+    const telRegex = /^\d{10}$/; // Richiede esattamente 10 numeri
 
-    // Funzione di validazione LIVE per l'Email
-    function validaEmail() {
-        if (!emailRegex.test(emailInput.value)) {
-            emailInput.classList.add('input-errore');
-            emailError.style.display = 'block';
+    function validaCampo(input, errorDiv, regex) {
+        if (!regex.test(input.value)) {
+            input.classList.add('input-errore');
+            errorDiv.style.display = 'block';
             return false;
         } else {
-            emailInput.classList.remove('input-errore');
-            emailError.style.display = 'none';
+            input.classList.remove('input-errore');
+            errorDiv.style.display = 'none';
             return true;
         }
     }
 
-    // Funzione di validazione LIVE per la Password
-    function validaPassword() {
-        if (!pwdRegex.test(pwdInput.value)) {
-            pwdInput.classList.add('input-errore');
-            pwdError.style.display = 'block';
-            return false;
-        } else {
-            pwdInput.classList.remove('input-errore');
-            pwdError.style.display = 'none';
-            return true;
-        }
-    }
-
-    // Eventi live: Scattano ad ogni singolo tasto premuto
-    emailInput.addEventListener('input', validaEmail);
-    pwdInput.addEventListener('input', validaPassword);
+    // eventi live
+    emailInput.addEventListener('input', () => validaCampo(emailInput, emailError, emailRegex));
+    pwdInput.addEventListener('input', () => validaCampo(pwdInput, pwdError, pwdRegex));
+    telInput.addEventListener('input', () => validaCampo(telInput, telError, telRegex));
 
     form.addEventListener('submit', function(event) {
-        let isFormValid = this.checkValidity(); // Controlla i campi vuoti
-        let isEmailValid = validaEmail();
-        let isPwdValid = validaPassword();
+        let isFormValid = this.checkValidity(); 
+        let isEmailValid = validaCampo(emailInput, emailError, emailRegex);
+        let isPwdValid = validaCampo(pwdInput, pwdError, pwdRegex);
+        let isTelValid = validaCampo(telInput, telError, telRegex);
 
         const inputs = this.querySelectorAll('input[required]');
         inputs.forEach(input => {
             if (!input.value) {
                 input.classList.add('input-errore');
                 isFormValid = false;
-            } else if (input !== emailInput && input !== pwdInput) {
+            } else if (input !== emailInput && input !== pwdInput && input !== telInput) {
                 input.classList.remove('input-errore');
             }
         });
 
-        // Se anche solo una regola non è rispettata, blocca l'invio alla Servlet
-        if (!isFormValid || !isEmailValid || !isPwdValid) {
+        if (!isFormValid || !isEmailValid || !isPwdValid || !isTelValid) {
             event.preventDefault();
         }
     });
-</script>
+	</script>
 </body>
 </html>
