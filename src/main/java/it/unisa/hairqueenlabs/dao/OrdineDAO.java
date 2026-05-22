@@ -23,14 +23,12 @@ public class OrdineDAO {
             //DISABILITIAMO L'AUTOCOMMIT (Inizio Transazione)
             connection.setAutoCommit(false);
 
-            //SALVIAMO L'ORDINE PRINCIPALE
-            String sqlOrdine = "INSERT INTO Ordine (data_ordine, totale, stato, id_utente) VALUES (?, ?, ?, ?)";
-            // Usiamo Statement.RETURN_GENERATED_KEYS per farci ridare l'ID appena creato da MySQL
+            //SALVA L'ORDINE PRINCIPALE
+            String sqlOrdine = "INSERT INTO Ordine (totale, stato, id_utente) VALUES (?, ?, ?)";
             psOrdine = connection.prepareStatement(sqlOrdine, Statement.RETURN_GENERATED_KEYS);
-            psOrdine.setTimestamp(1, ordine.getDataOrdine());
-            psOrdine.setDouble(2, ordine.getTotale());
-            psOrdine.setString(3, ordine.getStato());
-            psOrdine.setInt(4, ordine.getIdUtente());
+            psOrdine.setDouble(1, ordine.getTotale());
+            psOrdine.setString(2, ordine.getStato());
+            psOrdine.setInt(3, ordine.getIdUtente());
 
             psOrdine.executeUpdate();
 
