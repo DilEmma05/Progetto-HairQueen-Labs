@@ -8,13 +8,14 @@ public class Utente {
 	private String password;
 	private String indirizzo;
 	private String ruolo;
+	private String telefono;
 	
 	public Utente() {
 		
 	}
 
 	public Utente(int idUtente, String nome, String cognome, String email, String password, String indirizzo,
-			String ruolo) {
+			String ruolo, String telefono) {
 		this.idUtente = idUtente;
 		this.nome = nome;
 		this.cognome = cognome;
@@ -22,6 +23,7 @@ public class Utente {
 		this.password = password;
 		this.indirizzo = indirizzo;
 		this.ruolo = ruolo;
+		this.telefono = telefono;
 	}
 
 	public int getIdUtente() {
@@ -78,6 +80,14 @@ public class Utente {
 
 	public void setRuolo(String ruolo) {
 		this.ruolo = ruolo;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 	
 }

@@ -3,6 +3,7 @@
 <%@ page import="it.unisa.hairqueenlabs.model.Prodotto" %>
 <%@ page import="it.unisa.hairqueenlabs.model.Categoria" %>
 <%@ page import="it.unisa.hairqueenlabs.dao.CategoriaDAO" %>
+<%@ page import="it.unisa.hairqueenlabs.model.Utente" %>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -175,6 +176,37 @@
         <h1>HAIRQUEEN LABS</h1>
         <p>Benvenuti nel tempio della cura dei tuoi capelli</p>
     </header>
+    
+    <div style="display: flex; justify-content: flex-end; align-items: center; gap: 20px; padding: 10px 20px; border-bottom: 1px solid #2C2C2C; background-color: var(--sfondo-principale);">
+        
+        <a href="carrello" style="color: var(--colore-accento); text-decoration: none; font-weight: bold; font-size: 1rem; display: flex; align-items: center; gap: 5px;">
+            🛒 Carrello
+        </a>
+
+        <%
+            // Recuperiamo l'utente dalla sessione
+            Utente utente = (Utente) session.getAttribute("utente");
+            
+            if (utente == null) {
+        %>
+                <a href="login" style="background-color: var(--colore-primario); color: white; text-decoration: none; padding: 8px 18px; border-radius: 4px; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s;">
+                    Accedi
+                </a>
+        <%
+            } else {
+        %>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <span style="color: #bbb; font-size: 0.95rem;">
+                        Ciao, <strong style="color: var(--testo-principale);"><%= utente.getNome() %></strong>
+                    </span>
+                    <a href="logout" style="color: #ff4d4d; text-decoration: none; font-size: 0.9rem; border: 1px solid #ff4d4d; padding: 5px 12px; border-radius: 4px; transition: 0.3s;" onmouseover="this.style.backgroundColor='#ff4d4d'; this.style.color='white';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ff4d4d';">
+                        Esci
+                    </a>
+                </div>
+        <%
+            }
+        %>
+    </div>
 
     <nav>
         <ul>
