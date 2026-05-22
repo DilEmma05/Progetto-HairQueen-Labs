@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <title>Crea Account - HairQueen Labs</title>
     <style>
         :root {
@@ -124,9 +125,9 @@
             <div class="gruppo-form">
                 <label for="password">Password *</label>
                 <div style="position: relative;">
-                    <input type="password" id="password" name="password" required style="padding-right: 40px;">
-                    <span id="togglePassword" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.2rem; user-select: none;">👁️</span>
-                </div>
+        			<input type="password" id="password" name="password" required style="padding-right: 40px;">
+        			<i id="togglePassword" class="fas fa-eye" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.1rem; color: #bbb; user-select: none; transition: 0.3s;"></i>
+    			</div>
                 <div id="errore-password" class="messaggio-errore-js">La password deve contenere almeno 8 caratteri, una lettera MAIUSCOLA, un numero e un carattere speciale.</div>
             </div>
             
@@ -147,8 +148,12 @@
     const form = document.getElementById('form-registrazione');
     const emailInput = document.getElementById('email');
     const emailError = document.getElementById('errore-email');
+    
+    // Definiamo gli elementi della password una sola volta qui in alto
     const pwdInput = document.getElementById('password');
     const pwdError = document.getElementById('errore-password');
+    const togglePassword = document.getElementById('togglePassword');
+    
     const telInput = document.getElementById('telefono');
     const telError = document.getElementById('errore-telefono');
 
@@ -169,29 +174,38 @@
         }
     }
 
-    // eventi live
+    // --- EVENTI LIVE PER LA VALIDAZIONE ---
     emailInput.addEventListener('input', () => validaCampo(emailInput, emailError, emailRegex));
     pwdInput.addEventListener('input', () => validaCampo(pwdInput, pwdError, pwdRegex));
     telInput.addEventListener('input', () => validaCampo(telInput, telError, telRegex));
 
+    // --- FUNZIONALITÀ MOSTRA/NASCONDI PASSWORD CON ICONA FONTAWESOME ---
+    // (Ora è fuori dal blocco submit, quindi funziona sempre!)
+    togglePassword.addEventListener('click', function () {
+        // Alterna il tipo dell'input
+        const type = pwdInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        pwdInput.setAttribute('type', type);
+        
+        // Alterna le classi di FontAwesome
+        if (type === 'password') {
+            this.classList.remove('fa-eye-slash');
+            this.classList.add('fa-eye');
+            this.style.color = '#bbb'; // Colore neutro quando nascosta
+        } else {
+            this.classList.remove('fa-eye');
+            this.classList.add('fa-eye-slash');
+            this.style.color = 'var(--colore-accento)'; // Si colora di oro quando visibile
+        }
+    });
+
+    // --- CONTROLLO FINALE AL CLICK SU "CREA ACCOUNT" ---
     form.addEventListener('submit', function(event) {
         let isFormValid = this.checkValidity(); 
         let isEmailValid = validaCampo(emailInput, emailError, emailRegex);
         let isPwdValid = validaCampo(pwdInput, pwdError, pwdRegex);
         let isTelValid = validaCampo(telInput, telError, telRegex);
         
-        const togglePassword = document.getElementById('togglePassword');
-        const pwdInput = document.getElementById('password'); // (se l'avevi già definita, non c'è bisogno di dichiararla due volte)
-
-        togglePassword.addEventListener('click', function () {
-            // Controlla il tipo attuale: se è password diventa text, altrimenti torna password
-            const type = pwdInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            pwdInput.setAttribute('type', type);
-            
-            // Cambia l'icona (usa un'emoji diversa o un occhio sbarrato quando nascosta)
-            this.textContent = type === 'password' ? '👁️' : '🙈';
-        });
-
+        // Colora di rosso i campi vuoti
         const inputs = this.querySelectorAll('input[required]');
         inputs.forEach(input => {
             if (!input.value) {
@@ -202,10 +216,11 @@
             }
         });
 
+        // Se c'è anche un solo errore, blocca l'invio alla Servlet
         if (!isFormValid || !isEmailValid || !isPwdValid || !isTelValid) {
-            event.preventDefault();
+            event.preventDefault(); 
         }
     });
-	</script>
+</script>
 </body>
 </html>
