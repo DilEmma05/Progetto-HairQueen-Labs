@@ -129,6 +129,20 @@
             <a href="registrazione.jsp">Crea un account</a>
         </div>
     </main>
+    
+    <script>
+    const togglePassword = document.getElementById('togglePassword');
+    const pwdInput = document.getElementById('password');
+
+    togglePassword.addEventListener('click', function () {
+        // Controlla il tipo attuale: se è password diventa text, altrimenti torna password
+        const type = pwdInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        pwdInput.setAttribute('type', type);
+        
+        // Cambia l'icona (usa un'emoji diversa o un occhio sbarrato quando nascosta)
+        this.textContent = type === 'password' ? '👁️' : '🙈';
+    });
+    </script>
 
 </body>
 </html>
