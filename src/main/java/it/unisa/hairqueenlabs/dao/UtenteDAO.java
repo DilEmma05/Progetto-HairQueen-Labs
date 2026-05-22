@@ -15,7 +15,7 @@ public class UtenteDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
-        String insertSQL = "INSERT INTO Utente (nome, cognome, email, password, indirizzo, ruolo) VALUES (?, ?, ?, ?, ?, ?)";
+        String insertSQL = "INSERT INTO Utente (nome, cognome, email, password, indirizzo, ruolo, telefono) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
             connection = DriverManagerConnectionPool.getConnection();
@@ -27,6 +27,7 @@ public class UtenteDAO {
             preparedStatement.setString(4, utente.getPassword());
             preparedStatement.setString(5, utente.getIndirizzo());
             preparedStatement.setString(6, utente.getRuolo());
+            preparedStatement.setString(7, utente.getTelefono());
 
             preparedStatement.executeUpdate();
             connection.commit();
