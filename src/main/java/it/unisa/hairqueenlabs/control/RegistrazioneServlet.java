@@ -47,6 +47,7 @@ public class RegistrazioneServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String indirizzo = request.getParameter("indirizzo");
+        String telefono = request.getParameter("telefono");
 
         Utente nuovoUtente = new Utente();
         nuovoUtente.setNome(nome);
@@ -54,6 +55,7 @@ public class RegistrazioneServlet extends HttpServlet {
         nuovoUtente.setEmail(email);
         nuovoUtente.setPassword(password);
         nuovoUtente.setIndirizzo(indirizzo);
+        nuovoUtente.setTelefono(telefono);
         nuovoUtente.setRuolo("CLIENTE");
 
         UtenteDAO utenteDAO = new UtenteDAO();
