@@ -48,12 +48,14 @@ public class RegistrazioneServlet extends HttpServlet {
         String password = request.getParameter("password");
         String indirizzo = request.getParameter("indirizzo");
         String telefono = request.getParameter("telefono");
+        
+        String passwordCriptata = it.unisa.hairqueenlabs.utils.PasswordUtils.hashPassword(password);
 
         Utente nuovoUtente = new Utente();
         nuovoUtente.setNome(nome);
         nuovoUtente.setCognome(cognome);
         nuovoUtente.setEmail(email);
-        nuovoUtente.setPassword(password);
+        nuovoUtente.setPassword(passwordCriptata);
         nuovoUtente.setIndirizzo(indirizzo);
         nuovoUtente.setTelefono(telefono);
         nuovoUtente.setRuolo("CLIENTE");
