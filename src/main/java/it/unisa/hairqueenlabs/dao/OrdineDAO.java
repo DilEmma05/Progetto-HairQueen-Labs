@@ -113,4 +113,41 @@ public class OrdineDAO {
 
         return ordiniUtente;
     }
+    
+    // Metodo per recuperare i dettagli di un ordine
+    public List<DettaglioOrdine> doRetrieveDettagli(int idOrdine, int idUtente) throws SQLException {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<DettaglioOrdine> dettagli = new java.util.ArrayList<>();
+
+        String query = "SELECT d.id_prodotto, d.quantita_acquistata, d.prezzo_unitario, p.nome " +
+                       "FROM Dettaglio_Ordine d " +
+                       "JOIN Prodotto p ON d.id_prodotto = p.id_prodotto " +
+                       "JOIN Ordine o ON d.id_ordine = o.id_ordine " +
+                       "WHERE d.id_ordine = ? AND o.id_utente = ?";
+
+        try {
+            connection = DriverManagerConnectionPool.getConnection();
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, idOrdine);
+            ps.setInt(2, idUtente); // Se un utente cerca di vedere l'ordine di un altro, la query restituirà vuoto!
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                DettaglioOrdine dett = new DettaglioOrdine();
+                dett.setIdProdotto(rs.getInt("id_prodotto"));
+                dett.setQuantitaAcquistata(rs.getInt("quantita_acquistata"));
+                dett.setPrezzoUnitario(rs.getDouble("prezzo_unitario"));
+                dett.setNomeProdotto(rs.getString("nome")); // Il campo che abbiamo appena aggiunto!
+                
+                dettagli.add(dett);
+            }
+        } finally {
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
+            if (connection != null) DriverManagerConnectionPool.releaseConnection(connection);
+        }
+        return dettagli;
+    }
 }
