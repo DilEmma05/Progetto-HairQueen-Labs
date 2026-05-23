@@ -196,9 +196,9 @@
             } else {
         %>
                 <div style="display: flex; align-items: center; gap: 15px;">
-                    <span style="color: #bbb; font-size: 0.95rem;">
-                        Ciao, <strong style="color: var(--testo-principale);"><%= utente.getNome() %></strong>
-                    </span>
+                    <a href="profilo" style="color: #bbb; font-size: 0.95rem; text-decoration: none; transition: 0.3s;" onmouseover="this.style.color='var(--colore-primario)'" onmouseout="this.style.color='#bbb'">
+    					Ciao, <strong style="color: var(--testo-principale);"><%= utente.getNome() %></strong>
+					</a>
                     <a href="logout" style="color: #ff4d4d; text-decoration: none; font-size: 0.9rem; border: 1px solid #ff4d4d; padding: 5px 12px; border-radius: 4px; transition: 0.3s;" onmouseover="this.style.backgroundColor='#ff4d4d'; this.style.color='white';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ff4d4d';">
                         Esci
                     </a>
