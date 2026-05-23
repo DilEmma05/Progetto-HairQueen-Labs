@@ -51,6 +51,14 @@
             <% } %>
         </tbody>
     </table>
+    
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px;">
+        <a href="profilo" class="btn-back">&larr; Torna allo Storico Ordini</a>
+        
+        <a href="scarica-fattura?id=<%= idOrdine %>" style="background-color: var(--colore-accento); color: var(--sfondo-principale); padding: 10px 20px; text-decoration: none; font-weight: bold; border-radius: 4px; transition: 0.3s; display: inline-block;">
+            📄 Scarica Fattura (PDF)
+        </a>
+    </div>
 
     <a href="profilo" class="btn-back">&larr; Torna allo Storico Ordini</a>
 </div>
