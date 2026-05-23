@@ -59,8 +59,6 @@
             📄 Scarica Fattura (PDF)
         </a>
     </div>
-
-    <a href="profilo" class="btn-back">&larr; Torna allo Storico Ordini</a>
 </div>
 
 </body>
