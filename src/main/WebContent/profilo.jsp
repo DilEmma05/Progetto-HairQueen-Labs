@@ -110,7 +110,7 @@
                     <th>Data</th>
                     <th>Totale</th>
                     <th>Stato</th>
-                </tr>
+                    <th></th> </tr>
             </thead>
             <tbody>
                 <% 
@@ -122,6 +122,12 @@
                         <td><%= (o.getDataOrdine() != null) ? sdf.format(o.getDataOrdine()) : "N/D" %></td>
                         <td style="font-weight: bold;"><%= String.format("%.2f", o.getTotale()) %> &euro;</td>
                         <td><span class="stato-badge"><%= o.getStato() %></span></td>
+                        
+                        <td style="text-align: right;">
+                            <a href="dettagli-ordine?id=<%= o.getIdOrdine() %>" style="color: var(--colore-accento); text-decoration: none; font-size: 0.9rem; border: 1px solid var(--colore-accento); padding: 5px 10px; border-radius: 4px; transition: 0.3s;" onmouseover="this.style.backgroundColor='var(--colore-accento)'; this.style.color='#121212';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='var(--colore-accento)';">
+                                Dettagli &rarr;
+                            </a>
+                        </td>
                     </tr>
                 <% } %>
             </tbody>
