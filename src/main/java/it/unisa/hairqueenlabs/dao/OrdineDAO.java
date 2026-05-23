@@ -76,4 +76,41 @@ public class OrdineDAO {
             DriverManagerConnectionPool.releaseConnection(connection);
         }
     }
+    
+    //Metodo per recuperare tutti gli ordini di un singolo utente
+    public List<Ordine> doRetrieveByUtente(int idUtente) throws SQLException {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        List<Ordine> ordiniUtente = new java.util.ArrayList<>();
+
+        //prende tutti gli ordini di questo id, ordinandoli dal più recente al più vecchio
+        String query = "SELECT * FROM Ordine WHERE id_utente = ? ORDER BY data_ordine DESC";
+
+        try {
+            connection = DriverManagerConnectionPool.getConnection();
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, idUtente);
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Ordine ordine = new Ordine();
+                ordine.setIdOrdine(rs.getInt("id_ordine"));
+                ordine.setDataOrdine(rs.getTimestamp("data_ordine"));
+                ordine.setTotale(rs.getDouble("totale"));
+                ordine.setStato(rs.getString("stato"));
+                ordine.setIdUtente(rs.getInt("id_utente"));
+
+                ordiniUtente.add(ordine);
+            }
+        } finally {
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
+            if (connection != null) DriverManagerConnectionPool.releaseConnection(connection);
+        }
+
+        return ordiniUtente;
+    }
 }
