@@ -6,75 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <title>Accedi - HairQueen Labs</title>
-    <style>
-        :root {
-            --sfondo-principale: #121212;
-            --testo-principale: #F5F5F5;
-            --colore-primario: #8E44AD; 
-            --colore-accento: #D4AF37;   
-            --sfondo-card: #1E1E1E;
-            --colore-errore: #e74c3c;
-        }
-
-        body {
-            background-color: var(--sfondo-principale);
-            color: var(--testo-principale);
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0; padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        header { text-align: center; padding: 20px 0; border-bottom: 1px solid #2C2C2C; }
-        header h1 { color: var(--colore-accento); margin: 0; letter-spacing: 2px; }
-        header a { text-decoration: none; }
-
-        .container-login {
-            max-width: 450px;
-            margin: 60px auto;
-            background-color: var(--sfondo-card);
-            padding: 40px;
-            border-radius: 8px;
-            border: 1px solid #2C2C2C;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        }
-
-        h2 { text-align: center; color: var(--testo-principale); border-bottom: 2px solid var(--colore-primario); padding-bottom: 10px; margin-top: 0; margin-bottom: 30px;}
-
-        .gruppo-form { margin-bottom: 25px; }
-        .gruppo-form label { display: block; margin-bottom: 8px; color: #bbb; font-size: 0.9rem; }
-        .gruppo-form input {
-            width: 100%; padding: 12px; border: 1px solid #333; background-color: #121212;
-            color: white; border-radius: 4px; box-sizing: border-box; font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-        .gruppo-form input:focus { border-color: var(--colore-accento); outline: none; }
-
-        .btn-login {
-            width: 100%; background-color: var(--colore-accento); color: var(--sfondo-principale);
-            border: none; padding: 15px; font-size: 1.1rem; font-weight: bold; border-radius: 4px;
-            cursor: pointer; text-transform: uppercase; transition: 0.3s; margin-top: 10px;
-        }
-        .btn-login:hover { background-color: #bfa030; }
-
-        .messaggio-errore {
-            background-color: rgba(231, 76, 60, 0.1);
-            color: var(--colore-errore);
-            padding: 10px;
-            border: 1px solid var(--colore-errore);
-            border-radius: 4px;
-            margin-bottom: 20px;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-
-        .link-registrazione { text-align: center; margin-top: 25px; font-size: 0.95rem; color: #bbb; }
-        .link-registrazione a { color: var(--colore-primario); text-decoration: none; font-weight: bold; }
-        .link-registrazione a:hover { color: #a55eea; text-decoration: underline; }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+<div class="area-auth">
 
     <header>
         <a href="home"><h1>HAIRQUEEN LABS</h1></a>
@@ -97,10 +33,10 @@
         <% 
             } 
             
-            // Se c'è un successo, stampiamo il blocco verde
+            // Se c'è un successo, stampiamo il blocco verde (ora con classe CSS pulita)
             if (successo != null) { 
         %>
-            <div style="background-color: rgba(46, 204, 113, 0.1); color: #2ecc71; padding: 10px; border: 1px solid #2ecc71; border-radius: 4px; margin-bottom: 20px; text-align: center; font-size: 0.9rem; font-weight: bold;">
+            <div class="messaggio-successo">
                 <%= successo %>
             </div>
         <% 
@@ -130,27 +66,7 @@
         </div>
     </main>
     
-    <script>
-    const togglePassword = document.getElementById('togglePassword');
-    const pwdInput = document.getElementById('password');
-
-    togglePassword.addEventListener('click', function () {
-        // Alterna il tipo dell'input
-        const type = pwdInput.getAttribute('type') === 'password' ? 'text' : 'password';
-        pwdInput.setAttribute('type', type);
-        
-        // Alterna le classi di FontAwesome
-        if (type === 'password') {
-            this.classList.remove('fa-eye-slash');
-            this.classList.add('fa-eye');
-            this.style.color = '#bbb'; // Colore neutro quando nascosta
-        } else {
-            this.classList.remove('fa-eye');
-            this.classList.add('fa-eye-slash');
-            this.style.color = 'var(--colore-accento)'; // Si colora di oro quando la password è visibile!
-        }
-    });
-    </script>
+</div> <script src="js/login.js"></script>
 
 </body>
 </html>
