@@ -470,3 +470,42 @@ body {
 /* Feedback prodotto non trovato */
 .area-dettaglio .prodotto-non-trovato { text-align: center; margin-top: 50px; }
 .area-dettaglio .prodotto-non-trovato h2 { color: #e74c3c; margin-bottom: 10px; }
+
+/* ==========================================================================
+   AREA DETTAGLI ORDINE
+   ========================================================================== */
+
+.area-dettaglio-ordine .container-dettaglio-ordine { 
+    max-width: 800px; margin: 0 auto; background-color: var(--sfondo-card); 
+    padding: 30px; border-radius: 8px; margin-top: 20px;
+}
+
+.area-dettaglio-ordine h1 { 
+    color: var(--colore-accento); text-align: center; 
+    border-bottom: 1px solid #2C2C2C; padding-bottom: 20px;
+}
+
+.area-dettaglio-ordine table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+.area-dettaglio-ordine th, .area-dettaglio-ordine td { padding: 15px; text-align: left; border-bottom: 1px solid #2C2C2C; }
+.area-dettaglio-ordine th { color: var(--colore-primario); text-transform: uppercase; }
+
+/* Subtotale evidenziato */
+.area-dettaglio-ordine .subtotale-riga { font-weight: bold; color: var(--colore-accento); }
+
+/* Contenitore bottoni finali */
+.area-dettaglio-ordine .azioni-dettaglio { 
+    display: flex; justify-content: space-between; align-items: center; margin-top: 30px; 
+}
+
+.area-dettaglio-ordine .btn-back { color: var(--colore-primario); text-decoration: none; font-weight: bold; }
+.area-dettaglio-ordine .btn-back:hover { text-decoration: underline; }
+
+/* Bottone Download PDF */
+.area-dettaglio-ordine .btn-fattura {
+    background-color: var(--colore-accento); color: var(--sfondo-principale); 
+    padding: 10px 20px; text-decoration: none; font-weight: bold; 
+    border-radius: 4px; transition: 0.3s; display: inline-block;
+}
+.area-dettaglio-ordine .btn-fattura:hover {
+    background-color: #bfa030;
+}
