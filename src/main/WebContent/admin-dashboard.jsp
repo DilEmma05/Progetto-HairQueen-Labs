@@ -63,9 +63,9 @@
                             <form action="aggiorna-stato" method="post" style="display:inline;">
                                 <input type="hidden" name="idOrdine" value="<%= o.getIdOrdine() %>">
                                 <select name="nuovoStato" style="padding: 5px; background: #333; color: white; border: none;">
-                                    <option value="In elaborazione">In elaborazione</option>
-                                    <option value="Spedito">Spedito</option>
-                                    <option value="Consegnato">Consegnato</option>
+                                    <option value="In elaborazione" <%= "In elaborazione".equals(o.getStato()) ? "selected" : "" %>>In elaborazione</option>
+                                    <option value="Spedito" <%= "Spedito".equals(o.getStato()) ? "selected" : "" %>>Spedito</option>
+                                    <option value="Consegnato" <%= "Consegnato".equals(o.getStato()) ? "selected" : "" %>>Consegnato</option>
                                 </select>
                                 <button type="submit" class="btn-update">Aggiorna</button>
                             </form>
