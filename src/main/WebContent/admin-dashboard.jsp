@@ -23,6 +23,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
+<div class="area-admin">
 
 <div class="container">
     <h1>Dashboard Amministratore - Gestione Ordini</h1>
@@ -87,6 +88,7 @@
 
     <br>
     <a href="home" style="color: #bbb;">Torna al lato pubblico del sito</a>
+</div>
 </div>
 
 </body>
