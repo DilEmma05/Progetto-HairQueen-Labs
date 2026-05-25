@@ -41,6 +41,15 @@
             + Aggiungi Nuovo Prodotto al Catalogo
         </a>
     </div>
+    
+    <% 
+        String messaggioSuccesso = request.getParameter("successo");
+        if ("prodottoInserito".equals(messaggioSuccesso)) { 
+    %>
+        <div style="background-color: #2ecc71; color: #121212; padding: 15px; border-radius: 4px; margin-bottom: 25px; font-weight: bold; text-align: center; border-left: 5px solid #27ae60;">
+            &#10004; Nuovo prodotto inserito nel catalogo con successo!
+        </div>
+    <% } %>
 
     <% if (ordini != null && !ordini.isEmpty()) { %>
         <table>
