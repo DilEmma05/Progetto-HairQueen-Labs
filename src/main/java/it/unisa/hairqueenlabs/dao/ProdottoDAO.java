@@ -203,4 +203,43 @@ public class ProdottoDAO {
         }
         return prodotti;
     }
+    
+    // Inserimento di un nuovo prodotto nel database (Area Amministratore)
+    public synchronized void doSave(Prodotto prodotto) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        String insertSQL = "INSERT INTO Prodotto (nome, descrizione, prezzo, quantita_magazzino, "
+                + "immagine_url, fase_utilizzo, id_sottocategoria, tipo_cute_target, tipo_capello_target) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try {
+            connection = DriverManagerConnectionPool.getConnection();
+            preparedStatement = connection.prepareStatement(insertSQL);
+
+            preparedStatement.setString(1, prodotto.getNome());
+            preparedStatement.setString(2, prodotto.getDescrizione());
+            preparedStatement.setDouble(3, prodotto.getPrezzo());
+            preparedStatement.setInt(4, prodotto.getQuantitaMagazzino());
+            preparedStatement.setString(5, prodotto.getImmagineUrl());
+            preparedStatement.setString(6, prodotto.getFaseUtilizzo());
+
+            if (prodotto.getIdSottocategoria() > 0) {
+                preparedStatement.setInt(7, prodotto.getIdSottocategoria());
+            } else {
+                preparedStatement.setNull(7, java.sql.Types.INTEGER);
+            }
+            
+            preparedStatement.setString(8, prodotto.getTipoCuteTarget());
+            preparedStatement.setString(9, prodotto.getTipoCapelloTarget());
+
+            preparedStatement.executeUpdate();
+
+            connection.commit();
+
+        } finally {
+            if (preparedStatement != null) preparedStatement.close();
+            if (connection != null) DriverManagerConnectionPool.releaseConnection(connection);
+        }
+    }
 }

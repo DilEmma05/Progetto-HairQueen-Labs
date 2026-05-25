@@ -150,4 +150,61 @@ public class OrdineDAO {
         }
         return dettagli;
     }
+    
+    public List<Ordine> doRetrieveAll() throws SQLException {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        List<Ordine> tuttiGliOrdini = new java.util.ArrayList<>();
+
+        String query = "SELECT * FROM Ordine ORDER BY data_ordine DESC";
+
+        try {
+            connection = DriverManagerConnectionPool.getConnection();
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Ordine ordine = new Ordine();
+                ordine.setIdOrdine(rs.getInt("id_ordine"));
+                ordine.setDataOrdine(rs.getTimestamp("data_ordine"));
+                ordine.setTotale(rs.getDouble("totale"));
+                ordine.setStato(rs.getString("stato"));
+                ordine.setIdUtente(rs.getInt("id_utente"));
+
+                tuttiGliOrdini.add(ordine);
+            }
+        } finally {
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
+            if (connection != null) DriverManagerConnectionPool.releaseConnection(connection);
+        }
+
+        return tuttiGliOrdini;
+    }
+    
+    //Metodo per l'admin: aggiorna lo stato di un ordine esistente
+    public synchronized boolean doUpdateStato(int idOrdine, String nuovoStato) throws SQLException {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        int result = 0;
+
+        String query = "UPDATE Ordine SET stato = ? WHERE id_ordine = ?";
+
+        try {
+            connection = DriverManagerConnectionPool.getConnection();
+            ps = connection.prepareStatement(query);
+            ps.setString(1, nuovoStato);
+            ps.setInt(2, idOrdine);
+
+            result = ps.executeUpdate();
+            connection.commit();
+        } finally {
+            if (ps != null) ps.close();
+            if (connection != null) DriverManagerConnectionPool.releaseConnection(connection);
+        }
+
+        return (result > 0);
+    }
 }
