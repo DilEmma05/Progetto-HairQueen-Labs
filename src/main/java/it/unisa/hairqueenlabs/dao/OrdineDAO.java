@@ -183,4 +183,28 @@ public class OrdineDAO {
 
         return tuttiGliOrdini;
     }
+    
+    //Metodo per l'admin: aggiorna lo stato di un ordine esistente
+    public synchronized boolean doUpdateStato(int idOrdine, String nuovoStato) throws SQLException {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        int result = 0;
+
+        String query = "UPDATE Ordine SET stato = ? WHERE id_ordine = ?";
+
+        try {
+            connection = DriverManagerConnectionPool.getConnection();
+            ps = connection.prepareStatement(query);
+            ps.setString(1, nuovoStato);
+            ps.setInt(2, idOrdine);
+
+            result = ps.executeUpdate();
+            connection.commit();
+        } finally {
+            if (ps != null) ps.close();
+            if (connection != null) DriverManagerConnectionPool.releaseConnection(connection);
+        }
+
+        return (result > 0);
+    }
 }
