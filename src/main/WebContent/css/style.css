@@ -369,3 +369,61 @@ body {
 /* Messaggio di carrello vuoto al checkout */
 .area-checkout .carrello-vuoto-checkout { text-align: center; width: 100%; margin-top: 50px; }
 .area-checkout .carrello-vuoto-checkout a { color: var(--colore-accento); text-decoration: none; }
+
+/* ==========================================================================
+   AREA PROFILO
+   ========================================================================== */
+
+.area-profilo .container-profilo { max-width: 900px; margin: 0 auto; }
+
+.area-profilo .header-profilo {
+    text-align: center; padding-bottom: 20px; 
+    border-bottom: 1px solid #2C2C2C; margin-bottom: 30px;
+}
+.area-profilo .header-profilo h1 { color: var(--colore-accento); }
+.area-profilo .email-utente { color: #888; font-size: 0.9rem; }
+
+.area-profilo .titolo-storico { color: var(--colore-accento); margin-bottom: 15px; }
+
+/* Tabella Ordini Profilo */
+.area-profilo table {
+    width: 100%; border-collapse: collapse; 
+    background-color: var(--sfondo-card); 
+    border-radius: 8px; overflow: hidden;
+}
+.area-profilo th, .area-profilo td { padding: 15px; text-align: left; border-bottom: 1px solid #2C2C2C; }
+.area-profilo th {
+    background-color: #1a1a1a; color: var(--colore-primario); 
+    font-weight: bold; text-transform: uppercase;
+}
+.area-profilo tr:hover { background-color: #252525; }
+
+.area-profilo .stato-badge {
+    background-color: rgba(46, 204, 113, 0.1); color: #2ecc71; 
+    padding: 5px 10px; border-radius: 20px; 
+    font-size: 0.85rem; font-weight: bold;
+}
+.area-profilo .totale-ordine { font-weight: bold; }
+.area-profilo .colonna-azioni { text-align: right; }
+
+/* Bottone Dettagli Ordine*/
+.area-profilo .btn-dettagli {
+    color: var(--colore-accento); text-decoration: none; font-size: 0.9rem; 
+    border: 1px solid var(--colore-accento); padding: 5px 10px; 
+    border-radius: 4px; transition: 0.3s;
+}
+.area-profilo .btn-dettagli:hover {
+    background-color: var(--colore-accento); color: #121212;
+}
+
+/* Messaggio Nessun Ordine */
+.area-profilo .nessun-ordine {
+    text-align: center; padding: 40px; color: #bbb; 
+    background-color: var(--sfondo-card); border-radius: 8px;
+}
+.area-profilo .nessun-ordine h3 { margin: 0 0 10px 0; }
+
+.area-profilo .btn-home {
+    display: inline-block; margin-top: 20px; color: var(--colore-primario); 
+    text-decoration: none; font-weight: bold;
+}
