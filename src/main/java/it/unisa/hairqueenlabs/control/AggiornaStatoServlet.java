@@ -16,7 +16,7 @@ import it.unisa.hairqueenlabs.model.Utente;
 /**
  * Servlet implementation class AggiornaStatoServlet
  */
-@WebServlet("/AggiornaStatoServlet")
+@WebServlet("/aggiorna-stato")
 public class AggiornaStatoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
