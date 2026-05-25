@@ -94,7 +94,7 @@
             <ul class="carousel-track">
                 
                 <li class="carousel-slide current-slide">
-    				<img class="carousel-image" src="<%= request.getContextPath() %>/img/uso_phon_haiqueenlabs.jpg" alt="Modella con capelli dinamici in salone">
+    				<img class="carousel-image" src="<%= request.getContextPath() %>/img/layout/uso_phon_hairqueenlabs.jpg" alt="Modella con capelli dinamici in salone">
     					<div class="hero-content">
         					<h2>Il futuro dei tuoi<br>capelli inizia qui.</h2>
         					<p>Formulazioni premium per una routine di lusso.<br>Risultati da salone, direttamente a casa tua.</p>
@@ -103,7 +103,7 @@
 				</li>
 
 				<li class="carousel-slide">
-    				<img class="carousel-image" src="<%= request.getContextPath() %>/img/rituali_cura_capelli.jpg" alt="Applicazione prodotto di lusso">
+    				<img class="carousel-image" src="<%= request.getContextPath() %>/img/layout/rituali_cura_capelli.jpg" alt="Applicazione prodotto di lusso">
     					<div class="hero-content">
         					<h2>Vizia te stessa.</h2>
         					<p>Rituali di cura esclusivi per ogni tipo di capello.</p>
