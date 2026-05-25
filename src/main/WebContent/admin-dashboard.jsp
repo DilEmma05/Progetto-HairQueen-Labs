@@ -35,6 +35,12 @@
 <div class="container">
     <h1>Dashboard Amministratore - Gestione Ordini</h1>
     <p>Benvenuto, Admin <%= utente.getNome() %>.</p>
+    
+    <div style="margin: 20px 0 30px 0;">
+        <a href="inserisci-prodotto" style="background-color: #27ae60; color: white; padding: 10px 20px; text-decoration: none; font-weight: bold; border-radius: 4px; display: inline-block;">
+            + Aggiungi Nuovo Prodotto al Catalogo
+        </a>
+    </div>
 
     <% if (ordini != null && !ordini.isEmpty()) { %>
         <table>
