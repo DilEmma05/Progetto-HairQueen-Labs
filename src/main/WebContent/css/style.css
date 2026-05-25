@@ -187,7 +187,6 @@ body {
     border-color: #e74c3c !important; 
     background-color: rgba(231, 76, 60, 0.05) !important; 
 }
-
 .area-auth .messaggio-errore-js { 
     color: #e74c3c; 
     font-size: 0.8rem; 
@@ -209,3 +208,49 @@ body {
 
 .area-auth .link-login { text-align: center; margin-top: 25px; font-size: 0.95rem; color: #bbb; }
 .area-auth .link-login a { color: var(--colore-primario); text-decoration: none; font-weight: bold; }
+
+/*Regole specifiche per il Login*/
+.area-auth .container-login {
+    max-width: 450px;
+    margin: 60px auto;
+    background-color: var(--sfondo-card);
+    padding: 40px;
+    border-radius: 8px;
+    border: 1px solid #2C2C2C;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.area-auth .btn-login {
+    width: 100%; background-color: var(--colore-accento); color: var(--sfondo-principale);
+    border: none; padding: 15px; font-size: 1.1rem; font-weight: bold; border-radius: 4px;
+    cursor: pointer; text-transform: uppercase; transition: 0.3s; margin-top: 10px;
+}
+.area-auth .btn-login:hover { background-color: #bfa030; }
+
+/*Feedback visivi Login*/
+.area-auth .messaggio-errore {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: var(--colore-errore);
+    padding: 10px;
+    border: 1px solid var(--colore-errore);
+    border-radius: 4px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.area-auth .messaggio-successo {
+    background-color: rgba(46, 204, 113, 0.1); 
+    color: #2ecc71; 
+    padding: 10px; 
+    border: 1px solid #2ecc71; 
+    border-radius: 4px; 
+    margin-bottom: 20px; 
+    text-align: center; 
+    font-size: 0.9rem; 
+    font-weight: bold;
+}
+
+.area-auth .link-registrazione { text-align: center; margin-top: 25px; font-size: 0.95rem; color: #bbb; }
+.area-auth .link-registrazione a { color: var(--colore-primario); text-decoration: none; font-weight: bold; }
+.area-auth .link-registrazione a:hover { color: #a55eea; text-decoration: underline; }
