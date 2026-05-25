@@ -254,3 +254,49 @@ body {
 .area-auth .link-registrazione { text-align: center; margin-top: 25px; font-size: 0.95rem; color: #bbb; }
 .area-auth .link-registrazione a { color: var(--colore-primario); text-decoration: none; font-weight: bold; }
 .area-auth .link-registrazione a:hover { color: #a55eea; text-decoration: underline; }
+
+/* ==========================================================================
+   AREA CARRELLO
+   ========================================================================== */
+
+.area-carrello header { text-align: center; padding: 20px 0; border-bottom: 1px solid #2C2C2C; }
+.area-carrello header h1 { color: var(--colore-accento); margin: 0; letter-spacing: 2px; }
+
+.area-carrello .container-navigazione { max-width: 1000px; margin: 0 auto; padding: 20px; }
+.area-carrello .btn-indietro { color: var(--colore-accento); text-decoration: none; font-weight: bold; }
+.area-carrello .btn-indietro:hover { color: var(--colore-primario); }
+
+.area-carrello .container-carrello {
+    max-width: 1000px; margin: 20px auto; background-color: var(--sfondo-card);
+    padding: 30px; border-radius: 8px; border: 1px solid #2C2C2C;
+}
+
+.area-carrello h2 { border-bottom: 2px solid var(--colore-primario); padding-bottom: 10px; margin-top: 0; }
+
+.area-carrello .messaggio-vuoto { text-align: center; font-size: 1.2rem; color: #888; margin: 40px 0; }
+
+/* Tabella Prodotti Carrello */
+.area-carrello table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+.area-carrello th, .area-carrello td { padding: 15px; text-align: left; border-bottom: 1px solid #333; }
+.area-carrello th { color: var(--colore-accento); text-transform: uppercase; font-size: 0.9rem; }
+.area-carrello .img-carrello { width: 80px; height: 80px; object-fit: contain; border-radius: 4px; }
+.area-carrello .nome-prodotto { font-weight: bold; }
+.area-carrello .totale-riga { font-weight: bold; color: var(--colore-primario); }
+
+/* Sezione inferiore*/
+.area-carrello .riepilogo-totale { text-align: right; font-size: 1.5rem; margin-bottom: 20px; }
+.area-carrello .riepilogo-totale span { color: var(--colore-accento); font-weight: bold; }
+
+.area-carrello .azioni-carrello { display: flex; justify-content: flex-end; gap: 15px; }
+.area-carrello .form-svuota { margin: 0; }
+
+/* Bottoni universali dell'area carrello */
+.area-carrello .btn {
+    padding: 12px 25px; border: none; border-radius: 4px;
+    font-weight: bold; text-transform: uppercase; cursor: pointer; transition: 0.3s;
+    text-decoration: none; display: inline-block; text-align: center;
+}
+.area-carrello .btn-primario { background-color: var(--colore-accento); color: var(--sfondo-principale); }
+.area-carrello .btn-primario:hover { background-color: #bfa030; }
+.area-carrello .btn-secondario { background-color: transparent; color: #ff4d4d; border: 1px solid #ff4d4d; }
+.area-carrello .btn-secondario:hover { background-color: #ff4d4d; color: white; }
