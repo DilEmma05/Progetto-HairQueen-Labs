@@ -21,7 +21,7 @@ body {
 
 
 /* ==========================================================================
-   2. AREA AMMINISTRATORE
+   AREA AMMINISTRATORE
    ========================================================================== */
 .area-admin {
     padding: 20px;
@@ -51,7 +51,7 @@ body {
 
 
 /* ==========================================================================
-   3. AREA PUBBLICA
+   AREA PUBBLICA
    ========================================================================== */
 .area-pubblica header {
     text-align: center;
@@ -139,3 +139,73 @@ body {
     background-color: var(--colore-accento); color: var(--sfondo-principale); border: none; padding: 10px 20px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 0.85rem; width: 100%; transition: background-color 0.3s ease;
 }
 .area-pubblica .btn-acquista:hover { background-color: #bfa030; }
+
+/* ==========================================================================
+   AREA AUTENTICAZIONE
+   ========================================================================== */
+
+.area-auth {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.area-auth header { text-align: center; padding: 20px 0; border-bottom: 1px solid #2C2C2C; }
+.area-auth header h1 { color: var(--colore-accento); margin: 0; letter-spacing: 2px; }
+.area-auth header a { text-decoration: none; }
+
+.area-auth .container-registrazione {
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: var(--sfondo-card);
+    padding: 40px;
+    border-radius: 8px;
+    border: 1px solid #2C2C2C;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.area-auth h2 { 
+    text-align: center; color: var(--testo-principale); border-bottom: 2px solid var(--colore-primario); padding-bottom: 10px; margin-top: 0; margin-bottom: 30px;
+}
+
+.area-auth .riga-doppia { display: flex; gap: 20px; }
+.area-auth .riga-doppia .gruppo-form { flex: 1; }
+
+.area-auth .gruppo-form { margin-bottom: 35px; position: relative; }
+
+.area-auth .gruppo-form label { display: block; margin-bottom: 8px; color: #bbb; font-size: 0.9rem; }
+
+.area-auth .gruppo-form input {
+    width: 100%; padding: 12px; border: 1px solid #333; background-color: #121212;
+    color: white; border-radius: 4px; box-sizing: border-box; font-size: 1rem;
+    transition: border-color 0.3s;
+}
+.area-auth .gruppo-form input:focus { border-color: var(--colore-accento); outline: none; }
+
+/* Stili per la validazione errori */
+.area-auth .input-errore { 
+    border-color: #e74c3c !important; 
+    background-color: rgba(231, 76, 60, 0.05) !important; 
+}
+
+.area-auth .messaggio-errore-js { 
+    color: #e74c3c; 
+    font-size: 0.8rem; 
+    display: none; 
+    font-weight: bold; 
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 4px;
+    line-height: 1.2;
+}
+
+.area-auth .btn-registrati {
+    width: 100%; background-color: var(--colore-accento); color: var(--sfondo-principale);
+    border: none; padding: 15px; font-size: 1.1rem; font-weight: bold; border-radius: 4px;
+    cursor: pointer; text-transform: uppercase; transition: 0.3s; margin-top: 10px;
+}
+.area-auth .btn-registrati:hover { background-color: #bfa030; }
+
+.area-auth .link-login { text-align: center; margin-top: 25px; font-size: 0.95rem; color: #bbb; }
+.area-auth .link-login a { color: var(--colore-primario); text-decoration: none; font-weight: bold; }
