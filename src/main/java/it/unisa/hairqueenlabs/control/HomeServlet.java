@@ -34,16 +34,16 @@ public class HomeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ProdottoDAO prodottoDAO = new ProdottoDAO();
+ProdottoDAO prodottoDAO = new ProdottoDAO();
 		
 		try {
-			//Recupero prodotti dal database
-			List<Prodotto> catalogo = prodottoDAO.doRetrieveAll();
+			List<Prodotto> catalogo = prodottoDAO.doRetrieveNovita();
 			request.setAttribute("listaProdotti", catalogo);
 
-	        CategoriaDAO categoriaDAO = new CategoriaDAO();
-	        List<Categoria> categorie = categoriaDAO.doRetrieveAllCategorie(); 
-	        request.setAttribute("listaCategorie", categorie);
+			CategoriaDAO categoriaDAO = new CategoriaDAO();
+			
+			List<Categoria> categorie = categoriaDAO.doRetrieveAllCategorie(); 
+			request.setAttribute("listaCategorie", categorie);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
 			dispatcher.forward(request, response);
