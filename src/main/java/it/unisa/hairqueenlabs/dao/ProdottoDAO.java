@@ -35,6 +35,7 @@ public class ProdottoDAO {
                 p.setIdSottocategoria(resultSet.getInt("id_sottocategoria"));
                 p.setTipoCuteTarget(resultSet.getString("tipo_cute_target"));
                 p.setTipoCapelloTarget(resultSet.getString("tipo_capello_target"));
+                p.setNovita(resultSet.getBoolean("is_novita"));
                 
                 prodotti.add(p);
             }
@@ -241,5 +242,35 @@ public class ProdottoDAO {
             if (preparedStatement != null) preparedStatement.close();
             if (connection != null) DriverManagerConnectionPool.releaseConnection(connection);
         }
+    }
+    
+    public List<Prodotto> doRetrieveNovita() {
+        List<Prodotto> prodotti = new ArrayList<>();
+        String query = "SELECT * FROM Prodotto WHERE is_novita = 1";
+
+        try (Connection con = DriverManagerConnectionPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(query);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Prodotto p = new Prodotto();
+                p.setIdProdotto(rs.getInt("id_prodotto"));
+                p.setNome(rs.getString("nome"));
+                p.setDescrizione(rs.getString("descrizione"));
+                p.setPrezzo(rs.getDouble("prezzo"));
+                p.setQuantitaMagazzino(rs.getInt("quantita_magazzino"));
+                p.setImmagineUrl(rs.getString("immagine_url"));
+                p.setFaseUtilizzo(rs.getString("fase_utilizzo"));
+                p.setIdSottocategoria(rs.getInt("id_sottocategoria"));
+                p.setTipoCuteTarget(rs.getString("tipo_cute_target"));
+                p.setTipoCapelloTarget(rs.getString("tipo_capello_target"));
+                p.setNovita(rs.getBoolean("is_novita")); 
+
+                prodotti.add(p);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return prodotti;
     }
 }
