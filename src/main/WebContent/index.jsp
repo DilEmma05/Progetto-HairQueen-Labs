@@ -49,7 +49,7 @@
 
     <nav>
         <ul>
-        <li><a href="home">Tutti i Prodotti</a></li>
+        <li><a href="catalogo">Tutti i Prodotti</a></li>
         
         <%
             List<Categoria> macroCategorie = (List<Categoria>) request.getAttribute("listaCategorie");
@@ -110,6 +110,15 @@
         					<a href="home" class="btn-hero">Esplora il Catalogo</a>
     					</div>
 				</li>
+				
+				<li class="carousel-slide">
+                    <img class="carousel-image" src="<%= request.getContextPath() %>/img/promo_phon_piastra_capelli.png" alt="Bundle paistra phon">
+                    <div class="hero-content">
+                        <h2>Il Lusso Senza<br>Compromessi.</h2>
+                        <p>Scopri la nostra visione di lusso e cura esclusiva.<br>Esplora il rituale perfetto per te.</p>
+                        <a href="prodotto?id=14" class="btn-hero">Acquista la Promo</a>
+                    </div>
+                </li>
 
             </ul>
         </div>
@@ -123,6 +132,7 @@
 
         <div class="carousel-nav">
             <button class="carousel-indicator current-slide"></button>
+            <button class="carousel-indicator"></button>
             <button class="carousel-indicator"></button>
         </div>
     </section>
