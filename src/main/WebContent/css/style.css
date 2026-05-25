@@ -52,3 +52,77 @@ body {
 .area-admin .btn-update:hover {
     background-color: #2980b9;
 }
+
+/* Variante del container solo per il form */
+.area-admin .container-form {
+    max-width: 600px; 
+    background-color: #1E1E1E; 
+    padding: 30px; 
+    border-radius: 8px;
+    margin-top: 40px;
+}
+
+.area-admin .titolo-form {
+    text-align: center;
+}
+
+.area-admin .form-group { 
+    margin-bottom: 15px; 
+}
+
+.area-admin label { 
+    display: block; 
+    margin-bottom: 5px; 
+    color: #bbb; 
+}
+
+/* Stilizzazione globale di tutti i campi di input dell'admin */
+.area-admin input[type="text"], 
+.area-admin input[type="number"], 
+.area-admin textarea, 
+.area-admin select { 
+    width: 100%; 
+    padding: 10px; 
+    background-color: #333; 
+    color: white; 
+    border: 1px solid #555; 
+    border-radius: 4px; 
+    box-sizing: border-box; 
+}
+
+/* Griglia per affiancare i campi (es. Prezzo e Quantità) */
+.area-admin .form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.area-admin .flex-1 {
+    flex: 1;
+}
+
+/* Bottone rosso per il salvataggio */
+.area-admin .btn-submit { 
+    background-color: #e74c3c; 
+    color: white; 
+    border: none; 
+    padding: 12px 20px; 
+    width: 100%; 
+    border-radius: 4px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    font-size: 16px; 
+    margin-top: 10px; 
+}
+
+.area-admin .btn-submit:hover { 
+    background-color: #c0392b; 
+}
+
+/* Link di ritorno */
+.area-admin .back-link { 
+    display: block; 
+    text-align: center; 
+    margin-top: 20px; 
+    color: #888; 
+    text-decoration: none; 
+}
