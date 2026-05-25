@@ -118,6 +118,112 @@ body {
 .area-pubblica .dropdown-content a:hover { background-color: #2c2c2c; color: var(--colore-accento); }
 .area-pubblica nav ul li:hover .dropdown-content { display: block; }
 
+
+/* ==========================================================================
+   HERO CAROUSEL INTERATTIVO HOMEPAGE
+   ========================================================================== */
+.area-pubblica .hero-carousel {
+    position: relative;
+    height: 70vh;
+    min-height: 500px;
+    width: 100%;
+    overflow: hidden;
+    border-bottom: 2px solid var(--colore-primario);
+}
+
+.area-pubblica .carousel-track-container {
+    height: 100%;
+    width: 100%;
+}
+
+.area-pubblica .carousel-track {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    height: 100%;
+    width: 100%;
+    animation: slideUp 1.2s ease-out forwards;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.area-pubblica .carousel-slide {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 8%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.area-pubblica .carousel-slide.current-slide {
+    opacity: 1;
+    z-index: 1; 
+}
+
+/* Gestione Immagine di Sfondo e Gradiente */
+.area-pubblica .carousel-image {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: -2; 
+}
+
+/* Gradiente scuro sovrapposto per leggere il testo */
+.area-pubblica .carousel-slide::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to right, rgba(18, 18, 18, 0.95) 0%, rgba(18, 18, 18, 0.1) 100%);
+    z-index: -1; 
+}
+
+/* Stili del testo della Hero */
+.area-pubblica .hero-content { max-width: 700px; }
+.area-pubblica .hero-content h2 { font-size: 4rem; color: var(--colore-accento); margin: 0 0 15px 0; line-height: 1.1; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); }
+.area-pubblica .hero-content p { font-size: 1.3rem; color: var(--testo-principale); margin-bottom: 35px; line-height: 1.6; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); }
+
+.area-pubblica .btn-hero {
+    display: inline-block; background-color: var(--colore-accento); color: var(--sfondo-principale); padding: 15px 35px; font-size: 1.2rem; font-weight: bold; text-transform: uppercase; text-decoration: none; border-radius: 4px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+.area-pubblica .btn-hero:hover { background-color: #bfa030; transform: scale(1.05); box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6); }
+
+/* --- Stili per Frecce e Pallini --- */
+.area-pubblica .carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(26, 26, 26, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    font-size: 20px;
+    padding: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    transition: 0.3s;
+}
+.area-pubblica .carousel-button:hover { background-color: var(--colore-primario); border-color: transparent; }
+.area-pubblica .carousel-button-left { left: 20px; }
+.area-pubblica .carousel-button-right { right: 20px; }
+
+/* I pallini indicatori in basso */
+.area-pubblica .carousel-nav {
+    display: flex; justify-content: center; gap: 10px; padding: 15px 0; position: absolute; bottom: 20px; width: 100%; z-index: 10;
+}
+.area-pubblica .carousel-indicator {
+    border: 0; border-radius: 50%; width: 12px; height: 12px; background-color: rgba(255, 255, 255, 0.3); cursor: pointer; transition: 0.3s;
+}
+.area-pubblica .carousel-indicator.current-slide { background-color: var(--colore-accento); box-shadow: 0 0 10px rgba(212, 175, 55, 0.6); }
+
+/* Animazione di entrata e classi di utilità */
+@keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+.area-pubblica .is-hidden { display: none; }
+
 /* Griglia Prodotti */
 .area-pubblica .contenitore-prodotti {
     max-width: 1200px; margin: 40px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;
