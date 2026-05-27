@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HairQueen Labs</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=<%= System.currentTimeMillis() %>">
 </head>
 <body>
 
@@ -181,6 +181,17 @@
             }
         %>
     </main>
+    
+    <section class="brand-philosophy">
+        <div class="philosophy-text">
+            <h2>Scienza e Lusso per la tua Corona.</h2>
+            <p>In HairQueen Labs crediamo che ogni capello meriti l'eccellenza. Uniamo l'ingegneria più avanzata alle formulazioni più esclusive per offrirti non solo un prodotto, ma un vero e proprio rituale di bellezza. La vera rivoluzione nasce nei nostri laboratori e prende vita sulla tua chioma.</p>
+            <a href="laboratori" class="btn-outline">Scopri la nostra tecnologia</a>
+        </div>
+        <div class="philosophy-image">
+            <img src="<%= request.getContextPath() %>/img/layout/filosofia_laboratori.png" alt="Laboratori HairQueen">
+        </div>
+    </section>
 
 </div> 
 
