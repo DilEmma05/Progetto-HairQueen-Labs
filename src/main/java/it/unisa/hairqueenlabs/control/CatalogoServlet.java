@@ -44,7 +44,7 @@ public class CatalogoServlet extends HttpServlet {
 			List<Categoria> categorie = categoriaDAO.doRetrieveAllCategorie(); 
 			request.setAttribute("listaCategorie", categorie);
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/catalogo.jsp");
 			dispatcher.forward(request, response);
 			
 		} catch(SQLException e) {
