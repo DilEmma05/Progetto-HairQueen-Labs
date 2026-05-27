@@ -74,3 +74,37 @@ dotsNav.addEventListener('click', e => {
     updateDots(currentDot, targetDot);
     hideShowArrows(slides, prevButton, nextButton, targetIndex);
 });
+
+//AUTOPLAY CAROUSEL
+
+const TEMPO_AUTOPLAY = 5000;
+let intervalloAutoplay;
+
+function scorriAutomaticamente() {
+    const currentSlide = track.querySelector('.current-slide');
+    const currentIndex = slides.findIndex(slide => slide === currentSlide);
+
+    if (currentIndex === slides.length - 1) {
+        dots[0].click();
+    } else {
+        nextButton.click();
+    }
+}
+
+// Accende il metronomo
+function avviaAutoplay() {
+    intervalloAutoplay = setInterval(scorriAutomaticamente, TEMPO_AUTOPLAY);
+}
+
+// Azzera il metronomo
+function resettaAutoplay(e) {
+    if (e && e.isTrusted) {
+        clearInterval(intervalloAutoplay); 
+        avviaAutoplay();                   
+    }
+}
+avviaAutoplay();
+
+nextButton.addEventListener('click', resettaAutoplay);
+prevButton.addEventListener('click', resettaAutoplay);
+dotsNav.addEventListener('click', resettaAutoplay);
