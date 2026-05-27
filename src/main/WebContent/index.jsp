@@ -49,6 +49,8 @@
 
     <nav>
         <ul>
+        <li><a href="home#ultimi-arrivi">Novità</a></li>
+        
         <li><a href="catalogo">Tutti i Prodotti</a></li>
         
         <%
@@ -136,6 +138,9 @@
             <button class="carousel-indicator"></button>
         </div>
     </section>
+
+    <h2 id="ultimi-arrivi" style="text-align: center; color: var(--colore-accento); margin-top: 60px; margin-bottom: 10px; font-size: 2.5rem; letter-spacing: 1px;">Le Nostre Novità</h2>
+
     <main class="contenitore-prodotti">
         <%
             List<Prodotto> prodotti = (List<Prodotto>) request.getAttribute("listaProdotti");
