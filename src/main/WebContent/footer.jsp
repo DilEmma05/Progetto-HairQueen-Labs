@@ -18,8 +18,10 @@
             <ul>
                 <li><a href="home">Home</a></li>
                 <li><a href="catalogo">Tutti i Prodotti</a></li>
+                <li><a href="FiltroCatalogoServlet?id=1">Cura dei Capelli</a></li>
+                <li><a href="FiltroCatalogoServlet?id=2">Strumenti di Styling</a></li>
+                <li><a href="FiltroCatalogoServlet?id=3">Bundle</a></li>
                 <li><a href="routine">Trova Routine</a></li>
-                <li><a href="laboratori">La Nostra Scienza</a></li>
             </ul>
         </div>
 
