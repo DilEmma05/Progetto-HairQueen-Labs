@@ -197,6 +197,8 @@
             <img src="<%= request.getContextPath() %>/img/layout/filosofia_laboratori.png" alt="Laboratori HairQueen">
         </div>
     </section>
+    
+    <jsp:include page="footer.jsp" />
 
 </div> 
 
