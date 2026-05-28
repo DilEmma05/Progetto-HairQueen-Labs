@@ -28,10 +28,10 @@
         <div class="footer-col">
             <h4>Supporto</h4>
             <ul>
-                <li><a href="#">Spedizioni e Resi</a></li>
-                <li><a href="#">Domande Frequenti (FAQ)</a></li>
-                <li><a href="#">Contattaci</a></li>
-                <li><a href="#">Condizioni di Vendita</a></li>
+                <li><a href="info.jsp#spedizioni">Spedizioni e Resi</a></li>
+                <li><a href="info.jsp#faq">Domande Frequenti (FAQ)</a></li>
+                <li><a href="info.jsp#contatti">Contattaci</a></li>
+                <li><a href="info.jsp#condizioni">Condizioni di Vendita</a></li>
             </ul>
         </div>
 
