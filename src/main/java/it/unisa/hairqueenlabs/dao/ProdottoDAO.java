@@ -90,8 +90,7 @@ public class ProdottoDAO {
         List<Prodotto> raccomandati = new ArrayList<>();
 
         // Cerchiamo i prodotti che corrispondono alle esigenze e ne prendiamo solo 3
-        String selectSQL = "SELECT * FROM Prodotto WHERE tipo_cute_target = ? AND tipo_capello_target = ? LIMIT 3";
-
+        String selectSQL = "SELECT * FROM Prodotto WHERE (tipo_cute_target = ? OR tipo_cute_target = 'Tutti') AND (tipo_capello_target = ? OR tipo_capello_target = 'Tutti')";
         try {
             connection = DriverManagerConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(selectSQL);
