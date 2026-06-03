@@ -10,24 +10,34 @@
 </header>
 
 <div class="barra-utente">
-    <a href="carrello" class="link-carrello">🛒 Carrello</a>
+        
+        <a href="carrello" class="link-carrello">
+            🛒 Carrello
+        </a>
 
-    <%
-        Utente utente = (Utente) session.getAttribute("utente");
-        if (utente == null) {
-    %>
-            <a href="login" class="btn-login">Accedi</a>
-    <%
-        } else {
-    %>
-            <div class="menu-utente-loggato">
-                <a href="profilo" class="link-profilo">Ciao, <strong><%= utente.getNome() %></strong></a>
-                <a href="logout" class="btn-logout">Esci</a>
-            </div>
-    <%
-        }
-    %>
-</div>
+        <%
+            Utente utente = (Utente) session.getAttribute("utente");
+            if (utente == null) {
+        %>
+                <a href="login" class="btn-login">Accedi</a>
+        <%
+            } else {
+        %>
+                <div class="menu-utente-loggato">
+                    <a href="profilo" class="link-profilo">
+                        Ciao, <strong><%= utente.getNome() %></strong>
+                    </a>
+                    
+                    <% if ("admin".equalsIgnoreCase(utente.getRuolo())) { %>
+    					<a href="admin-dashboard" class="btn-admin">Pannello Admin</a>
+					<% } %>
+                    
+                    <a href="logout" class="btn-logout">Esci</a>
+                </div>
+        <%
+            }
+        %>
+    </div>
 
 <nav>
     <ul>
