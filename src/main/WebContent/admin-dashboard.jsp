@@ -134,9 +134,11 @@
                                     <i class="fas fa-edit"></i> Modifica
                                 </a>
                                 
-                                <form action="EliminaProdottoServlet" method="POST" style="margin: 0; padding: 0;" onsubmit="return confirm('Sei sicuro di voler eliminare <%= p.getNome().replace("'", "\\'") %> dal catalogo? Questa azione è irreversibile.');">
+                                <form action="EliminaProdottoServlet" method="POST" style="margin: 0; padding: 0;" id="form-delete-<%= p.getIdProdotto() %>">
                                     <input type="hidden" name="idProdotto" value="<%= p.getIdProdotto() %>">
-                                    <button type="submit" class="btn-elimina"><i class="fas fa-trash"></i> Elimina</button>
+                                    <button type="button" class="btn-elimina" onclick="openDeleteModal(<%= p.getIdProdotto() %>, '<%= p.getNome().replace("'", "\\'") %>')">
+                                        <i class="fas fa-trash"></i> Elimina
+                                    </button>
                                 </form>
                                 
                             </div>
@@ -155,6 +157,26 @@
     </div>
 </div>
 </div>
+
+<div id="deleteModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <i class="fas fa-exclamation-circle warning-icon"></i>
+            <h3>Conferma Eliminazione</h3>
+        </div>
+        <div class="modal-body">
+            <p>Sei sicuro di voler eliminare dal catalogo:</p>
+            <p><strong id="modalProductName" style="color: #fff; font-size: 1.1rem;"></strong> ?</p>
+            <p class="warning-text">Questa azione è irreversibile.</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn-modal-annulla" onclick="closeDeleteModal()">Annulla</button>
+            <button type="button" class="btn-modal-conferma" id="btnConfirmDelete">Sì, Elimina</button>
+        </div>
+    </div>
+</div>
+
+<script src="js/admin.js"></script>
 
 </body>
 </html>
