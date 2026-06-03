@@ -2,17 +2,19 @@
 <%@ page import="java.util.List" %>
 <%@ page import="it.unisa.hairqueenlabs.model.Ordine" %>
 <%@ page import="it.unisa.hairqueenlabs.model.Utente" %>
+<%@ page import="it.unisa.hairqueenlabs.model.Prodotto" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 
 <%
     // Doppio controllo lato View (Best practice di sicurezza)
     Utente utente = (Utente) session.getAttribute("utente");
-    if (utente == null || !"ADMIN".equals(utente.getRuolo())) {
+    if (utente == null || !"admin".equalsIgnoreCase(utente.getRuolo())) {
         response.sendRedirect("login");
         return;
     }
     
     List<Ordine> ordini = (List<Ordine>) request.getAttribute("ordini");
+    List<Prodotto> catalogo = (List<Prodotto>) request.getAttribute("catalogo");
 %>
 
 <!DOCTYPE html>
@@ -21,19 +23,21 @@
     <meta charset="UTF-8">
     <title>Pannello Amministratore - HairQueen Labs</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Stili aggiuntivi specifici per i bottoni admin */
+        .btn-modifica { background-color: #f39c12; color: #fff; padding: 5px 10px; text-decoration: none; border-radius: 3px; font-weight: bold; font-size: 0.9em; }
+        .btn-modifica:hover { background-color: #d68910; }
+        .btn-elimina { background-color: #e74c3c; color: #fff; border: none; padding: 6px 10px; border-radius: 3px; font-weight: bold; cursor: pointer; font-size: 0.9em; }
+        .btn-elimina:hover { background-color: #c0392b; }
+    </style>
 </head>
 <body>
 <div class="area-admin">
 
 <div class="container">
-    <h1>Dashboard Amministratore - Gestione Ordini</h1>
+    <h1>Dashboard Amministratore</h1>
     <p>Benvenuto, Admin <%= utente.getNome() %>.</p>
-    
-    <div style="margin: 20px 0 30px 0;">
-        <a href="inserisci-prodotto" style="background-color: #27ae60; color: white; padding: 10px 20px; text-decoration: none; font-weight: bold; border-radius: 4px; display: inline-block;">
-            + Aggiungi Nuovo Prodotto al Catalogo
-        </a>
-    </div>
     
     <% 
         String messaggioSuccesso = request.getParameter("successo");
@@ -42,8 +46,13 @@
         <div style="background-color: #2ecc71; color: #121212; padding: 15px; border-radius: 4px; margin-bottom: 25px; font-weight: bold; text-align: center; border-left: 5px solid #27ae60;">
             &#10004; Nuovo prodotto inserito nel catalogo con successo!
         </div>
+    <% } else if ("prodottoEliminato".equals(messaggioSuccesso)) { %>
+        <div style="background-color: #e74c3c; color: #fff; padding: 15px; border-radius: 4px; margin-bottom: 25px; font-weight: bold; text-align: center; border-left: 5px solid #c0392b;">
+            &#10004; Prodotto eliminato dal catalogo.
+        </div>
     <% } %>
 
+    <h2 style="margin-top: 40px; color: var(--colore-accento); border-bottom: 1px solid #333; padding-bottom: 10px;">Gestione Ordini</h2>
     <% if (ordini != null && !ordini.isEmpty()) { %>
         <table>
             <thead>
@@ -86,8 +95,64 @@
         <p>Non ci sono ordini nel sistema.</p>
     <% } %>
 
-    <br>
-    <a href="home" style="color: #bbb;">Torna al lato pubblico del sito</a>
+    <h2 style="margin-top: 50px; color: var(--colore-accento); border-bottom: 1px solid #333; padding-bottom: 10px;">Gestione Catalogo</h2>
+    
+    <div style="margin: 15px 0;">
+        <a href="inserisci-prodotto" style="background-color: #27ae60; color: white; padding: 10px 20px; text-decoration: none; font-weight: bold; border-radius: 4px; display: inline-block;">
+            <i class="fas fa-plus"></i> Aggiungi Nuovo Prodotto
+        </a>
+    </div>
+
+    <% if (catalogo != null && !catalogo.isEmpty()) { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome Prodotto</th>
+                    <th>Prezzo</th>
+                    <th>Magazzino</th>
+                    <th>Azioni</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (Prodotto p : catalogo) { %>
+                    <tr>
+                        <td><%= p.getIdProdotto() %></td>
+                        <td><strong><%= p.getNome() %></strong></td>
+                        <td><%= String.format("%.2f", p.getPrezzo()) %> &euro;</td>
+                        <td>
+                            <% if (p.getQuantitaMagazzino() <= 5) { %>
+                                <span style="color: #e74c3c; font-weight: bold;"><%= p.getQuantitaMagazzino() %> (In esaurimento)</span>
+                            <% } else { %>
+                                <%= p.getQuantitaMagazzino() %>
+                            <% } %>
+                        </td>
+                        <td>
+                            <div style="display: flex; gap: 10px; align-items: center;">
+                                
+                                <a href="modifica-prodotto?id=<%= p.getIdProdotto() %>" class="btn-modifica">
+                                    <i class="fas fa-edit"></i> Modifica
+                                </a>
+                                
+                                <form action="EliminaProdottoServlet" method="POST" style="margin: 0; padding: 0;" onsubmit="return confirm('Sei sicuro di voler eliminare <%= p.getNome().replace("'", "\\'") %> dal catalogo? Questa azione è irreversibile.');">
+                                    <input type="hidden" name="idProdotto" value="<%= p.getIdProdotto() %>">
+                                    <button type="submit" class="btn-elimina"><i class="fas fa-trash"></i> Elimina</button>
+                                </form>
+                                
+                            </div>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <p>Il catalogo è attualmente vuoto.</p>
+    <% } %>
+
+    <br><br>
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="home" style="color: #bbb; text-decoration: none;"><i class="fas fa-arrow-left"></i> Torna al lato pubblico del sito</a>
+    </div>
 </div>
 </div>
 
