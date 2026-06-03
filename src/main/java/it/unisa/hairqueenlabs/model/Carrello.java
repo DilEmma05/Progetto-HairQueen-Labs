@@ -54,4 +54,12 @@ public class Carrello {
         public void incrementaQuantita() { this.quantita++; }
         public void setQuantita(int quantita) { this.quantita = quantita; }
     }
+
+    public int getNumeroTotaleArticoli() {
+        int totale = 0;
+        for (ElementoCarrello elemento : elementi) {
+            totale += elemento.getQuantita();
+        }
+        return totale;
+    }
 }

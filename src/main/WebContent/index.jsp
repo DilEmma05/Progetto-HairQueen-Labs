@@ -96,7 +96,7 @@
                         </a>
                     </h3>
                     <p class="prezzo"><%= String.format("%.2f", p.getPrezzo()) %> &euro;</p>
-                    <form action="CarrelloServlet" method="POST" style="margin-top: 15px;">
+                    <form action="<%= request.getContextPath() %>/CarrelloServlet" method="POST" class="form-ajax-carrello" style="margin-top: 15px;">
                     <input type="hidden" name="idProdotto" value="<%= p.getIdProdotto() %>">
                     <button type="submit" class="btn-acquista">Aggiungi al Carrello</button>
                     </form>
@@ -129,5 +129,6 @@
 </div> 
 
 <script src="js/hero.js"></script>
+<script src="<%= request.getContextPath() %>/js/ajax-carrello.js"></script>
 </body>
 </html>

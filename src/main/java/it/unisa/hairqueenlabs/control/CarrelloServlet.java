@@ -42,32 +42,40 @@ public class CarrelloServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
         
-		//Recupera il carrello dalla sessione. Se non esiste, ne crea uno nuovo
-		Carrello carrello = (Carrello) session.getAttribute("carrello");
-		if (carrello == null) {
-			carrello = new Carrello();
-			session.setAttribute("carrello", carrello);
-		}
-
-		//Recupera l'ID del prodotto dal form di dettaglio.jsp
-		String idString = request.getParameter("idProdotto");
-        
-		if (idString != null && !idString.isEmpty()) {
-			try {
-				int idProdotto = Integer.parseInt(idString);
-				ProdottoDAO dao = new ProdottoDAO();
-				Prodotto prodotto = dao.doRetrieveById(idProdotto);
-                
-				if (prodotto != null) {
-                   //Aggiunge il prodotto al carrello
-					carrello.aggiungiProdotto(prodotto);
-				}
-			} catch (NumberFormatException | SQLException e) {
-				e.printStackTrace();
-			}
+        Carrello carrello = (Carrello) session.getAttribute("carrello");
+        if (carrello == null) {
+            carrello = new Carrello();
+            session.setAttribute("carrello", carrello);
         }
 
-        //Una volta aggiunto, reindirizza l'utente alla pagina del carrello
+        String idString = request.getParameter("idProdotto");
+        if (idString != null && !idString.isEmpty()) {
+            try {
+                int idProdotto = Integer.parseInt(idString);
+                ProdottoDAO dao = new ProdottoDAO();
+                Prodotto prodotto = dao.doRetrieveById(idProdotto);
+                
+                if (prodotto != null) {
+                    carrello.aggiungiProdotto(prodotto);
+                }
+            } catch (NumberFormatException | SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+
+        if (isAjax) {
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            
+            int totaleArticoli = carrello.getNumeroTotaleArticoli();
+            
+            String jsonResponse = "{\"status\": \"success\", \"totaleArticoli\": " + totaleArticoli + "}";
+
+            response.getWriter().write(jsonResponse);
+            return;
+        }
+
         response.sendRedirect("carrello");
 	}
 	

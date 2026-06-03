@@ -12,7 +12,13 @@
 <div class="barra-utente">
         
         <a href="carrello" class="link-carrello">
-            🛒 Carrello
+            🛒 Carrello 
+            <span id="cart-badge" class="cart-badge">
+                <% 
+                   it.unisa.hairqueenlabs.model.Carrello c = (it.unisa.hairqueenlabs.model.Carrello) session.getAttribute("carrello");
+                   out.print((c != null) ? c.getNumeroTotaleArticoli() : "0");
+                %>
+            </span>
         </a>
 
         <%
