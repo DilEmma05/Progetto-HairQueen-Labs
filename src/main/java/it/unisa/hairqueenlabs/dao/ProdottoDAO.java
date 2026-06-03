@@ -272,4 +272,27 @@ public class ProdottoDAO {
         }
         return prodotti;
     }
+    
+    public synchronized boolean doDelete(int idProdotto) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        int result = 0;
+
+        String deleteSQL = "DELETE FROM Prodotto WHERE id_prodotto = ?";
+
+        try {
+            connection = DriverManagerConnectionPool.getConnection();
+            preparedStatement = connection.prepareStatement(deleteSQL);
+            preparedStatement.setInt(1, idProdotto);
+
+            result = preparedStatement.executeUpdate();
+            connection.commit();
+
+        } finally {
+            if (preparedStatement != null) preparedStatement.close();
+            if (connection != null) DriverManagerConnectionPool.releaseConnection(connection);
+        }
+
+        return (result != 0);
+    }
 }
