@@ -11,13 +11,14 @@ public class Prodotto {
 	private int idSottocategoria;
 	private String tipoCuteTarget;
 	private String tipoCapelloTarget;
+	private boolean isNovita;
 	
 	public Prodotto(){
 		
 	}
 
 	public Prodotto(int idProdotto, String nome, String descrizione, double prezzo, int quantitaMagazzino,
-			String immagineUrl, String faseUtilizzo, int idSottocategoria, String tipoCuteTarget, String tipoCapelloTarget) {
+			String immagineUrl, String faseUtilizzo, int idSottocategoria, String tipoCuteTarget, String tipoCapelloTarget, boolean isNovita) {
 		super();
 		this.idProdotto = idProdotto;
 		this.nome = nome;
@@ -29,6 +30,7 @@ public class Prodotto {
 		this.idSottocategoria = idSottocategoria;
 		this.tipoCuteTarget = tipoCuteTarget;
 		this.tipoCapelloTarget = tipoCapelloTarget;
+		this.isNovita = isNovita;
 	}
 
 	public int getIdProdotto() {
@@ -109,6 +111,14 @@ public class Prodotto {
 
 	public void setTipoCapelloTarget(String tipoCapelloTarget) {
 		this.tipoCapelloTarget = tipoCapelloTarget;
+	}
+
+	public boolean isNovita() {
+		return isNovita;
+	}
+
+	public void setNovita(boolean isNovita) {
+		this.isNovita = isNovita;
 	}
 
 }

@@ -20,6 +20,9 @@ body {
     margin: 0;
 }
 
+html {
+    scroll-behavior: smooth;
+}
 
 /* ==========================================================================
    AREA AMMINISTRATORE
@@ -117,6 +120,112 @@ body {
 }
 .area-pubblica .dropdown-content a:hover { background-color: #2c2c2c; color: var(--colore-accento); }
 .area-pubblica nav ul li:hover .dropdown-content { display: block; }
+
+
+/* ==========================================================================
+   HERO CAROUSEL INTERATTIVO HOMEPAGE
+   ========================================================================== */
+.area-pubblica .hero-carousel {
+    position: relative;
+    height: 70vh;
+    min-height: 500px;
+    width: 100%;
+    overflow: hidden;
+    border-bottom: 2px solid var(--colore-primario);
+}
+
+.area-pubblica .carousel-track-container {
+    height: 100%;
+    width: 100%;
+}
+
+.area-pubblica .carousel-track {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    height: 100%;
+    width: 100%;
+    animation: slideUp 1.2s ease-out forwards;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.area-pubblica .carousel-slide {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 8%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.area-pubblica .carousel-slide.current-slide {
+    opacity: 1;
+    z-index: 1; 
+}
+
+/* Gestione Immagine di Sfondo e Gradiente */
+.area-pubblica .carousel-image {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: -2; 
+}
+
+/* Gradiente scuro sovrapposto per leggere il testo */
+.area-pubblica .carousel-slide::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to right, rgba(18, 18, 18, 0.95) 0%, rgba(18, 18, 18, 0.1) 100%);
+    z-index: -1; 
+}
+
+/* Stili del testo della Hero */
+.area-pubblica .hero-content { max-width: 700px; }
+.area-pubblica .hero-content h2 { font-size: 4rem; color: var(--colore-accento); margin: 0 0 15px 0; line-height: 1.1; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); }
+.area-pubblica .hero-content p { font-size: 1.3rem; color: var(--testo-principale); margin-bottom: 35px; line-height: 1.6; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); }
+
+.area-pubblica .btn-hero {
+    display: inline-block; background-color: var(--colore-accento); color: var(--sfondo-principale); padding: 15px 35px; font-size: 1.2rem; font-weight: bold; text-transform: uppercase; text-decoration: none; border-radius: 4px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+.area-pubblica .btn-hero:hover { background-color: #bfa030; transform: scale(1.05); box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6); }
+
+/* --- Stili per Frecce e Pallini --- */
+.area-pubblica .carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(26, 26, 26, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    font-size: 20px;
+    padding: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    transition: 0.3s;
+}
+.area-pubblica .carousel-button:hover { background-color: var(--colore-primario); border-color: transparent; }
+.area-pubblica .carousel-button-left { left: 20px; }
+.area-pubblica .carousel-button-right { right: 20px; }
+
+/* I pallini indicatori in basso */
+.area-pubblica .carousel-nav {
+    display: flex; justify-content: center; gap: 10px; padding: 15px 0; position: absolute; bottom: 20px; width: 100%; z-index: 10;
+}
+.area-pubblica .carousel-indicator {
+    border: 0; border-radius: 50%; width: 12px; height: 12px; background-color: rgba(255, 255, 255, 0.3); cursor: pointer; transition: 0.3s;
+}
+.area-pubblica .carousel-indicator.current-slide { background-color: var(--colore-accento); box-shadow: 0 0 10px rgba(212, 175, 55, 0.6); }
+
+/* Animazione di entrata e classi di utilità */
+@keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+.area-pubblica .is-hidden { display: none; }
 
 /* Griglia Prodotti */
 .area-pubblica .contenitore-prodotti {
@@ -510,3 +619,529 @@ body {
 .area-dettaglio-ordine .btn-fattura:hover {
     background-color: #bfa030;
 }
+
+/* ==========================================================================
+   SEZIONE FILOSOFIA BRAND (PRE-FOOTER)
+   ========================================================================== */
+
+.brand-philosophy {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #111;
+    color: #fff;
+    margin-top: 80px;
+    padding: 0;
+    overflow: hidden;
+}
+
+.philosophy-text {
+    flex: 1;
+    padding: 50px 80px;
+}
+
+.philosophy-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.philosophy-text p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    color: #ccc;
+}
+
+.btn-outline {
+    display: inline-block;
+    padding: 12px 30px;
+    border: 1px solid #fff;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+    background-color: #fff;
+    color: #111;
+}
+
+.philosophy-image {
+    flex: 1;
+    display: flex;
+}
+
+.philosophy-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Responsive per i cellulari */
+@media screen and (max-width: 768px) {
+    .brand-philosophy {
+        flex-direction: column;
+    }
+    
+    .philosophy-text {
+        padding: 40px 20px;
+        text-align: center;
+    }
+}
+
+/* =========================================
+   FOOTER GLOBALE
+   ========================================= */
+.site-footer {
+    background-color: #0a0a0a;
+    color: #e0e0e0;
+    padding: 60px 0 20px 0;
+    margin-top: 50px;
+    border-top: 1px solid #222;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    padding: 0 20px;
+}
+
+.footer-col h3 {
+    color: var(--colore-accento);
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.footer-col h4 {
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-col p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #aaa;
+    margin-bottom: 15px;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 12px;
+}
+
+.footer-col ul li a {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+    color: var(--colore-accento);
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #1a1a1a;
+    color: #fff;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+    background-color: var(--colore-accento);
+    transform: translateY(-3px);
+}
+
+.newsletter-form {
+    display: flex;
+    margin-top: 15px;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid #333;
+    background-color: #111;
+    color: #fff;
+    outline: none;
+}
+
+.newsletter-form button {
+    padding: 0 20px;
+    background-color: var(--colore-accento);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.newsletter-form button:hover {
+    background-color: #c9a063;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid #1a1a1a;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* =========================================
+   PAGINA INFO / CUSTOMER CARE
+   ========================================= */
+.contenitore-info {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    color: #e0e0e0;
+}
+
+.info-section {
+    background-color: #111;
+    padding: 40px;
+    margin-bottom: 40px;
+    border-radius: 8px;
+    border: 1px solid #222;
+    scroll-margin-top: 80px; 
+}
+
+.info-section h3 {
+    color: var(--colore-accento);
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+}
+
+.info-section h3 i {
+    margin-right: 10px;
+    color: #fff;
+}
+
+.info-section p {
+    line-height: 1.8;
+    margin-bottom: 15px;
+    font-size: 1.05rem;
+    color: #ccc;
+}
+
+.info-section ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.info-section ul li {
+    margin-bottom: 10px;
+    color: #ccc;
+}
+
+.info-section ul li strong {
+    color: #fff;
+}
+
+.faq-item {
+    margin-bottom: 25px;
+}
+
+.faq-item h4 {
+    color: #fff;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+/* =========================================
+   PAGINA TROVA ROUTINE (QUIZ)
+   ========================================= */
+.routine-quiz-container, .routine-results-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.quiz-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.quiz-header h2 {
+    color: var(--colore-accento);
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.quiz-step {
+    background-color: #111;
+    border: 1px solid #222;
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+
+.quiz-step h3 {
+    color: #fff;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+}
+
+.quiz-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.option-card input[type="radio"] {
+    display: none;
+}
+
+.option-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 25px 20px;
+    background-color: #1a1a1a;
+    border: 2px solid #333;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.option-content i {
+    font-size: 2rem;
+    color: var(--colore-accento);
+    margin-bottom: 15px;
+}
+
+.option-content strong {
+    color: #fff;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.option-content small {
+    color: #888;
+    font-size: 0.85rem;
+}
+
+.option-card:hover .option-content {
+    border-color: #555;
+    background-color: #222;
+}
+
+.option-card input[type="radio"]:checked + .option-content {
+    border-color: var(--colore-accento);
+    background-color: #251f15;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+}
+
+.btn-quiz-submit {
+    background-color: var(--colore-accento);
+    color: #000;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+}
+
+.btn-quiz-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+}
+
+.results-header {
+    text-align: center;
+    background-color: #111;
+    padding: 40px;
+    border-radius: 12px;
+    border: 1px solid #222;
+    margin-bottom: 40px;
+}
+
+.badge-routine {
+    background-color: #222;
+    color: var(--colore-accento);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.routine-desc {
+    color: #ccc;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.btn-Ripeti-quiz {
+    display: inline-block;
+    color: #aaa;
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    transition: color 0.3s;
+}
+.btn-Ripeti-quiz:hover {
+    color: #fff;
+}
+.results-title {
+    color: #fff;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* =========================================
+   BOTTONE PANNELLO ADMIN (HEADER)
+   ========================================= */
+.btn-admin {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.95rem;
+    margin-left: 15px;
+    margin-right: 15px;
+    padding: 5px 10px;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.btn-admin:hover {
+    background-color: #fff;
+    color: #000;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* =========================================
+   MODALE (POP-UP) CONFERMA ELIMINAZIONE
+   ========================================= */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.7);
+    animation: modalFadeIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-30px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-header .warning-icon {
+    font-size: 3.5rem;
+    color: #e74c3c;
+    margin-bottom: 15px;
+}
+
+.modal-header h3 {
+    color: #fff;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.modal-body p {
+    color: #aaa;
+    margin-bottom: 10px;
+}
+
+.modal-body .warning-text {
+    color: #e74c3c;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.btn-modal-annulla {
+    background: #333; color: #fff; border: none; padding: 12px 25px; border-radius: 6px; cursor: pointer; transition: background 0.3s; font-weight: bold;
+}
+.btn-modal-annulla:hover { background: #555; }
+
+.btn-modal-conferma {
+    background: #e74c3c; color: #fff; border: none; padding: 12px 25px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.3s; box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+}
+.btn-modal-conferma:hover { background: #c0392b; transform: translateY(-2px); }
+
+/* =========================================
+   FORM INSERIMENTO E MODIFICA PRODOTTI (AREA ADMIN)
+   ========================================= */
+.form-container { background: #1e1e1e; padding: 40px; border-radius: 8px; margin-top: 20px; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--colore-accento); }
+.form-group input[type="text"], .form-group input[type="number"], .form-group select, .form-group textarea {
+    width: 100%; padding: 10px; border: 1px solid #444; border-radius: 4px; background: #2a2a2a; color: #fff;
+}
+.form-group textarea { resize: vertical; height: 100px; }
+
+.btn-salva { 
+    background-color: #f39c12; 
+    color: #fff; 
+    border: none; 
+    padding: 12px 25px; 
+    border-radius: 4px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    font-size: 1rem; 
+    transition: background 0.3s; 
+}
+.btn-salva:hover { background-color: #d68910; }

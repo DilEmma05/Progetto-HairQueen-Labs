@@ -12,7 +12,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 import it.unisa.hairqueenlabs.dao.OrdineDAO;
+import it.unisa.hairqueenlabs.dao.ProdottoDAO;
 import it.unisa.hairqueenlabs.model.Ordine;
+import it.unisa.hairqueenlabs.model.Prodotto;
 import it.unisa.hairqueenlabs.model.Utente;
 
 /**
@@ -45,8 +47,12 @@ public class AdminDashboardServlet extends HttpServlet {
         try {
             OrdineDAO ordineDAO = new OrdineDAO();
             List<Ordine> tuttiOrdini = ordineDAO.doRetrieveAll();
-
             request.setAttribute("ordini", tuttiOrdini);
+
+            ProdottoDAO prodottoDAO = new ProdottoDAO();
+            List<Prodotto> catalogo = prodottoDAO.doRetrieveAll();
+            request.setAttribute("catalogo", catalogo);
+
             request.getRequestDispatcher("/admin-dashboard.jsp").forward(request, response);
 
         } catch (SQLException e) {
