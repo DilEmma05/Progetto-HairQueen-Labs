@@ -1121,3 +1121,27 @@ html {
     background: #e74c3c; color: #fff; border: none; padding: 12px 25px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.3s; box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
 }
 .btn-modal-conferma:hover { background: #c0392b; transform: translateY(-2px); }
+
+/* =========================================
+   FORM INSERIMENTO E MODIFICA PRODOTTI (AREA ADMIN)
+   ========================================= */
+.form-container { background: #1e1e1e; padding: 40px; border-radius: 8px; margin-top: 20px; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--colore-accento); }
+.form-group input[type="text"], .form-group input[type="number"], .form-group select, .form-group textarea {
+    width: 100%; padding: 10px; border: 1px solid #444; border-radius: 4px; background: #2a2a2a; color: #fff;
+}
+.form-group textarea { resize: vertical; height: 100px; }
+
+.btn-salva { 
+    background-color: #f39c12; 
+    color: #fff; 
+    border: none; 
+    padding: 12px 25px; 
+    border-radius: 4px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    font-size: 1rem; 
+    transition: background 0.3s; 
+}
+.btn-salva:hover { background-color: #d68910; }
