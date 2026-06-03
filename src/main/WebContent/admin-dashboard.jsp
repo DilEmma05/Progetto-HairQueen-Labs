@@ -50,6 +50,10 @@
         <div style="background-color: #e74c3c; color: #fff; padding: 15px; border-radius: 4px; margin-bottom: 25px; font-weight: bold; text-align: center; border-left: 5px solid #c0392b;">
             &#10004; Prodotto eliminato dal catalogo.
         </div>
+    <% } else if ("prodottoModificato".equals(messaggioSuccesso)) { %>
+        <div style="background-color: #f39c12; color: #fff; padding: 15px; border-radius: 4px; margin-bottom: 25px; font-weight: bold; text-align: center; border-left: 5px solid #d68910;">
+            &#10004; Le modifiche al prodotto sono state salvate con successo!
+        </div>
     <% } %>
 
     <h2 style="margin-top: 40px; color: var(--colore-accento); border-bottom: 1px solid #333; padding-bottom: 10px;">Gestione Ordini</h2>
