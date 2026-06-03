@@ -20,6 +20,10 @@ body {
     margin: 0;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -80,7 +84,15 @@ html {
     background-color: var(--sfondo-principale);
 }
 .area-pubblica .link-carrello {
-    color: var(--colore-accento); text-decoration: none; font-weight: bold; font-size: 1rem; display: flex; align-items: center; gap: 5px;
+    color: var(--colore-accento); 
+    text-decoration: none; 
+    font-weight: bold; 
+    font-size: 1rem; 
+    display: flex; 
+    align-items: center; 
+    gap: 5px;
+    position: relative;
+    padding-right: 15px;
 }
 .area-pubblica .btn-login {
     background-color: var(--colore-primario); color: white; text-decoration: none; padding: 8px 18px; border-radius: 4px; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s;
@@ -1145,3 +1157,22 @@ html {
     transition: background 0.3s; 
 }
 .btn-salva:hover { background-color: #d68910; }
+
+/* =========================================
+   BADGE NOTIFICA CARRELLO (AJAX)
+   ========================================= */
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -5px;
+    background-color: #e74c3c;
+    color: white;
+    border-radius: 50%;
+    padding: 3px 6px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    min-width: 12px;
+    text-align: center;
+    line-height: 1;
+    box-shadow: 0px 2px 4px rgba(0,0,0,0.4);
+}
