@@ -1047,3 +1047,77 @@ html {
     color: #000;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
+
+/* =========================================
+   MODALE (POP-UP) CONFERMA ELIMINAZIONE
+   ========================================= */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.7);
+    animation: modalFadeIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-30px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-header .warning-icon {
+    font-size: 3.5rem;
+    color: #e74c3c;
+    margin-bottom: 15px;
+}
+
+.modal-header h3 {
+    color: #fff;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.modal-body p {
+    color: #aaa;
+    margin-bottom: 10px;
+}
+
+.modal-body .warning-text {
+    color: #e74c3c;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.btn-modal-annulla {
+    background: #333; color: #fff; border: none; padding: 12px 25px; border-radius: 6px; cursor: pointer; transition: background 0.3s; font-weight: bold;
+}
+.btn-modal-annulla:hover { background: #555; }
+
+.btn-modal-conferma {
+    background: #e74c3c; color: #fff; border: none; padding: 12px 25px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.3s; box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+}
+.btn-modal-conferma:hover { background: #c0392b; transform: translateY(-2px); }
