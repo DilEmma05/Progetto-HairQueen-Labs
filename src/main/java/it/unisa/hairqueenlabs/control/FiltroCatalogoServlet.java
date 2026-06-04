@@ -53,7 +53,7 @@ public class FiltroCatalogoServlet extends HttpServlet {
                 request.setAttribute("listaCategorie", categorie);
                 
                 // 4. Inoltriamo la richiesta alla index.jsp che si occuperà di stampare tutto
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/catalogo.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/catalogo.jsp");
                 dispatcher.forward(request, response);
                 
             } catch (SQLException | NumberFormatException e) {
