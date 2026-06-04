@@ -1176,3 +1176,35 @@ html {
     line-height: 1;
     box-shadow: 0px 2px 4px rgba(0,0,0,0.4);
 }
+
+/* ==========================================================================
+   AREA CONFERMA ORDINE
+   ========================================================================== */
+.container-conferma-ordine {
+    text-align: center;
+    padding: 100px 20px;
+    min-height: 50vh;
+}
+
+.container-conferma-ordine .icona-successo {
+    font-size: 5rem;
+    color: #2ecc71;
+    margin-bottom: 20px;
+}
+
+.container-conferma-ordine .titolo-conferma {
+    color: var(--colore-accento);
+    font-size: 3rem;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.container-conferma-ordine .testo-conferma {
+    font-size: 1.2rem;
+    color: #ccc;
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
