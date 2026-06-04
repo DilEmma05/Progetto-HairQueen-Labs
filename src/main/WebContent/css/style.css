@@ -4,10 +4,11 @@
 :root {
     --sfondo-principale: #121212;
     --testo-principale: #F5F5F5;
-    --colore-primario: #8E44AD; /* Viola Ametista */
-    --colore-accento: #D4AF37;   /* Oro Luxury */
+    --colore-primario: #8E44AD; 
+    --colore-accento: #D4AF37;   
     --sfondo-card: #1E1E1E;
     --colore-errore: #e74c3c;
+    --colore-successo: #2ecc71;
 }
 
 /* ==========================================================================
@@ -29,6 +30,84 @@ html {
 }
 
 /* ==========================================================================
+   HEADER CONDIVISO (Pubblica, Auth, Carrello, Checkout, Dettaglio)
+   ========================================================================== */
+.area-pubblica header,
+.area-auth header,
+.area-carrello header,
+.area-checkout header,
+.area-dettaglio header {
+    text-align: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #2C2C2C;
+}
+
+.area-pubblica header h1,
+.area-auth header h1,
+.area-carrello header h1,
+.area-checkout header h1,
+.area-dettaglio header h1 {
+    color: var(--colore-accento);
+    margin: 0;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+}
+
+/* ==========================================================================
+   BOTTONI FULL-WIDTH CONDIVISI (Login, Registrazione, Conferma Ordine)
+   ========================================================================== */
+.area-auth .btn-registrati,
+.area-auth .btn-login,
+.area-checkout .btn-conferma {
+    width: 100%; 
+    background-color: var(--colore-accento); 
+    color: var(--sfondo-principale);
+    border: none; 
+    padding: 15px; 
+    font-size: 1.1rem; 
+    font-weight: bold; 
+    border-radius: 4px;
+    cursor: pointer; 
+    text-transform: uppercase; 
+    transition: 0.3s; 
+    margin-top: 10px;
+}
+
+.area-auth .btn-registrati:hover,
+.area-auth .btn-login:hover,
+.area-checkout .btn-conferma:hover {
+    background-color: #bfa030;
+}
+
+/* ==========================================================================
+   TABELLE CONDIVISE (Struttura base per Admin, Carrello, Profilo, Dettagli)
+   ========================================================================== */
+.area-admin table,
+.area-carrello table,
+.area-profilo table,
+.area-dettaglio-ordine table {
+    width: 100%; 
+    border-collapse: collapse; 
+}
+
+.area-admin th, .area-admin td,
+.area-carrello th, .area-carrello td,
+.area-profilo th, .area-profilo td,
+.area-dettaglio-ordine th, .area-dettaglio-ordine td {
+    padding: 15px; 
+    text-align: left; 
+    border-bottom: 1px solid #2C2C2C;
+}
+
+.area-admin th,
+.area-carrello th,
+.area-profilo th,
+.area-dettaglio-ordine th {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/* ==========================================================================
    AREA AMMINISTRATORE
    ========================================================================== */
 .area-admin {
@@ -36,10 +115,9 @@ html {
 }
 
 .area-admin .container { max-width: 1000px; margin: 0 auto; }
-.area-admin h1 { color: #e74c3c; border-bottom: 2px solid #333; padding-bottom: 10px; }
-.area-admin table { width: 100%; border-collapse: collapse; margin-top: 20px; background-color: #1E1E1E; }
-.area-admin th, .area-admin td { padding: 15px; text-align: left; border-bottom: 1px solid #2C2C2C; }
-.area-admin th { color: #e74c3c; text-transform: uppercase; }
+.area-admin h1 { color: var(--colore-errore); border-bottom: 2px solid #333; padding-bottom: 10px; }
+.area-admin table { margin-top: 20px; background-color: var(--sfondo-card); }
+.area-admin th { color: var(--colore-errore); }
 .area-admin .btn-update { background-color: #3498db; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; }
 .area-admin .btn-update:hover { background-color: #2980b9; }
 
@@ -53,7 +131,7 @@ html {
 }
 .area-admin .form-row { display: flex; gap: 15px; }
 .area-admin .flex-1 { flex: 1; }
-.area-admin .btn-submit { background-color: #e74c3c; color: white; border: none; padding: 12px 20px; width: 100%; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
+.area-admin .btn-submit { background-color: var(--colore-errore); color: white; border: none; padding: 12px 20px; width: 100%; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
 .area-admin .btn-submit:hover { background-color: #c0392b; }
 .area-admin .back-link { display: block; text-align: center; margin-top: 20px; color: #888; text-decoration: none; }
 
@@ -61,17 +139,7 @@ html {
 /* ==========================================================================
    AREA PUBBLICA
    ========================================================================== */
-.area-pubblica header {
-    text-align: center;
-    padding: 20px 0;
-    border-bottom: 1px solid #2C2C2C;
-}
-.area-pubblica header h1 {
-    color: var(--colore-accento);
-    margin: 0;
-    font-size: 2.5rem;
-    letter-spacing: 2px;
-}
+
 
 /* Barra utente (Carrello e Login) */
 .area-pubblica .barra-utente {
@@ -272,8 +340,7 @@ html {
     min-height: 100vh;
 }
 
-.area-auth header { text-align: center; padding: 20px 0; border-bottom: 1px solid #2C2C2C; }
-.area-auth header h1 { color: var(--colore-accento); margin: 0; letter-spacing: 2px; }
+
 .area-auth header a { text-decoration: none; }
 
 .area-auth .container-registrazione {
@@ -306,11 +373,11 @@ html {
 
 /* Stili per la validazione errori */
 .area-auth .input-errore { 
-    border-color: #e74c3c !important; 
+    border-color: var(--colore-errore) !important; 
     background-color: rgba(231, 76, 60, 0.05) !important; 
 }
 .area-auth .messaggio-errore-js { 
-    color: #e74c3c; 
+    color: var(--colore-errore); 
     font-size: 0.8rem; 
     display: none; 
     font-weight: bold; 
@@ -321,12 +388,7 @@ html {
     line-height: 1.2;
 }
 
-.area-auth .btn-registrati {
-    width: 100%; background-color: var(--colore-accento); color: var(--sfondo-principale);
-    border: none; padding: 15px; font-size: 1.1rem; font-weight: bold; border-radius: 4px;
-    cursor: pointer; text-transform: uppercase; transition: 0.3s; margin-top: 10px;
-}
-.area-auth .btn-registrati:hover { background-color: #bfa030; }
+
 
 .area-auth .link-login { text-align: center; margin-top: 25px; font-size: 0.95rem; color: #bbb; }
 .area-auth .link-login a { color: var(--colore-primario); text-decoration: none; font-weight: bold; }
@@ -342,12 +404,7 @@ html {
     box-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
 
-.area-auth .btn-login {
-    width: 100%; background-color: var(--colore-accento); color: var(--sfondo-principale);
-    border: none; padding: 15px; font-size: 1.1rem; font-weight: bold; border-radius: 4px;
-    cursor: pointer; text-transform: uppercase; transition: 0.3s; margin-top: 10px;
-}
-.area-auth .btn-login:hover { background-color: #bfa030; }
+
 
 /*Feedback visivi Login*/
 .area-auth .messaggio-errore {
@@ -363,9 +420,9 @@ html {
 
 .area-auth .messaggio-successo {
     background-color: rgba(46, 204, 113, 0.1); 
-    color: #2ecc71; 
+    color: var(--colore-successo); 
     padding: 10px; 
-    border: 1px solid #2ecc71; 
+    border: 1px solid var(--colore-successo); 
     border-radius: 4px; 
     margin-bottom: 20px; 
     text-align: center; 
@@ -381,8 +438,7 @@ html {
    AREA CARRELLO
    ========================================================================== */
 
-.area-carrello header { text-align: center; padding: 20px 0; border-bottom: 1px solid #2C2C2C; }
-.area-carrello header h1 { color: var(--colore-accento); margin: 0; letter-spacing: 2px; }
+
 
 .area-carrello .container-navigazione { max-width: 1000px; margin: 0 auto; padding: 20px; }
 .area-carrello .btn-indietro { color: var(--colore-accento); text-decoration: none; font-weight: bold; }
@@ -398,9 +454,8 @@ html {
 .area-carrello .messaggio-vuoto { text-align: center; font-size: 1.2rem; color: #888; margin: 40px 0; }
 
 /* Tabella Prodotti Carrello */
-.area-carrello table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
-.area-carrello th, .area-carrello td { padding: 15px; text-align: left; border-bottom: 1px solid #333; }
-.area-carrello th { color: var(--colore-accento); text-transform: uppercase; font-size: 0.9rem; }
+.area-carrello table { margin-bottom: 30px; }
+.area-carrello th { color: var(--colore-accento); font-size: 0.9rem; }
 .area-carrello .img-carrello { width: 80px; height: 80px; object-fit: contain; border-radius: 4px; }
 .area-carrello .nome-prodotto { font-weight: bold; }
 .area-carrello .totale-riga { font-weight: bold; color: var(--colore-primario); }
@@ -427,8 +482,7 @@ html {
    AREA CHECKOUT
    ========================================================================== */
 
-.area-checkout header { text-align: center; padding: 20px 0; border-bottom: 1px solid #2C2C2C; }
-.area-checkout header h1 { color: var(--colore-accento); margin: 0; letter-spacing: 2px; }
+
 
 .area-checkout .container-checkout {
     max-width: 1100px; margin: 40px auto; padding: 0 20px;
@@ -473,15 +527,10 @@ html {
 /* Sezione Riepilogo e Totali */
 .area-checkout .lista-riepilogo { margin-bottom: 20px; max-height: 200px; overflow-y: auto; padding-right: 5px; }
 .area-checkout .item-riepilogo { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 0.95rem; color: #ccc; }
-.area-checkout .spedizione-gratis { color: #2ecc71; font-weight: bold; }
+.area-checkout .spedizione-gratis { color: var(--colore-successo); font-weight: bold; }
 .area-checkout .totale-finalizzato { display: flex; justify-content: space-between; font-size: 1.4rem; font-weight: bold; border-top: 1px solid #333; padding-top: 15px; margin-top: 15px; color: var(--colore-accento); }
 
-.area-checkout .btn-conferma {
-    width: 100%; background-color: var(--colore-accento); color: var(--sfondo-principale);
-    border: none; padding: 15px; font-size: 1.1rem; font-weight: bold; border-radius: 4px;
-    cursor: pointer; text-transform: uppercase; margin-top: 20px; transition: 0.3s;
-}
-.area-checkout .btn-conferma:hover { background-color: #bfa030; }
+
 
 .area-checkout #messaggio-errore {
     display: none; color: var(--colore-errore); text-align: center; 
@@ -508,20 +557,13 @@ html {
 .area-profilo .titolo-storico { color: var(--colore-accento); margin-bottom: 15px; }
 
 /* Tabella Ordini Profilo */
-.area-profilo table {
-    width: 100%; border-collapse: collapse; 
-    background-color: var(--sfondo-card); 
-    border-radius: 8px; overflow: hidden;
-}
-.area-profilo th, .area-profilo td { padding: 15px; text-align: left; border-bottom: 1px solid #2C2C2C; }
-.area-profilo th {
-    background-color: #1a1a1a; color: var(--colore-primario); 
-    font-weight: bold; text-transform: uppercase;
-}
+.area-profilo table { background-color: var(--sfondo-card); border-radius: 8px; overflow: hidden; }
+.area-profilo th { background-color: #1a1a1a; color: var(--colore-primario); }
+
 .area-profilo tr:hover { background-color: #252525; }
 
 .area-profilo .stato-badge {
-    background-color: rgba(46, 204, 113, 0.1); color: #2ecc71; 
+    background-color: rgba(46, 204, 113, 0.1); color: var(--colore-successo); 
     padding: 5px 10px; border-radius: 20px; 
     font-size: 0.85rem; font-weight: bold;
 }
@@ -554,8 +596,7 @@ html {
    AREA DETTAGLIO PRODOTTO
    ========================================================================== */
 
-.area-dettaglio header { text-align: center; padding: 20px 0; border-bottom: 1px solid #2C2C2C; }
-.area-dettaglio header h1 { color: var(--colore-accento); margin: 0; font-size: 2.5rem; letter-spacing: 2px; }
+
 
 .area-dettaglio .container-navigazione { max-width: 1000px; margin: 0 auto; padding: 20px; }
 .area-dettaglio .btn-indietro { color: var(--colore-accento); text-decoration: none; font-weight: bold; font-size: 1.1rem; transition: color 0.3s; }
@@ -591,7 +632,7 @@ html {
 
 /* Feedback prodotto non trovato */
 .area-dettaglio .prodotto-non-trovato { text-align: center; margin-top: 50px; }
-.area-dettaglio .prodotto-non-trovato h2 { color: #e74c3c; margin-bottom: 10px; }
+.area-dettaglio .prodotto-non-trovato h2 { color: var(--colore-errore); margin-bottom: 10px; }
 
 /* ==========================================================================
    AREA DETTAGLI ORDINE
@@ -607,9 +648,8 @@ html {
     border-bottom: 1px solid #2C2C2C; padding-bottom: 20px;
 }
 
-.area-dettaglio-ordine table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-.area-dettaglio-ordine th, .area-dettaglio-ordine td { padding: 15px; text-align: left; border-bottom: 1px solid #2C2C2C; }
-.area-dettaglio-ordine th { color: var(--colore-primario); text-transform: uppercase; }
+.area-dettaglio-ordine table { margin-top: 20px; }
+.area-dettaglio-ordine th { color: var(--colore-primario); }
 
 /* Subtotale evidenziato */
 .area-dettaglio-ordine .subtotale-riga { font-weight: bold; color: var(--colore-accento); }
@@ -1093,7 +1133,7 @@ html {
 
 .modal-header .warning-icon {
     font-size: 3.5rem;
-    color: #e74c3c;
+    color: var(--colore-errore);
     margin-bottom: 15px;
 }
 
@@ -1109,7 +1149,7 @@ html {
 }
 
 .modal-body .warning-text {
-    color: #e74c3c;
+    color: var(--colore-errore);
     font-size: 0.85rem;
     font-weight: bold;
     margin-top: 15px;
@@ -1130,7 +1170,7 @@ html {
 .btn-modal-annulla:hover { background: #555; }
 
 .btn-modal-conferma {
-    background: #e74c3c; color: #fff; border: none; padding: 12px 25px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.3s; box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+    background: var(--colore-errore); color: #fff; border: none; padding: 12px 25px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.3s; box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
 }
 .btn-modal-conferma:hover { background: #c0392b; transform: translateY(-2px); }
 
@@ -1165,7 +1205,7 @@ html {
     position: absolute;
     top: -8px;
     right: -5px;
-    background-color: #e74c3c;
+    background-color: var(--colore-errore);
     color: white;
     border-radius: 50%;
     padding: 3px 6px;
@@ -1188,7 +1228,7 @@ html {
 
 .container-conferma-ordine .icona-successo {
     font-size: 5rem;
-    color: #2ecc71;
+    color: var(--colore-successo);
     margin-bottom: 20px;
 }
 
@@ -1227,13 +1267,13 @@ html {
     font-weight: bold;
     text-align: center;
 }
-.alert-success { background-color: #2ecc71; color: #121212; border-left: 5px solid #27ae60; }
-.alert-danger { background-color: #e74c3c; color: #fff; border-left: 5px solid #c0392b; }
+.alert-success { background-color: var(--colore-successo); color: #121212; border-left: 5px solid #27ae60; }
+.alert-danger { background-color: var(--colore-errore); color: #fff; border-left: 5px solid #c0392b; }
 .alert-warning { background-color: #f39c12; color: #fff; border-left: 5px solid #d68910; }
 
 .testo-totale-ordine { font-weight: bold; }
 .testo-stato-ordine { color: #f1c40f; }
-.testo-esaurimento { color: #e74c3c; font-weight: bold; }
+.testo-esaurimento { color: var(--colore-errore); font-weight: bold; }
 
 .form-inline {
     display: inline;
@@ -1277,7 +1317,7 @@ html {
 .btn-modifica:hover { background-color: #d68910; }
 
 .btn-elimina {
-    background-color: #e74c3c;
+    background-color: var(--colore-errore);
     color: #fff;
     border: none;
     padding: 6px 10px;
