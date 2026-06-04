@@ -1409,3 +1409,15 @@ html {
 .link-annulla:hover {
     color: #fff;
 }
+
+/* ==========================================================================
+   ROUTINE
+   ========================================================================== */
+.container-submit-quiz {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.testo-accento {
+    color: var(--colore-accento);
+}
