@@ -18,7 +18,7 @@
     <div class="area-dettaglio">
 
         <div class="container-navigazione">
-            <a href="home" class="btn-indietro">&larr; Torna al Catalogo</a>
+            <a href="<%= request.getContextPath() %>/home" class="btn-indietro">&larr; Torna al Catalogo</a>
         </div>
 
         <%
@@ -65,7 +65,10 @@
             }
         %>
 
-    </div> </div> <script src="<%= request.getContextPath() %>/js/ajax-carrello.js"></script>
+    </div> 
+</div> 
+
+<script src="<%= request.getContextPath() %>/js/ajax-carrello.js"></script>
 
 </body>
 </html>
