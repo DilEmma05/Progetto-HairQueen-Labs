@@ -36,12 +36,12 @@ public class InserisciProdottoServlet extends HttpServlet {
 		HttpSession session = request.getSession();
         Utente utenteLoggato = (Utente) session.getAttribute("utente");
 
-        if (utenteLoggato == null || !"ADMIN".equals(utenteLoggato.getRuolo())) {
+        if (utenteLoggato == null || !"ADMIN".equalsIgnoreCase(utenteLoggato.getRuolo())) {
             response.sendRedirect("home");
             return;
         }
 
-        request.getRequestDispatcher("/inserisci-prodotto.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/view/inserisci-prodotto.jsp").forward(request, response);
 	}
 
 	/**
