@@ -6,20 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <title>Crea Account - HairQueen Labs</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
 </head>
 <body>
 
 <div class="area-auth">
 
     <header>
-        <a href="home"><h1>HAIRQUEEN LABS</h1></a>
+        <a href="<%= request.getContextPath() %>/home"><h1>HAIRQUEEN LABS</h1></a>
     </header>
 
     <main class="container-registrazione">
         <h2>Unisciti a HairQueen</h2>
 
-        <form action="registrazione" method="POST" id="form-registrazione" novalidate>
+        <form action="<%= request.getContextPath() %>/registrazione" method="POST" id="form-registrazione" novalidate>
             <div class="riga-doppia">
                 <div class="gruppo-form">
                     <label for="nome">Nome *</label>
@@ -45,10 +45,10 @@
 
             <div class="gruppo-form">
                 <label for="password">Password *</label>
-                <div style="position: relative;">
-        			<input type="password" id="password" name="password" required style="padding-right: 40px;">
-        			<i id="togglePassword" class="fas fa-eye" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.1rem; color: #bbb; user-select: none; transition: 0.3s;"></i>
-    			</div>
+                <div class="password-wrapper">
+                    <input type="password" id="password" name="password" class="input-password-toggle" required>
+                    <i id="togglePassword" class="fas fa-eye icon-toggle-password"></i>
+                </div>
                 <div id="errore-password" class="messaggio-errore-js">La password deve contenere almeno 8 caratteri, una lettera MAIUSCOLA, un numero e un carattere speciale.</div>
             </div>
             
@@ -61,10 +61,11 @@
         </form>
 
         <div class="link-login">
-            Hai già un account? <a href="login">Accedi qui</a>
+            Hai già un account? <a href="<%= request.getContextPath() %>/login">Accedi qui</a>
         </div>
     </main>
 
-</div> <script src="js/registrazione.js"></script>
+</div> 
+<script src="<%= request.getContextPath() %>/js/registrazione.js"></script>
 </body>
 </html>
