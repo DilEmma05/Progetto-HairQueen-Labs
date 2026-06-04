@@ -16,22 +16,22 @@
         <div class="footer-col">
             <h4>Esplora</h4>
             <ul>
-                <li><a href="home">Home</a></li>
-                <li><a href="catalogo">Tutti i Prodotti</a></li>
-                <li><a href="FiltroCatalogoServlet?id=1">Cura dei Capelli</a></li>
-                <li><a href="FiltroCatalogoServlet?id=2">Strumenti di Styling</a></li>
-                <li><a href="FiltroCatalogoServlet?id=3">Bundle</a></li>
-                <li><a href="routine">Trova Routine</a></li>
+                <li><a href="<%= request.getContextPath() %>/home">Home</a></li>
+                <li><a href="<%= request.getContextPath() %>/catalogo">Tutti i Prodotti</a></li>
+                <li><a href="<%= request.getContextPath() %>/FiltroCatalogoServlet?id=1">Cura dei Capelli</a></li>
+                <li><a href="<%= request.getContextPath() %>/FiltroCatalogoServlet?id=2">Strumenti di Styling</a></li>
+                <li><a href="<%= request.getContextPath() %>/FiltroCatalogoServlet?id=3">Bundle</a></li>
+                <li><a href="<%= request.getContextPath() %>/routine">Trova Routine</a></li>
             </ul>
         </div>
 
         <div class="footer-col">
             <h4>Supporto</h4>
             <ul>
-                <li><a href="info.jsp#spedizioni">Spedizioni e Resi</a></li>
-                <li><a href="info.jsp#faq">Domande Frequenti (FAQ)</a></li>
-                <li><a href="info.jsp#contatti">Contattaci</a></li>
-                <li><a href="info.jsp#condizioni">Condizioni di Vendita</a></li>
+                <li><a href="<%= request.getContextPath() %>/info#spedizioni">Spedizioni e Resi</a></li>
+                <li><a href="<%= request.getContextPath() %>/info#faq">Domande Frequenti (FAQ)</a></li>
+                <li><a href="<%= request.getContextPath() %>/info#contatti">Contattaci</a></li>
+                <li><a href="<%= request.getContextPath() %>/info#condizioni">Condizioni di Vendita</a></li>
             </ul>
         </div>
 
