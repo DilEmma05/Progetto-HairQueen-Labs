@@ -45,7 +45,7 @@ ProdottoDAO prodottoDAO = new ProdottoDAO();
 			List<Categoria> categorie = categoriaDAO.doRetrieveAllCategorie(); 
 			request.setAttribute("listaCategorie", categorie);
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/index.jsp");
 			dispatcher.forward(request, response);
 		}catch(SQLException e) {
 			System.out.println("Errore nel recupero dei prodotti dalla HomeServlet");
