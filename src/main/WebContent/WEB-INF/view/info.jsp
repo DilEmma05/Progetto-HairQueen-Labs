@@ -7,16 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Supporto e Info - HairQueen Labs</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
 </head>
 <body>
 
 <div class="area-pubblica">
     <jsp:include page="header.jsp"/>
 
-    <div style="background-color: #1a1a1a; padding: 40px 20px; text-align: center; margin-bottom: 30px;">
-        <h2 style="color: var(--colore-accento); font-size: 2.2rem; letter-spacing: 2px; margin: 0;">Customer Care</h2>
-        <p style="color: #bbb; font-size: 1.1rem; margin-top: 10px;">Siamo qui per garantirti un'esperienza di acquisto impeccabile.</p>
+    <div class="banner-catalogo">
+        <h2 class="banner-titolo">Customer Care</h2>
+        <p class="banner-sottotitolo">Siamo qui per garantirti un'esperienza di acquisto impeccabile.</p>
     </div>
 
     <main class="contenitore-info">
