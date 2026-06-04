@@ -39,7 +39,7 @@ public class AreaPersonaleServlet extends HttpServlet {
         Utente utenteLoggato = (Utente) session.getAttribute("utente");
         if (utenteLoggato == null) {
             request.setAttribute("errore", "Devi accedere per visualizzare la tua area personale.");
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
             return;
         }
 
@@ -49,7 +49,7 @@ public class AreaPersonaleServlet extends HttpServlet {
 
             request.setAttribute("ordini", listaOrdini);
 
-            request.getRequestDispatcher("/profilo.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/view/profilo.jsp").forward(request, response);
 
         } catch (SQLException e) {
             throw new ServletException("Errore durante il recupero dello storico ordini", e);
