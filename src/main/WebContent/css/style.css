@@ -1294,3 +1294,42 @@ html {
 .link-back:hover { color: #fff; }
 
 .modal-product-name { color: #fff; font-size: 1.1rem; }
+
+/* ==========================================================================
+   CATALOGO PRODOTTI
+   ========================================================================== */
+.banner-catalogo {
+    background-color: #1a1a1a;
+    border-bottom: 1px solid var(--colore-primario);
+    padding: 40px 20px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.banner-titolo {
+    color: var(--colore-accento);
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+.banner-sottotitolo {
+    color: #bbb;
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+.link-immagine-prodotto {
+    display: block;
+}
+
+.form-ajax-carrello {
+    margin-top: 15px;
+}
+
+.messaggio-catalogo-vuoto {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #888;
+    padding: 40px;
+}
