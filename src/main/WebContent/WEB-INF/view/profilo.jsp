@@ -5,13 +5,9 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 
 <%
+    // I dati passati dal Controller (ProfiloServlet)
     Utente utente = (Utente) session.getAttribute("utente");
     List<Ordine> ordini = (List<Ordine>) request.getAttribute("ordini");
-    
-    if (utente == null) {
-        response.sendRedirect("login");
-        return;
-    }
 %>
 
 <!DOCTYPE html>
@@ -19,7 +15,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Area Personale - HairQueen Labs</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
 </head>
 <body>
 
@@ -57,7 +53,7 @@
                             <td><span class="stato-badge"><%= o.getStato() %></span></td>
                             
                             <td class="colonna-azioni">
-                                <a href="dettagli-ordine?id=<%= o.getIdOrdine() %>" class="btn-dettagli">
+                                <a href="<%= request.getContextPath() %>/dettagli-ordine?id=<%= o.getIdOrdine() %>" class="btn-dettagli">
                                     Dettagli &rarr;
                                 </a>
                             </td>
@@ -72,8 +68,9 @@
             </div>
         <% } %>
 
-        <a href="home" class="btn-home">&larr; Torna alla Home</a>
+        <a href="<%= request.getContextPath() %>/home" class="btn-home">&larr; Torna alla Home</a>
     </div>
 
-</div> </body>
+</div> 
+</body>
 </html>
