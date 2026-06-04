@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HairQueen Labs</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
 </head>
 <body>
 
@@ -22,29 +22,29 @@
             <ul class="carousel-track">
                 
                 <li class="carousel-slide current-slide">
-    				<img class="carousel-image" src="<%= request.getContextPath() %>/img/layout/uso_phon_hairqueenlabs.png" alt="Modella con capelli dinamici in salone">
-    					<div class="hero-content">
-        					<h2>Il futuro dei tuoi<br>capelli inizia qui.</h2>
-        					<p>Formulazioni premium per una routine di lusso.<br>Risultati da salone, direttamente a casa tua.</p>
-        					<a href="routine" class="btn-hero">Scopri la Tua Routine ✨</a>
-    					</div>
-				</li>
+                    <img class="carousel-image" src="<%= request.getContextPath() %>/img/layout/uso_phon_hairqueenlabs.png" alt="Modella con capelli dinamici in salone">
+                        <div class="hero-content">
+                            <h2>Il futuro dei tuoi<br>capelli inizia qui.</h2>
+                            <p>Formulazioni premium per una routine di lusso.<br>Risultati da salone, direttamente a casa tua.</p>
+                            <a href="<%= request.getContextPath() %>/routine" class="btn-hero">Scopri la Tua Routine ✨</a>
+                        </div>
+                </li>
 
-				<li class="carousel-slide">
-    				<img class="carousel-image" src="<%= request.getContextPath() %>/img/layout/rituali_cura_capelli.png" alt="Applicazione prodotto di lusso">
-    					<div class="hero-content">
-        					<h2>Vizia te stessa.</h2>
-        					<p>Rituali di cura esclusivi per ogni tipo di capello.</p>
-        					<a href="home" class="btn-hero">Esplora il Catalogo</a>
-    					</div>
-				</li>
-				
-				<li class="carousel-slide">
+                <li class="carousel-slide">
+                    <img class="carousel-image" src="<%= request.getContextPath() %>/img/layout/rituali_cura_capelli.png" alt="Applicazione prodotto di lusso">
+                        <div class="hero-content">
+                            <h2>Vizia te stessa.</h2>
+                            <p>Rituali di cura esclusivi per ogni tipo di capello.</p>
+                            <a href="<%= request.getContextPath() %>/home" class="btn-hero">Esplora il Catalogo</a>
+                        </div>
+                </li>
+                
+                <li class="carousel-slide">
                     <img class="carousel-image" src="<%= request.getContextPath() %>/img/promo_phon_piastra_capelli.png" alt="Bundle paistra phon">
                     <div class="hero-content">
                         <h2>Il Lusso Senza<br>Compromessi.</h2>
                         <p>Scopri la nostra visione di lusso e cura esclusiva.<br>Esplora il rituale perfetto per te.</p>
-                        <a href="prodotto?id=14" class="btn-hero">Acquista la Promo</a>
+                        <a href="<%= request.getContextPath() %>/prodotto?id=14" class="btn-hero">Acquista la Promo</a>
                     </div>
                 </li>
 
@@ -65,7 +65,7 @@
         </div>
     </section>
 
-    <h2 id="ultimi-arrivi" style="text-align: center; color: var(--colore-accento); margin-top: 60px; margin-bottom: 10px; font-size: 2.5rem; letter-spacing: 1px;">Le Nostre Novità</h2>
+    <h2 id="ultimi-arrivi" class="titolo-sezione-novita">Le Nostre Novità</h2>
 
     <main class="contenitore-prodotti">
         <%
@@ -86,26 +86,26 @@
                         }
                     %>
             
-                    <a href="prodotto?id=<%= p.getIdProdotto() %>" style="display: block;">
+                    <a href="<%= request.getContextPath() %>/prodotto?id=<%= p.getIdProdotto() %>" class="link-immagine-prodotto">
                         <img src="<%= urlImmagine.startsWith("http") ? urlImmagine : request.getContextPath() + urlImmagine %>" alt="<%= p.getNome() %>" class="img-prodotto">
                     </a>
             
                     <h3>
-                        <a href="prodotto?id=<%= p.getIdProdotto() %>" class="link-titolo-prodotto">
+                        <a href="<%= request.getContextPath() %>/prodotto?id=<%= p.getIdProdotto() %>" class="link-titolo-prodotto">
                         <%= p.getNome() %>
                         </a>
                     </h3>
                     <p class="prezzo"><%= String.format("%.2f", p.getPrezzo()) %> &euro;</p>
-                    <form action="<%= request.getContextPath() %>/CarrelloServlet" method="POST" class="form-ajax-carrello" style="margin-top: 15px;">
-                    <input type="hidden" name="idProdotto" value="<%= p.getIdProdotto() %>">
-                    <button type="submit" class="btn-acquista">Aggiungi al Carrello</button>
+                    <form action="<%= request.getContextPath() %>/CarrelloServlet" method="POST" class="form-ajax-carrello">
+                        <input type="hidden" name="idProdotto" value="<%= p.getIdProdotto() %>">
+                        <button type="submit" class="btn-acquista">Aggiungi al Carrello</button>
                     </form>
                 </div>
         <%
                 }
             } else {
         %>
-                <p style="grid-column: 1/-1; text-align: center; color: #888;">
+                <p class="messaggio-catalogo-vuoto">
                     Nessun prodotto disponibile nel catalogo. Assicurati di avviare il sito tramite l'URL della Servlet (/home)!
                 </p>
         <%
@@ -117,7 +117,7 @@
         <div class="philosophy-text">
             <h2>Scienza e Lusso per la tua Corona.</h2>
             <p>In HairQueen Labs crediamo che ogni capello meriti l'eccellenza. Uniamo l'ingegneria più avanzata alle formulazioni più esclusive per offrirti non solo un prodotto, ma un vero e proprio rituale di bellezza. La vera rivoluzione nasce nei nostri laboratori e prende vita sulla tua chioma.</p>
-            <a href="laboratori" class="btn-outline">Scopri la nostra tecnologia</a>
+            <a href="<%= request.getContextPath() %>/laboratori" class="btn-outline">Scopri la nostra tecnologia</a>
         </div>
         <div class="philosophy-image">
             <img src="<%= request.getContextPath() %>/img/layout/filosofia_laboratori.png" alt="Laboratori HairQueen">
@@ -128,7 +128,7 @@
 
 </div> 
 
-<script src="js/hero.js"></script>
+<script src="<%= request.getContextPath() %>/js/hero.js"></script>
 <script src="<%= request.getContextPath() %>/js/ajax-carrello.js"></script>
 </body>
 </html>
