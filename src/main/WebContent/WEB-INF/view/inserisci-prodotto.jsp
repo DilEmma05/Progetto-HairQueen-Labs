@@ -1,21 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="it.unisa.hairqueenlabs.model.Utente" %>
 
-<%
-    // Sicurezza: doppio controllo lato View per il Pattern MVC
-    Utente utente = (Utente) session.getAttribute("utente");
-    if (utente == null || !"ADMIN".equals(utente.getRuolo())) {
-        response.sendRedirect("login");
-        return;
-    }
-%>
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
     <title>Inserisci Nuovo Prodotto - Admin</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
 </head>
 <body>
 
@@ -24,7 +15,7 @@
     <div class="container container-form">
         <h1 class="titolo-form">Aggiungi al Catalogo</h1>
         
-        <form action="inserisci-prodotto" method="POST">
+        <form action="<%= request.getContextPath() %>/inserisci-prodotto" method="POST">
             
             <div class="form-group">
                 <label for="nome">Nome Prodotto *</label>
@@ -81,7 +72,7 @@
             <button type="submit" class="btn-submit">Salva Prodotto</button>
         </form>
         
-        <a href="admin-dashboard" class="back-link">&larr; Torna alla Dashboard</a>
+        <a href="<%= request.getContextPath() %>/admin-dashboard" class="back-link">&larr; Torna alla Dashboard</a>
     </div>
 
 </div>
