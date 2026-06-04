@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - HairQueen Labs</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
 </head>
 <body>
 
@@ -24,7 +24,7 @@
         %>
             <section class="sezione-dati">
                 <h2>Informazioni di Spedizione</h2>
-                <form action="ConfermaOrdine" method="POST" id="form-checkout" novalidate>
+                <form action="<%= request.getContextPath() %>/ConfermaOrdine" method="POST" id="form-checkout" novalidate>
                     <div class="riga-doppia">
                         <div class="gruppo-form">
                             <label for="nome">Nome <span class="asterisco">*</span></label>
@@ -106,13 +106,13 @@
         %>
             <div class="carrello-vuoto-checkout">
                 <h2>Il tuo carrello è vuoto.</h2>
-                <a href="home">Torna agli acquisti</a>
+                <a href="<%= request.getContextPath() %>/home">Torna agli acquisti</a>
             </div>
         <%
             }
         %>
     </main>
 
-</div> <script src="js/checkout.js"></script>
+</div> <script src="<%= request.getContextPath() %>/js/checkout.js"></script>
 </body>
 </html>
