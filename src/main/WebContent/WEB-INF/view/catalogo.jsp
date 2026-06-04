@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catalogo Prodotti - HairQueen Labs</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
 </head>
 <body>
 
@@ -24,10 +24,9 @@
         }
     %>
 
-    <!-- Banner Minimal per la pagina del catalogo -->
-    <div style="background-color: #1a1a1a; border-bottom: 1px solid var(--colore-primario); padding: 40px 20px; text-align: center; margin-bottom: 30px;">
-        <h2 style="color: var(--colore-accento); font-size: 2.2rem; letter-spacing: 2px; margin: 0;"><%= titoloPagina %></h2>
-        <p style="color: #bbb; font-size: 1.1rem; margin-top: 10px;">L'eccellenza HairQueen Labs per la tua routine di bellezza.</p>
+    <div class="banner-catalogo">
+        <h2 class="banner-titolo"><%= titoloPagina %></h2>
+        <p class="banner-sottotitolo">L'eccellenza HairQueen Labs per la tua routine di bellezza.</p>
     </div>
 
     <main class="contenitore-prodotti">
@@ -49,26 +48,27 @@
                         }
                     %>
             
-                    <a href="prodotto?id=<%= p.getIdProdotto() %>" style="display: block;">
+                    <a href="<%= request.getContextPath() %>/prodotto?id=<%= p.getIdProdotto() %>" class="link-immagine-prodotto">
                         <img src="<%= urlImmagine.startsWith("http") ? urlImmagine : request.getContextPath() + urlImmagine %>" alt="<%= p.getNome() %>" class="img-prodotto">
                     </a>
             
                     <h3>
-                        <a href="prodotto?id=<%= p.getIdProdotto() %>" class="link-titolo-prodotto">
+                        <a href="<%= request.getContextPath() %>/prodotto?id=<%= p.getIdProdotto() %>" class="link-titolo-prodotto">
                         <%= p.getNome() %>
                         </a>
                     </h3>
                     <p class="prezzo"><%= String.format("%.2f", p.getPrezzo()) %> &euro;</p>
-                    <form action="<%= request.getContextPath() %>/CarrelloServlet" method="POST" class="form-ajax-carrello" style="margin-top: 15px;">
-                    <input type="hidden" name="idProdotto" value="<%= p.getIdProdotto() %>">
-                    <button type="submit" class="btn-acquista">Aggiungi al Carrello</button>
+                    
+                    <form action="<%= request.getContextPath() %>/CarrelloServlet" method="POST" class="form-ajax-carrello">
+                        <input type="hidden" name="idProdotto" value="<%= p.getIdProdotto() %>">
+                        <button type="submit" class="btn-acquista">Aggiungi al Carrello</button>
                     </form>
                 </div>
         <%
                 }
             } else {
         %>
-                <p style="grid-column: 1/-1; text-align: center; color: #888; padding: 40px;">
+                <p class="messaggio-catalogo-vuoto">
                     Nessun prodotto trovato in questa categoria.
                 </p>
         <%
