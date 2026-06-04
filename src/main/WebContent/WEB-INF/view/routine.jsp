@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trova la tua Routine - HairQueen Labs</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
 </head>
 <body>
 
@@ -29,7 +29,7 @@
                     <p>Rispondi a 2 semplici domande. La nostra scienza formulerà la combinazione perfetta per la tua corona.</p>
                 </div>
 
-                <form action="routine" method="POST" class="quiz-form">
+                <form action="<%= request.getContextPath() %>/routine" method="POST" class="quiz-form">
                     
                     <div class="quiz-step">
                         <h3>1. Qual è lo stato della tua cute?</h3>
@@ -91,7 +91,7 @@
                         </div>
                     </div>
 
-                    <div style="text-align: center; margin-top: 40px;">
+                    <div class="container-submit-quiz">
                         <button type="submit" class="btn-quiz-submit">Genera la mia Routine ✨</button>
                     </div>
                 </form>
@@ -102,9 +102,9 @@
             <div class="routine-results-container">
                 <div class="results-header">
                     <span class="badge-routine">Diagnosi Completata</span>
-                    <h2>La tua Routine: <span style="color: var(--colore-accento);"><%= nomeRoutine %></span></h2>
+                    <h2>La tua Routine: <span class="testo-accento"><%= nomeRoutine %></span></h2>
                     <p class="routine-desc"><%= descrizioneRoutine %></p>
-                    <a href="routine" class="btn-Ripeti-quiz"><i class="fas fa-redo"></i> Ripeti il Test</a>
+                    <a href="<%= request.getContextPath() %>/routine" class="btn-Ripeti-quiz"><i class="fas fa-redo"></i> Ripeti il Test</a>
                 </div>
 
                 <h3 class="results-title">I tuoi Prodotti Consigliati</h3>
@@ -124,16 +124,16 @@
                                             urlImmagine = "/" + urlImmagine; 
                                         }
                                     %>
-                                    <a href="prodotto?id=<%= p.getIdProdotto() %>" style="display: block;">
+                                    <a href="<%= request.getContextPath() %>/prodotto?id=<%= p.getIdProdotto() %>" class="link-immagine-prodotto">
                                         <img src="<%= urlImmagine.startsWith("http") ? urlImmagine : request.getContextPath() + urlImmagine %>" alt="<%= p.getNome() %>" class="img-prodotto">
                                     </a>
                                     <h3>
-                                        <a href="prodotto?id=<%= p.getIdProdotto() %>" class="link-titolo-prodotto">
+                                        <a href="<%= request.getContextPath() %>/prodotto?id=<%= p.getIdProdotto() %>" class="link-titolo-prodotto">
                                             <%= p.getNome() %>
                                         </a>
                                     </h3>
                                     <p class="prezzo"><%= String.format("%.2f", p.getPrezzo()) %> &euro;</p>
-                                    <form action="CarrelloServlet" method="POST" style="margin-top: 15px;">
+                                    <form action="<%= request.getContextPath() %>/CarrelloServlet" method="POST" class="form-ajax-carrello">
                                         <input type="hidden" name="idProdotto" value="<%= p.getIdProdotto() %>">
                                         <button type="submit" class="btn-acquista">Aggiungi al Carrello</button>
                                     </form>
@@ -142,7 +142,7 @@
                             }
                         } else {
                     %>
-                            <p style="grid-column: 1/-1; text-align: center; color: #888;">Nessun prodotto trovato per questa specifica combinazione.</p>
+                            <p class="messaggio-catalogo-vuoto">Nessun prodotto trovato per questa specifica combinazione.</p>
                     <%
                         }
                     %>
