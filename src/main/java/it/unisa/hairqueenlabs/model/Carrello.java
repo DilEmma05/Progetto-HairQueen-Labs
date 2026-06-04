@@ -1,11 +1,13 @@
 package it.unisa.hairqueenlabs.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Carrello {
+public class Carrello implements Serializable{
 
-    private List<ElementoCarrello> elementi;
+	private static final long serialVersionUID = 1L;
+	private List<ElementoCarrello> elementi;
 
     public Carrello() {
         this.elementi = new ArrayList<>();
@@ -14,8 +16,7 @@ public class Carrello {
     public List<ElementoCarrello> getElementi() {
         return elementi;
     }
-
-    // Aggiunge un prodotto al carrello o ne incrementa la quantità se esiste già
+    
     public void aggiungiProdotto(Prodotto prodotto) {
         for (ElementoCarrello elemento : elementi) {
             if (elemento.getProdotto().getIdProdotto() == prodotto.getIdProdotto()) {
