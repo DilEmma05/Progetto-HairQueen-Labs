@@ -31,7 +31,7 @@ public class RegistrazioneServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/registrazione.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/registrazione.jsp");
         dispatcher.forward(request, response);
 	}
 
@@ -70,7 +70,7 @@ public class RegistrazioneServlet extends HttpServlet {
         } catch (SQLException e) {
             // Se l'email esiste già, il database lancia un'eccezione
             request.setAttribute("errore", "Esiste già un account con questa email.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/registrazione.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/registrazione.jsp");
             dispatcher.forward(request, response);
         }
     
