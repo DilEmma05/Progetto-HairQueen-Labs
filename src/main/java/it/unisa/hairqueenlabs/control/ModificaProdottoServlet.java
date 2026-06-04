@@ -50,7 +50,7 @@ public class ModificaProdottoServlet extends HttpServlet {
                 
                 if (prodottoDaModificare != null) {
                     request.setAttribute("prodotto", prodottoDaModificare);
-                    request.getRequestDispatcher("/modifica-prodotto.jsp").forward(request, response);
+                    request.getRequestDispatcher("/WEB-INF/view/modifica-prodotto.jsp").forward(request, response);
                 } else {
                     response.sendRedirect("admin-dashboard");
                 }
