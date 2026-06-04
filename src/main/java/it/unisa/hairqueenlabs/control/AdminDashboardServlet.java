@@ -39,7 +39,7 @@ public class AdminDashboardServlet extends HttpServlet {
 		HttpSession session = request.getSession();
         Utente utenteLoggato = (Utente) session.getAttribute("utente");
 
-        if (utenteLoggato == null || !"ADMIN".equals(utenteLoggato.getRuolo())) {
+        if (utenteLoggato == null || !"ADMIN".equalsIgnoreCase(utenteLoggato.getRuolo())) {
             response.sendRedirect("home");
             return;
         }
@@ -53,7 +53,7 @@ public class AdminDashboardServlet extends HttpServlet {
             List<Prodotto> catalogo = prodottoDAO.doRetrieveAll();
             request.setAttribute("catalogo", catalogo);
 
-            request.getRequestDispatcher("/admin-dashboard.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/view/admin-dashboard.jsp").forward(request, response);
 
         } catch (SQLException e) {
             throw new ServletException("Errore durante il caricamento della dashboard amministratore", e);
