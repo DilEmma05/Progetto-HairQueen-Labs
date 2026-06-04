@@ -37,7 +37,7 @@ public class VisualizzaCarrelloServlet extends HttpServlet {
         Carrello carrello = (Carrello) session.getAttribute("carrello");
         if (carrello == null) {
             carrello = new Carrello();
-            session.setAttribute("carrello", carrello);
+            session.setAttribute("/WEB-INF/view/carrello", carrello);
         }
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/carrello.jsp");
