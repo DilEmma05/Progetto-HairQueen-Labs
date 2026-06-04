@@ -1372,3 +1372,40 @@ html {
 .icon-toggle-password:hover {
     color: var(--colore-primario);
 }
+
+/* ==========================================================================
+   COMPONENTI FORM 
+   ========================================================================== */
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: auto;
+}
+
+.checkbox-label {
+    margin-bottom: 0;
+    display: inline;
+    color: #fff;
+    font-weight: normal;
+}
+
+.form-actions {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.link-annulla {
+    color: #bbb;
+    text-decoration: none;
+}
+
+.link-annulla:hover {
+    color: #fff;
+}
