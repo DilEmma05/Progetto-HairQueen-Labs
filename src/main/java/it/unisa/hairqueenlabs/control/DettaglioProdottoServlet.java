@@ -44,7 +44,7 @@ String idString = request.getParameter("id");
                     request.setAttribute("prodotto", prodotto);
                     
                     // Invia l'utente alla pagina di dettaglio
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("/dettaglio.jsp");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/dettaglio.jsp");
                     dispatcher.forward(request, response);
                     return;
                 }
