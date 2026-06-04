@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Il tuo Carrello - HairQueen Labs</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
 </head>
 <body>
 
@@ -18,7 +18,7 @@
     </header>
 
     <div class="container-navigazione">
-        <a href="home" class="btn-indietro">&larr; Continua lo shopping</a>
+        <a href="<%= request.getContextPath() %>/home" class="btn-indietro">&larr; Continua lo shopping</a>
     </div>
 
     <main class="container-carrello">
@@ -69,16 +69,17 @@
                 </div>
 
                 <div class="azioni-carrello">
-                    <form action="SvuotaCarrello" method="POST" class="form-svuota">
+                    <form action="<%= request.getContextPath() %>/SvuotaCarrello" method="POST" class="form-svuota">
                         <button type="submit" class="btn btn-secondario">Svuota Carrello</button>
                     </form>
         
-                    <a href="checkout" class="btn btn-primario">Procedi al Checkout</a>
+                    <a href="<%= request.getContextPath() %>/checkout" class="btn btn-primario">Procedi al Checkout</a>
                 </div>
         <%
             }
         %>
     </main>
 
-</div> </body>
+</div> 
+</body>
 </html>
