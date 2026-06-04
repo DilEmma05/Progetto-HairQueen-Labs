@@ -3,10 +3,9 @@
 <%@ page import="it.unisa.hairqueenlabs.model.DettaglioOrdine" %>
 
 <%
+    // I dati passati dal Controller
     List<DettaglioOrdine> dettagli = (List<DettaglioOrdine>) request.getAttribute("dettagli");
     Integer idOrdine = (Integer) request.getAttribute("idOrdine");
-    
-    if (dettagli == null) { response.sendRedirect("profilo"); return; }
 %>
 
 <!DOCTYPE html>
@@ -14,7 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Dettagli Ordine #<%= idOrdine %> - HairQueen Labs</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
 </head>
 <body>
 
@@ -46,9 +45,9 @@
         </table>
         
         <div class="azioni-dettaglio">
-            <a href="profilo" class="btn-back">&larr; Torna allo Storico Ordini</a>
+            <a href="<%= request.getContextPath() %>/profilo" class="btn-back">&larr; Torna allo Storico Ordini</a>
             
-            <a href="scarica-fattura?id=<%= idOrdine %>" class="btn-fattura">
+            <a href="<%= request.getContextPath() %>/scarica-fattura?id=<%= idOrdine %>" class="btn-fattura">
                 📄 Scarica Fattura (PDF)
             </a>
         </div>
