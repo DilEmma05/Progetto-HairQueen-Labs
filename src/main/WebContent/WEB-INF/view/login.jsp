@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <title>Accedi - HairQueen Labs</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
 </head>
 <body>
 
 <div class="area-auth">
 
     <header>
-        <a href="home"><h1>HAIRQUEEN LABS</h1></a>
+        <a href="<%= request.getContextPath() %>/home"><h1>HAIRQUEEN LABS</h1></a>
     </header>
 
     <main class="container-login">
@@ -43,30 +43,31 @@
             } 
         %>
 
-        <form action="login" method="POST">
+        <form action="<%= request.getContextPath() %>/login" method="POST">
             <div class="gruppo-form">
                 <label for="email">Indirizzo Email</label>
                 <input type="email" id="email" name="email" required>
             </div>
 
             <div class="gruppo-form">
-    			<label for="password">Password *</label>
-    			<div style="position: relative;">
-        			<input type="password" id="password" name="password" required style="padding-right: 40px;">
-        			<i id="togglePassword" class="fas fa-eye" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.1rem; color: #bbb; user-select: none; transition: 0.3s;"></i>
-    			</div>
-			</div>
+                <label for="password">Password *</label>
+                <div class="password-wrapper">
+                    <input type="password" id="password" name="password" class="input-password-toggle" required>
+                    <i id="togglePassword" class="fas fa-eye icon-toggle-password"></i>
+                </div>
+            </div>
 
             <button type="submit" class="btn-login">Accedi</button>
         </form>
 
         <div class="link-registrazione">
             Non hai ancora un account? <br><br>
-            <a href="registrazione.jsp">Crea un account</a>
+            <a href="<%= request.getContextPath() %>/registrazione">Crea un account</a>
         </div>
     </main>
     
-</div> <script src="js/login.js"></script>
+</div> 
+<script src="<%= request.getContextPath() %>/js/login.js"></script>
 
 </body>
 </html>
