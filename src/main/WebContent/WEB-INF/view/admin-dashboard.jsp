@@ -6,13 +6,8 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 
 <%
-    // Doppio controllo lato View (Best practice di sicurezza)
+    // Dati passati dal Controller (AdminDashboardServlet)
     Utente utente = (Utente) session.getAttribute("utente");
-    if (utente == null || !"admin".equalsIgnoreCase(utente.getRuolo())) {
-        response.sendRedirect("login");
-        return;
-    }
-    
     List<Ordine> ordini = (List<Ordine>) request.getAttribute("ordini");
     List<Prodotto> catalogo = (List<Prodotto>) request.getAttribute("catalogo");
 %>
@@ -22,15 +17,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Pannello Amministratore - HairQueen Labs</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        /* Stili aggiuntivi specifici per i bottoni admin */
-        .btn-modifica { background-color: #f39c12; color: #fff; padding: 5px 10px; text-decoration: none; border-radius: 3px; font-weight: bold; font-size: 0.9em; }
-        .btn-modifica:hover { background-color: #d68910; }
-        .btn-elimina { background-color: #e74c3c; color: #fff; border: none; padding: 6px 10px; border-radius: 3px; font-weight: bold; cursor: pointer; font-size: 0.9em; }
-        .btn-elimina:hover { background-color: #c0392b; }
-    </style>
 </head>
 <body>
 <div class="area-admin">
@@ -43,20 +31,20 @@
         String messaggioSuccesso = request.getParameter("successo");
         if ("prodottoInserito".equals(messaggioSuccesso)) { 
     %>
-        <div style="background-color: #2ecc71; color: #121212; padding: 15px; border-radius: 4px; margin-bottom: 25px; font-weight: bold; text-align: center; border-left: 5px solid #27ae60;">
+        <div class="alert alert-success">
             &#10004; Nuovo prodotto inserito nel catalogo con successo!
         </div>
     <% } else if ("prodottoEliminato".equals(messaggioSuccesso)) { %>
-        <div style="background-color: #e74c3c; color: #fff; padding: 15px; border-radius: 4px; margin-bottom: 25px; font-weight: bold; text-align: center; border-left: 5px solid #c0392b;">
+        <div class="alert alert-danger">
             &#10004; Prodotto eliminato dal catalogo.
         </div>
     <% } else if ("prodottoModificato".equals(messaggioSuccesso)) { %>
-        <div style="background-color: #f39c12; color: #fff; padding: 15px; border-radius: 4px; margin-bottom: 25px; font-weight: bold; text-align: center; border-left: 5px solid #d68910;">
+        <div class="alert alert-warning">
             &#10004; Le modifiche al prodotto sono state salvate con successo!
         </div>
     <% } %>
 
-    <h2 style="margin-top: 40px; color: var(--colore-accento); border-bottom: 1px solid #333; padding-bottom: 10px;">Gestione Ordini</h2>
+    <h2 class="admin-section-title">Gestione Ordini</h2>
     <% if (ordini != null && !ordini.isEmpty()) { %>
         <table>
             <thead>
@@ -78,12 +66,12 @@
                         <td>#<%= o.getIdOrdine() %></td>
                         <td><%= o.getIdUtente() %></td>
                         <td><%= (o.getDataOrdine() != null) ? sdf.format(o.getDataOrdine()) : "N/D" %></td>
-                        <td style="font-weight: bold;"><%= String.format("%.2f", o.getTotale()) %> &euro;</td>
-                        <td style="color: #f1c40f;"><%= o.getStato() %></td>
+                        <td class="testo-totale-ordine"><%= String.format("%.2f", o.getTotale()) %> &euro;</td>
+                        <td class="testo-stato-ordine"><%= o.getStato() %></td>
                         <td>
-                            <form action="aggiorna-stato" method="post" style="display:inline;">
+                            <form action="<%= request.getContextPath() %>/aggiorna-stato" method="post" class="form-inline">
                                 <input type="hidden" name="idOrdine" value="<%= o.getIdOrdine() %>">
-                                <select name="nuovoStato" style="padding: 5px; background: #333; color: white; border: none;">
+                                <select name="nuovoStato" class="select-stato">
                                     <option value="In elaborazione" <%= "In elaborazione".equals(o.getStato()) ? "selected" : "" %>>In elaborazione</option>
                                     <option value="Spedito" <%= "Spedito".equals(o.getStato()) ? "selected" : "" %>>Spedito</option>
                                     <option value="Consegnato" <%= "Consegnato".equals(o.getStato()) ? "selected" : "" %>>Consegnato</option>
@@ -99,10 +87,10 @@
         <p>Non ci sono ordini nel sistema.</p>
     <% } %>
 
-    <h2 style="margin-top: 50px; color: var(--colore-accento); border-bottom: 1px solid #333; padding-bottom: 10px;">Gestione Catalogo</h2>
+    <h2 class="admin-section-title">Gestione Catalogo</h2>
     
-    <div style="margin: 15px 0;">
-        <a href="inserisci-prodotto" style="background-color: #27ae60; color: white; padding: 10px 20px; text-decoration: none; font-weight: bold; border-radius: 4px; display: inline-block;">
+    <div class="margin-y-15">
+        <a href="<%= request.getContextPath() %>/inserisci-prodotto" class="btn-nuovo-prodotto">
             <i class="fas fa-plus"></i> Aggiungi Nuovo Prodotto
         </a>
     </div>
@@ -126,19 +114,19 @@
                         <td><%= String.format("%.2f", p.getPrezzo()) %> &euro;</td>
                         <td>
                             <% if (p.getQuantitaMagazzino() <= 5) { %>
-                                <span style="color: #e74c3c; font-weight: bold;"><%= p.getQuantitaMagazzino() %> (In esaurimento)</span>
+                                <span class="testo-esaurimento"><%= p.getQuantitaMagazzino() %> (In esaurimento)</span>
                             <% } else { %>
                                 <%= p.getQuantitaMagazzino() %>
                             <% } %>
                         </td>
                         <td>
-                            <div style="display: flex; gap: 10px; align-items: center;">
+                            <div class="container-azioni-tabella">
                                 
-                                <a href="modifica-prodotto?id=<%= p.getIdProdotto() %>" class="btn-modifica">
+                                <a href="<%= request.getContextPath() %>/modifica-prodotto?id=<%= p.getIdProdotto() %>" class="btn-modifica">
                                     <i class="fas fa-edit"></i> Modifica
                                 </a>
                                 
-                                <form action="EliminaProdottoServlet" method="POST" style="margin: 0; padding: 0;" id="form-delete-<%= p.getIdProdotto() %>">
+                                <form action="<%= request.getContextPath() %>/EliminaProdottoServlet" method="POST" class="form-inline" id="form-delete-<%= p.getIdProdotto() %>">
                                     <input type="hidden" name="idProdotto" value="<%= p.getIdProdotto() %>">
                                     <button type="button" class="btn-elimina" onclick="openDeleteModal(<%= p.getIdProdotto() %>, '<%= p.getNome().replace("'", "\\'") %>')">
                                         <i class="fas fa-trash"></i> Elimina
@@ -156,8 +144,8 @@
     <% } %>
 
     <br><br>
-    <div style="text-align: center; margin-top: 30px;">
-        <a href="home" style="color: #bbb; text-decoration: none;"><i class="fas fa-arrow-left"></i> Torna al lato pubblico del sito</a>
+    <div class="container-torna-home">
+        <a href="<%= request.getContextPath() %>/home" class="link-back"><i class="fas fa-arrow-left"></i> Torna al lato pubblico del sito</a>
     </div>
 </div>
 </div>
@@ -170,7 +158,7 @@
         </div>
         <div class="modal-body">
             <p>Sei sicuro di voler eliminare dal catalogo:</p>
-            <p><strong id="modalProductName" style="color: #fff; font-size: 1.1rem;"></strong> ?</p>
+            <p><strong id="modalProductName" class="modal-product-name"></strong> ?</p>
             <p class="warning-text">Questa azione è irreversibile.</p>
         </div>
         <div class="modal-footer">
@@ -180,7 +168,7 @@
     </div>
 </div>
 
-<script src="js/admin.js"></script>
+<script src="<%= request.getContextPath() %>/js/admin.js"></script>
 
 </body>
 </html>
