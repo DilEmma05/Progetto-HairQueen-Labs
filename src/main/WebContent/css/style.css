@@ -1345,3 +1345,30 @@ html {
     font-size: 2.5rem;
     letter-spacing: 1px;
 }
+
+/* ==========================================================================
+   INPUT PASSWORD
+   ========================================================================== */
+.password-wrapper {
+    position: relative;
+}
+
+.input-password-toggle {
+    padding-right: 40px;
+}
+
+.icon-toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: #bbb;
+    user-select: none;
+    transition: color 0.3s ease;
+}
+
+.icon-toggle-password:hover {
+    color: var(--colore-primario);
+}
