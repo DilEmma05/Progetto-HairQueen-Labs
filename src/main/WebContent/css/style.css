@@ -1333,3 +1333,15 @@ html {
     color: #888;
     padding: 40px;
 }
+
+/* ==========================================================================
+   HOME PAGE
+   ========================================================================== */
+.titolo-sezione-novita {
+    text-align: center;
+    color: var(--colore-accento);
+    margin-top: 60px;
+    margin-bottom: 10px;
+    font-size: 2.5rem;
+    letter-spacing: 1px;
+}
