@@ -30,7 +30,7 @@ public class RoutineServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("routine.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/routine.jsp").forward(request, response);
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class RoutineServlet extends HttpServlet {
         request.setAttribute("nomeRoutine", nomeRoutine);
         request.setAttribute("descrizioneRoutine", descrizioneRoutine);
 
-        request.getRequestDispatcher("routine.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/view/routine.jsp").forward(request, response);
 	}
 
 }
