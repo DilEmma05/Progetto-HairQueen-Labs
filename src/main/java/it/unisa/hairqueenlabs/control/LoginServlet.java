@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Mostra la pagina di login
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/login.jsp");
         dispatcher.forward(request, response);
 	}
 
@@ -62,7 +62,7 @@ public class LoginServlet extends HttpServlet {
             } else {
                 // Credenziali errate: rimandiamo alla pagina di login con un errore
                 request.setAttribute("errore", "Email o password non validi.");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/login.jsp");
                 dispatcher.forward(request, response);
             }
         } catch (SQLException e) {
