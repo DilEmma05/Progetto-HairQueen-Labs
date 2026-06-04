@@ -1,9 +1,12 @@
 package it.unisa.hairqueenlabs.model;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Recensione {
-    private int idRecensione;
+public class Recensione implements Serializable{
+    
+	private static final long serialVersionUID = 1L;
+	private int idRecensione;
     private int voto;
     private String testo;
     private Timestamp dataRecensione;
