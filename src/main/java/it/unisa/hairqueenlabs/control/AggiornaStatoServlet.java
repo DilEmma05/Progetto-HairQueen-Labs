@@ -43,7 +43,7 @@ public class AggiornaStatoServlet extends HttpServlet {
 		HttpSession session = request.getSession();
         Utente utenteLoggato = (Utente) session.getAttribute("utente");
 
-        if (utenteLoggato == null || !"ADMIN".equals(utenteLoggato.getRuolo())) {
+        if (utenteLoggato == null || !"ADMIN".equalsIgnoreCase(utenteLoggato.getRuolo())) {
             response.sendRedirect("home");
             return;
         }
