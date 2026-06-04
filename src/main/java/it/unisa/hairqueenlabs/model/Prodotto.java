@@ -1,6 +1,10 @@
 package it.unisa.hairqueenlabs.model;
 
-public class Prodotto {
+import java.io.Serializable;
+
+public class Prodotto implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	private int idProdotto;
 	private String nome;
 	private String descrizione;
