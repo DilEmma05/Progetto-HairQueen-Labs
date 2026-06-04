@@ -37,7 +37,7 @@ public class CheckoutServlet extends HttpServlet {
 		Utente utenteLoggato = (Utente) session.getAttribute("utente");
 		if (utenteLoggato == null) {
 			request.setAttribute("errore", "Per procedere al checkout devi prima accedere o registrarti.");
-			request.getRequestDispatcher("/login.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
 			return; 
 		}
 		
@@ -46,7 +46,7 @@ public class CheckoutServlet extends HttpServlet {
 			response.sendRedirect("carrello");
 			return;
 		}
-		request.getRequestDispatcher("/checkout.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/checkout.jsp").forward(request, response);
 	}
 
 	/**
