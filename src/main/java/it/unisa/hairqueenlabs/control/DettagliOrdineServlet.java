@@ -56,7 +56,7 @@ public class DettagliOrdineServlet extends HttpServlet {
 
                 request.setAttribute("dettagli", dettagli);
                 request.setAttribute("idOrdine", idOrdine);
-                request.getRequestDispatcher("/dettagli-ordine.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/view/dettagli-ordine.jsp").forward(request, response);
 
             } catch (Exception e) {
                 throw new ServletException("Errore nel caricamento dei dettagli", e);
