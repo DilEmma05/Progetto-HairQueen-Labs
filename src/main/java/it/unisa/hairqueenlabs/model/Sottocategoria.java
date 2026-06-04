@@ -1,6 +1,10 @@
 package it.unisa.hairqueenlabs.model;
 
-public class Sottocategoria {
+import java.io.Serializable;
+
+public class Sottocategoria implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	private int idSottocategoria;
 	private String nomeSottocategoria;
 	private int idCategoria;
