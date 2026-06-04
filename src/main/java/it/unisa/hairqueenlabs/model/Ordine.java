@@ -1,8 +1,11 @@
 package it.unisa.hairqueenlabs.model;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Ordine {
+public class Ordine implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	private int idOrdine;
 	private Timestamp dataOrdine;
 	private double totale;
