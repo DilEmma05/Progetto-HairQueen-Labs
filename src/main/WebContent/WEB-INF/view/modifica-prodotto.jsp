@@ -12,7 +12,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Modifica Prodotto - HairQueen Labs</title>
-    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/style.css">
+    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/styles/style.css">
 </head>
 <body>
 
@@ -47,7 +47,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <label>URL Immagine (es. /img/prodotti/shampoo.png)</label>
+                    <label>URL Immagine (es. /images/prodotti/shampoo.png)</label>
                     <input type="text" name="immagineUrl" value="<%= (p.getImmagineUrl() != null) ? p.getImmagineUrl() : "" %>">
                 </div>
                 
