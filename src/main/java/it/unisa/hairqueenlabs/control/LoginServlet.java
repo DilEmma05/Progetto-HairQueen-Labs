@@ -33,7 +33,10 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Mostra la pagina di login
+		if (request.getParameter("registrato") != null) {
+            request.setAttribute("successo", "Account creato con successo! Ora puoi accedere.");
+        }
+		
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/login.jsp");
         dispatcher.forward(request, response);
 	}
