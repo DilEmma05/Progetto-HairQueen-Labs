@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - HairQueen Labs</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/style.css">
 </head>
 <body>
 
@@ -113,6 +113,6 @@
         %>
     </main>
 
-</div> <script src="<%= request.getContextPath() %>/js/checkout.js"></script>
+</div> <script src="<%= request.getContextPath() %>/scripts/checkout.js"></script>
 </body>
 </html>
