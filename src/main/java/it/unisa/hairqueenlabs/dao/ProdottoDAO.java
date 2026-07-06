@@ -16,7 +16,7 @@ public class ProdottoDAO {
         ResultSet resultSet = null;
         
         List<Prodotto> prodotti = new ArrayList<>();
-        String selectSQL = "SELECT * FROM Prodotto";
+        String selectSQL = "SELECT * FROM Prodotto WHERE is_attivo = 1";
 
         try {
             connection = DriverManagerConnectionPool.getConnection();
@@ -90,8 +90,7 @@ public class ProdottoDAO {
         List<Prodotto> raccomandati = new ArrayList<>();
 
         // Cerchiamo i prodotti che corrispondono alle esigenze
-        String selectSQL = "SELECT * FROM Prodotto WHERE (tipo_cute_target = ? OR tipo_cute_target = 'Tutti') AND (tipo_capello_target = ? OR tipo_capello_target = 'Tutti')";
-        try {
+        String selectSQL = "SELECT * FROM Prodotto WHERE is_attivo = 1 AND (tipo_cute_target = ? OR tipo_cute_target = 'Tutti') AND (tipo_capello_target = ? OR tipo_capello_target = 'Tutti')";        try {
             connection = DriverManagerConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(selectSQL);
             preparedStatement.setString(1, cute);
@@ -132,8 +131,8 @@ public class ProdottoDAO {
         
         // Query SQL con JOIN: prende tutti i prodotti la cui sottocategoria appartiene alla macro-categoria specificata
         String selectSQL = "SELECT p.* FROM Prodotto p " +
-                           "JOIN Sottocategoria s ON p.id_sottocategoria = s.id_sottocategoria " +
-                           "WHERE s.id_categoria = ?";
+                "JOIN Sottocategoria s ON p.id_sottocategoria = s.id_sottocategoria " +
+                "WHERE s.id_categoria = ? AND p.is_attivo = 1";
 
         try {
             connection = DriverManagerConnectionPool.getConnection();
@@ -172,7 +171,7 @@ public class ProdottoDAO {
         ResultSet resultSet = null;
         
         List<Prodotto> prodotti = new ArrayList<>();
-        String selectSQL = "SELECT * FROM Prodotto WHERE id_sottocategoria = ?";
+        String selectSQL = "SELECT * FROM Prodotto WHERE id_sottocategoria = ? AND is_attivo = 1";
 
         try {
             connection = DriverManagerConnectionPool.getConnection();
@@ -245,7 +244,7 @@ public class ProdottoDAO {
     
     public List<Prodotto> doRetrieveNovita() {
         List<Prodotto> prodotti = new ArrayList<>();
-        String query = "SELECT * FROM Prodotto WHERE is_novita = 1";
+        String query = "SELECT * FROM Prodotto WHERE is_novita = 1 AND is_attivo = 1";
 
         try (Connection con = DriverManagerConnectionPool.getConnection();
              PreparedStatement ps = con.prepareStatement(query);
@@ -278,7 +277,7 @@ public class ProdottoDAO {
         PreparedStatement preparedStatement = null;
         int result = 0;
 
-        String deleteSQL = "DELETE FROM Prodotto WHERE id_prodotto = ?";
+        String deleteSQL = "UPDATE Prodotto SET is_attivo = 0 WHERE id_prodotto = ?";
 
         try {
             connection = DriverManagerConnectionPool.getConnection();
