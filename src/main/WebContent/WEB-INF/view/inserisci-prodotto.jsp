@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Inserisci Nuovo Prodotto - Admin</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/style.css">
 </head>
 <body>
 
@@ -40,7 +40,7 @@
 
             <div class="form-group">
                 <label for="immagineUrl">URL Immagine</label>
-                <input type="text" id="immagineUrl" name="immagineUrl" placeholder="es. img/shampoo-nuovo.jpg">
+                <input type="text" id="immagineUrl" name="immagineUrl" placeholder="es. images/shampoo-nuovo.jpg">
             </div>
             
             <div class="form-group">
