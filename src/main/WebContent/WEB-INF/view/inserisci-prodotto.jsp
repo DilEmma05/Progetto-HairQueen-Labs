@@ -69,6 +69,15 @@
                 <input type="number" id="idSottocategoria" name="idSottocategoria" min="1">
             </div>
 
+            <div class="checkbox-group" style="margin-bottom: 10px;">
+                <input type="checkbox" name="isNovita" value="true" id="checkNovita">
+                <label for="checkNovita" class="checkbox-label">Contrassegna come Novità (Mostra nell'Homepage)</label>
+            </div>
+            
+            <div class="checkbox-group" style="margin-bottom: 25px;">
+                <input type="checkbox" name="is_attivo" value="true" id="checkAttivo" checked>
+                <label for="checkAttivo" class="checkbox-label">Pubblica Immediatamente (Visibile ai clienti nel catalogo)</label>
+            </div>
             <button type="submit" class="btn-submit">Salva Prodotto</button>
         </form>
         
