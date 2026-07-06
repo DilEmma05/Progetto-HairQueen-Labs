@@ -84,6 +84,16 @@ public class InserisciProdottoServlet extends HttpServlet {
             nuovoProdotto.setIdSottocategoria(idSottocategoria);
             nuovoProdotto.setTipoCuteTarget(tipoCuteTarget);
             nuovoProdotto.setTipoCapelloTarget(tipoCapelloTarget);
+            
+            // --- INIZIO NUOVA MODIFICA ---
+            // Lettura checkbox Novità
+            String isNovitaStr = request.getParameter("isNovita");
+            nuovoProdotto.setNovita(isNovitaStr != null && isNovitaStr.equals("true"));
+            
+            // Lettura checkbox Attivo (bozza/pubblicato)
+            String isAttivoStr = request.getParameter("is_attivo");
+            nuovoProdotto.setAttivo(isAttivoStr != null);
+            // --- FINE NUOVA MODIFICA ---
 
             ProdottoDAO prodottoDAO = new ProdottoDAO();
             prodottoDAO.doSave(nuovoProdotto);
