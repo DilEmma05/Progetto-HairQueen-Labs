@@ -11,8 +11,9 @@
     List<Ordine> ordini = (List<Ordine>) request.getAttribute("ordini");
     List<Prodotto> catalogo = (List<Prodotto>) request.getAttribute("catalogo");
     
-    // Recupero il parametro per capire se stiamo visualizzando tutti i prodotti o solo quelli dell'admin
+    // Recupero i parametri per capire cosa stiamo visualizzando
     String scopeVisualizzazione = (String) request.getAttribute("scopeVisualizzazione");
+    String scopeOrdini = (String) request.getAttribute("scopeOrdini");
 %>
 
 <!DOCTYPE html>
@@ -47,7 +48,21 @@
         </div>
     <% } %>
 
-    <h2 class="admin-section-title">Gestione Ordini</h2>
+    <h2 class="admin-section-title">
+        <%= "tutti".equals(scopeOrdini) ? "Gestione Ordini - Tutti gli Ordini dei Clienti" : "Gestione Ordini - I Miei Ordini Effettuati" %>
+    </h2>
+
+    <div class="margin-y-15" style="margin-bottom: 20px;">
+        <% if ("tutti".equals(scopeOrdini)) { %>
+            <a href="<%= request.getContextPath() %>/admin-dashboard" class="btn-update" style="text-decoration: none; padding: 10px 15px; display: inline-block; background-color: #28a745; border-radius: 4px; color: white;">
+                <i class="fas fa-shopping-bag"></i> Mostra Solo i Miei Ordini
+            </a>
+        <% } else { %>
+            <a href="<%= request.getContextPath() %>/admin-dashboard?mostraOrdini=tutti" class="btn-update" style="text-decoration: none; padding: 10px 15px; display: inline-block; background-color: #6c757d; border-radius: 4px; color: white;">
+                <i class="fas fa-globe"></i> Gestisci Ordini Globale (Tutti i Clienti)
+            </a>
+        <% } %>
+    </div>
     <% if (ordini != null && !ordini.isEmpty()) { %>
         <table>
             <thead>
@@ -87,7 +102,7 @@
             </tbody>
         </table>
     <% } else { %>
-        <p>Non ci sono ordini nel sistema.</p>
+        <p>Non ci sono ordini in questa visualizzazione.</p>
     <% } %>
 
     <h2 class="admin-section-title">
@@ -109,6 +124,7 @@
             </a>
         <% } %>
     </div>
+    
     <% if (catalogo != null && !catalogo.isEmpty()) { %>
         <table>
             <thead>
