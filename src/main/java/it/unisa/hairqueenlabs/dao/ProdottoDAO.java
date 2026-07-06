@@ -212,11 +212,9 @@ public class ProdottoDAO {
     public synchronized void doSave(Prodotto prodotto) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-
-        // Aggiunti is_novita e is_attivo alla query
         String insertSQL = "INSERT INTO Prodotto (nome, descrizione, prezzo, quantita_magazzino, "
-                + "immagine_url, fase_utilizzo, id_sottocategoria, tipo_cute_target, tipo_capello_target, is_novita, is_attivo) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "immagine_url, fase_utilizzo, id_sottocategoria, tipo_cute_target, tipo_capello_target, is_novita, is_attivo, id_utente) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             connection = DriverManagerConnectionPool.getConnection();
@@ -239,6 +237,7 @@ public class ProdottoDAO {
             preparedStatement.setString(9, prodotto.getTipoCapelloTarget());
             preparedStatement.setBoolean(10, prodotto.isNovita());
             preparedStatement.setBoolean(11, prodotto.isAttivo());
+            preparedStatement.setInt(12, prodotto.getIdUtente());
 
             preparedStatement.executeUpdate();
 
@@ -369,6 +368,48 @@ public class ProdottoDAO {
                 p.setTipoCapelloTarget(resultSet.getString("tipo_capello_target"));
                 p.setNovita(resultSet.getBoolean("is_novita"));
                 p.setAttivo(resultSet.getBoolean("is_attivo"));
+                p.setIdUtente(resultSet.getInt("id_utente"));
+                
+                prodotti.add(p);
+            }
+        } finally {
+            if (resultSet != null) resultSet.close();
+            if (preparedStatement != null) preparedStatement.close();
+            DriverManagerConnectionPool.releaseConnection(connection);
+        }
+        return prodotti;
+    }
+    
+ // Recupera solo i prodotti inseriti da uno specifico Amministratore
+    public synchronized List<Prodotto> doRetrieveByAdmin(int idAdmin) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        
+        List<Prodotto> prodotti = new ArrayList<>();
+        String selectSQL = "SELECT * FROM Prodotto WHERE id_utente = ?";
+
+        try {
+            connection = DriverManagerConnectionPool.getConnection();
+            preparedStatement = connection.prepareStatement(selectSQL);
+            preparedStatement.setInt(1, idAdmin);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Prodotto p = new Prodotto();
+                p.setIdProdotto(resultSet.getInt("id_prodotto"));
+                p.setNome(resultSet.getString("nome"));
+                p.setDescrizione(resultSet.getString("descrizione"));
+                p.setPrezzo(resultSet.getDouble("prezzo"));
+                p.setQuantitaMagazzino(resultSet.getInt("quantita_magazzino"));
+                p.setImmagineUrl(resultSet.getString("immagine_url"));
+                p.setFaseUtilizzo(resultSet.getString("fase_utilizzo"));
+                p.setIdSottocategoria(resultSet.getInt("id_sottocategoria"));
+                p.setTipoCuteTarget(resultSet.getString("tipo_cute_target"));
+                p.setTipoCapelloTarget(resultSet.getString("tipo_capello_target"));
+                p.setNovita(resultSet.getBoolean("is_novita"));
+                p.setAttivo(resultSet.getBoolean("is_attivo"));
+                p.setIdUtente(resultSet.getInt("id_utente"));
                 
                 prodotti.add(p);
             }
