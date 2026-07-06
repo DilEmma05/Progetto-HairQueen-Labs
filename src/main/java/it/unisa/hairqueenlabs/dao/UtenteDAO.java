@@ -30,7 +30,6 @@ public class UtenteDAO {
             preparedStatement.setString(7, utente.getTelefono());
 
             preparedStatement.executeUpdate();
-            connection.commit();
 
         } finally {
             if (preparedStatement != null) preparedStatement.close();
