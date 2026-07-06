@@ -1,61 +1,46 @@
 package it.unisa.hairqueenlabs.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.LinkedList;
-import java.util.List;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 public class DriverManagerConnectionPool {
 
-	private static List<Connection> freeConnections;
+    private static DataSource ds;
 
-	static {
-		freeConnections = new LinkedList<Connection>();
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			System.out.println("Driver non trovato: " + e.getMessage());
-		}
-	}
+    static {
+        try {
+            // Inizializza il contesto JNDI di Tomcat
+            Context initCtx = new InitialContext();
+            Context envCtx = (Context) initCtx.lookup("java:comp/env");
+            
+            // Cerca la risorsa definita nel context.xml
+            ds = (DataSource) envCtx.lookup("jdbc/hairqueen");
+            
+        } catch (NamingException e) {
+            System.out.println("Errore JNDI durante l'inizializzazione del DataSource: " + e.getMessage());
+        }
+    }
 
-	private static synchronized Connection createDBConnection() throws SQLException {
-		Connection newConnection = null;
-		String ip = "localhost";
-		String port = "3306";
-		String dbName = "HairQueen_Labs";
-		String username = "root";
-		String password = "Trimon0405.,";
+    // Restituisce una connessione pronta dal Pool
+    public static Connection getConnection() throws SQLException {
+        if (ds == null) {
+            throw new SQLException("DataSource non inizializzato. Controlla il context.xml in META-INF.");
+        }
+        return ds.getConnection();
+    }
 
-		newConnection = DriverManager.getConnection("jdbc:mysql://" + ip + ":" + port + "/" + dbName, username, password);
-		newConnection.setAutoCommit(false);
-		return newConnection;
-	}
-
-	public static synchronized Connection getConnection() throws SQLException {
-		Connection connection;
-
-		if (!freeConnections.isEmpty()) {
-			connection = (Connection) freeConnections.get(0);
-			freeConnections.remove(0);
-
-			try {
-				if (connection.isClosed())
-					connection = getConnection();
-			} catch (SQLException e) {
-				connection.isClosed();
-				connection = getConnection();
-			}
-		} else {
-			connection = createDBConnection();
-		}
-
-		return connection;
-	}
-
-	public static synchronized void releaseConnection(Connection connection) throws SQLException {
-		if (connection != null) {
-			freeConnections.add(connection);
-		}
-	}
+    // Rimette la connessione nel Pool senza distruggerla
+    public static void releaseConnection(Connection connection) {
+        try {
+            if (connection != null && !connection.isClosed()) {
+                connection.close(); 
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
