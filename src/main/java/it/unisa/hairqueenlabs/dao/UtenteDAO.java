@@ -55,12 +55,12 @@ public class UtenteDAO {
                 Utente u = new Utente();
                 u.setIdUtente(resultSet.getInt("id_utente"));
                 u.setNome(resultSet.getString("nome"));
-                u.setNome(resultSet.getString("nome"));
                 u.setCognome(resultSet.getString("cognome"));
                 u.setEmail(resultSet.getString("email"));
                 u.setPassword(resultSet.getString("password"));
                 u.setIndirizzo(resultSet.getString("indirizzo"));
                 u.setRuolo(resultSet.getString("ruolo"));
+                u.setTelefono(resultSet.getString("telefono"));
                 utenti.add(u);
             }
         } finally {
@@ -89,6 +89,7 @@ public class UtenteDAO {
                 u.setPassword(rs.getString("password"));
                 u.setIndirizzo(rs.getString("indirizzo"));
                 u.setRuolo(rs.getString("ruolo"));
+                u.setTelefono(rs.getString("telefono"));
                 return u;
             }
             return null;
