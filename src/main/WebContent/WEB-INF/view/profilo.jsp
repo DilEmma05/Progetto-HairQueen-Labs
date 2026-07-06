@@ -15,7 +15,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Area Personale - HairQueen Labs</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/style.css">
 </head>
 <body>
 
