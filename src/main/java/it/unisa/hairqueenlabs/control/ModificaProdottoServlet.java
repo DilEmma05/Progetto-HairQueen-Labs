@@ -93,6 +93,13 @@ public class ModificaProdottoServlet extends HttpServlet {
 
             String isNovitaStr = request.getParameter("isNovita");
             p.setNovita(isNovitaStr != null && isNovitaStr.equals("true"));
+            
+            // --- INIZIO NUOVA MODIFICA ---
+            // Nelle checkbox HTML, se la spunta è presente, il parametro viene inviato (es. "true" o "on").
+            // Se la spunta non c'è, il parametro è null.
+            String isAttivoStr = request.getParameter("is_attivo");
+            p.setAttivo(isAttivoStr != null);
+            // --- FINE NUOVA MODIFICA ---
 
             ProdottoDAO dao = new ProdottoDAO();
             dao.doUpdate(p);

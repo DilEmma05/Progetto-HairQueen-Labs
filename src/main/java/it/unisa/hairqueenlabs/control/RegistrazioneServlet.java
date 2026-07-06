@@ -63,17 +63,15 @@ public class RegistrazioneServlet extends HttpServlet {
         UtenteDAO utenteDAO = new UtenteDAO();
         try {
             utenteDAO.doSave(nuovoUtente);
-            request.setAttribute("successo", "Account creato con successo! Ora puoi accedere.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
-            dispatcher.forward(request, response);
+            
+            response.sendRedirect("login?registrato=true");
+            return;
             
         } catch (SQLException e) {
-            // Se l'email esiste già, il database lancia un'eccezione
             request.setAttribute("errore", "Esiste già un account con questa email.");
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/registrazione.jsp");
             dispatcher.forward(request, response);
         }
-    
 	}
 
 }

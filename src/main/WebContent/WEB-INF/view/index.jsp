@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HairQueen Labs</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/style.css">
 </head>
 <body>
 
@@ -22,7 +22,7 @@
             <ul class="carousel-track">
                 
                 <li class="carousel-slide current-slide">
-                    <img class="carousel-image" src="<%= request.getContextPath() %>/img/layout/uso_phon_hairqueenlabs.png" alt="Modella con capelli dinamici in salone">
+                    <img class="carousel-image" src="<%= request.getContextPath() %>/images/layout/uso_phon_hairqueenlabs.png" alt="Modella con capelli dinamici in salone">
                         <div class="hero-content">
                             <h2>Il futuro dei tuoi<br>capelli inizia qui.</h2>
                             <p>Formulazioni premium per una routine di lusso.<br>Risultati da salone, direttamente a casa tua.</p>
@@ -31,7 +31,7 @@
                 </li>
 
                 <li class="carousel-slide">
-                    <img class="carousel-image" src="<%= request.getContextPath() %>/img/layout/rituali_cura_capelli.png" alt="Applicazione prodotto di lusso">
+                    <img class="carousel-image" src="<%= request.getContextPath() %>/images/layout/rituali_cura_capelli.png" alt="Applicazione prodotto di lusso">
                         <div class="hero-content">
                             <h2>Vizia te stessa.</h2>
                             <p>Rituali di cura esclusivi per ogni tipo di capello.</p>
@@ -40,7 +40,7 @@
                 </li>
                 
                 <li class="carousel-slide">
-                    <img class="carousel-image" src="<%= request.getContextPath() %>/img/promo_phon_piastra_capelli.png" alt="Bundle paistra phon">
+                    <img class="carousel-image" src="<%= request.getContextPath() %>/images/promo_phon_piastra_capelli.png" alt="Bundle paistra phon">
                     <div class="hero-content">
                         <h2>Il Lusso Senza<br>Compromessi.</h2>
                         <p>Scopri la nostra visione di lusso e cura esclusiva.<br>Esplora il rituale perfetto per te.</p>
@@ -120,7 +120,7 @@
             <a href="<%= request.getContextPath() %>/laboratori" class="btn-outline">Scopri la nostra tecnologia</a>
         </div>
         <div class="philosophy-image">
-            <img src="<%= request.getContextPath() %>/img/layout/filosofia_laboratori.png" alt="Laboratori HairQueen">
+            <img src="<%= request.getContextPath() %>/images/layout/filosofia_laboratori.png" alt="Laboratori HairQueen">
         </div>
     </section>
     
@@ -128,7 +128,7 @@
 
 </div> 
 
-<script src="<%= request.getContextPath() %>/js/hero.js"></script>
-<script src="<%= request.getContextPath() %>/js/ajax-carrello.js"></script>
+<script src="<%= request.getContextPath() %>/scripts/hero.js"></script>
+<script src="<%= request.getContextPath() %>/scripts/ajax-carrello.js"></script>
 </body>
 </html>

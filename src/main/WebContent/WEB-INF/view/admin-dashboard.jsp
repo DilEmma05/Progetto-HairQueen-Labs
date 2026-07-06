@@ -10,6 +10,10 @@
     Utente utente = (Utente) session.getAttribute("utente");
     List<Ordine> ordini = (List<Ordine>) request.getAttribute("ordini");
     List<Prodotto> catalogo = (List<Prodotto>) request.getAttribute("catalogo");
+    
+    // Recupero i parametri per capire cosa stiamo visualizzando
+    String scopeVisualizzazione = (String) request.getAttribute("scopeVisualizzazione");
+    String scopeOrdini = (String) request.getAttribute("scopeOrdini");
 %>
 
 <!DOCTYPE html>
@@ -17,7 +21,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Pannello Amministratore - HairQueen Labs</title>
-    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/style.css">
+    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
@@ -44,7 +48,21 @@
         </div>
     <% } %>
 
-    <h2 class="admin-section-title">Gestione Ordini</h2>
+    <h2 class="admin-section-title">
+        <%= "tutti".equals(scopeOrdini) ? "Gestione Ordini - Tutti gli Ordini dei Clienti" : "Gestione Ordini - I Miei Ordini Effettuati" %>
+    </h2>
+
+    <div class="margin-y-15" style="margin-bottom: 20px;">
+        <% if ("tutti".equals(scopeOrdini)) { %>
+            <a href="<%= request.getContextPath() %>/admin-dashboard" class="btn-update" style="text-decoration: none; padding: 10px 15px; display: inline-block; background-color: #28a745; border-radius: 4px; color: white;">
+                <i class="fas fa-shopping-bag"></i> Mostra Solo i Miei Ordini
+            </a>
+        <% } else { %>
+            <a href="<%= request.getContextPath() %>/admin-dashboard?mostraOrdini=tutti" class="btn-update" style="text-decoration: none; padding: 10px 15px; display: inline-block; background-color: #6c757d; border-radius: 4px; color: white;">
+                <i class="fas fa-globe"></i> Gestisci Ordini Globale (Tutti i Clienti)
+            </a>
+        <% } %>
+    </div>
     <% if (ordini != null && !ordini.isEmpty()) { %>
         <table>
             <thead>
@@ -84,17 +102,29 @@
             </tbody>
         </table>
     <% } else { %>
-        <p>Non ci sono ordini nel sistema.</p>
+        <p>Non ci sono ordini in questa visualizzazione.</p>
     <% } %>
 
-    <h2 class="admin-section-title">Gestione Catalogo</h2>
+    <h2 class="admin-section-title">
+        <%= "tutti".equals(scopeVisualizzazione) ? "Gestione Catalogo - Tutti i Prodotti del Sistema" : "Gestione Catalogo - I Miei Prodotti" %>
+    </h2>
     
-    <div class="margin-y-15">
-        <a href="<%= request.getContextPath() %>/inserisci-prodotto" class="btn-nuovo-prodotto">
+    <div class="margin-y-15" style="margin-bottom: 20px;">
+        <a href="<%= request.getContextPath() %>/inserisci-prodotto" class="btn-nuovo-prodotto" style="display: inline-block; margin-right: 15px;">
             <i class="fas fa-plus"></i> Aggiungi Nuovo Prodotto
         </a>
+        
+        <% if ("tutti".equals(scopeVisualizzazione)) { %>
+            <a href="<%= request.getContextPath() %>/admin-dashboard" class="btn-update" style="text-decoration: none; padding: 10px 15px; display: inline-block; background-color: #28a745; border-radius: 4px; color: white;">
+                <i class="fas fa-user"></i> Mostra Solo i Miei Prodotti
+            </a>
+        <% } else { %>
+            <a href="<%= request.getContextPath() %>/admin-dashboard?mostra=tutti" class="btn-update" style="text-decoration: none; padding: 10px 15px; display: inline-block; background-color: #6c757d; border-radius: 4px; color: white;">
+                <i class="fas fa-users"></i> Vedi Prodotti di Tutti gli Utenti
+            </a>
+        <% } %>
     </div>
-
+    
     <% if (catalogo != null && !catalogo.isEmpty()) { %>
         <table>
             <thead>
@@ -168,7 +198,7 @@
     </div>
 </div>
 
-<script src="<%= request.getContextPath() %>/js/admin.js"></script>
+<script src="<%= request.getContextPath() %>/scripts/admin.js"></script>
 
 </body>
 </html>

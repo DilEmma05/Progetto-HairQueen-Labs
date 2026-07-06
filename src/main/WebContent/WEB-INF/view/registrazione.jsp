@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <title>Crea Account - HairQueen Labs</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/style.css">
 </head>
 <body>
 
@@ -66,6 +66,6 @@
     </main>
 
 </div> 
-<script src="<%= request.getContextPath() %>/js/registrazione.js"></script>
+<script src="<%= request.getContextPath() %>/scripts/registrazione.js"></script>
 </body>
 </html>

@@ -20,7 +20,6 @@ public class OrdineDAO {
         try {
             connection = DriverManagerConnectionPool.getConnection();
             
-            //DISABILITIAMO L'AUTOCOMMIT (Inizio Transazione)
             connection.setAutoCommit(false);
 
             //SALVA L'ORDINE PRINCIPALE
@@ -199,7 +198,6 @@ public class OrdineDAO {
             ps.setInt(2, idOrdine);
 
             result = ps.executeUpdate();
-            connection.commit();
         } finally {
             if (ps != null) ps.close();
             if (connection != null) DriverManagerConnectionPool.releaseConnection(connection);

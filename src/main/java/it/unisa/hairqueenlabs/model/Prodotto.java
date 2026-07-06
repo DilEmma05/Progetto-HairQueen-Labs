@@ -16,13 +16,15 @@ public class Prodotto implements Serializable{
 	private String tipoCuteTarget;
 	private String tipoCapelloTarget;
 	private boolean isNovita;
+	private boolean attivo;
+	private int idUtente;
 	
 	public Prodotto(){
 		
 	}
 
 	public Prodotto(int idProdotto, String nome, String descrizione, double prezzo, int quantitaMagazzino,
-			String immagineUrl, String faseUtilizzo, int idSottocategoria, String tipoCuteTarget, String tipoCapelloTarget, boolean isNovita) {
+			String immagineUrl, String faseUtilizzo, int idSottocategoria, String tipoCuteTarget, String tipoCapelloTarget, boolean isNovita, boolean attivo) {
 		super();
 		this.idProdotto = idProdotto;
 		this.nome = nome;
@@ -35,6 +37,7 @@ public class Prodotto implements Serializable{
 		this.tipoCuteTarget = tipoCuteTarget;
 		this.tipoCapelloTarget = tipoCapelloTarget;
 		this.isNovita = isNovita;
+		this.attivo = attivo;
 	}
 
 	public int getIdProdotto() {
@@ -123,6 +126,22 @@ public class Prodotto implements Serializable{
 
 	public void setNovita(boolean isNovita) {
 		this.isNovita = isNovita;
+	}
+	
+	public boolean isAttivo() {
+	    return attivo;
+	}
+
+	public void setAttivo(boolean attivo) {
+	    this.attivo = attivo;
+	}
+	
+	public int getIdUtente() {
+	    return idUtente;
+	}
+
+	public void setIdUtente(int idUtente) {
+	    this.idUtente = idUtente;
 	}
 
 }

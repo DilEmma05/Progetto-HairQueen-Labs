@@ -16,7 +16,7 @@ public class ProdottoDAO {
         ResultSet resultSet = null;
         
         List<Prodotto> prodotti = new ArrayList<>();
-        String selectSQL = "SELECT * FROM Prodotto";
+        String selectSQL = "SELECT * FROM Prodotto WHERE is_attivo = 1";
 
         try {
             connection = DriverManagerConnectionPool.getConnection();
@@ -36,6 +36,7 @@ public class ProdottoDAO {
                 p.setTipoCuteTarget(resultSet.getString("tipo_cute_target"));
                 p.setTipoCapelloTarget(resultSet.getString("tipo_capello_target"));
                 p.setNovita(resultSet.getBoolean("is_novita"));
+                p.setAttivo(resultSet.getBoolean("is_attivo"));
                 
                 prodotti.add(p);
             }
@@ -74,6 +75,7 @@ public class ProdottoDAO {
                 p.setFaseUtilizzo(resultSet.getString("fase_utilizzo"));
                 p.setIdSottocategoria(resultSet.getInt("id_sottocategoria"));p.setTipoCuteTarget(resultSet.getString("tipo_cute_target"));
                 p.setTipoCapelloTarget(resultSet.getString("tipo_capello_target"));
+                p.setAttivo(resultSet.getBoolean("is_attivo"));
             }
         } finally {
             if (resultSet != null) resultSet.close();
@@ -90,8 +92,7 @@ public class ProdottoDAO {
         List<Prodotto> raccomandati = new ArrayList<>();
 
         // Cerchiamo i prodotti che corrispondono alle esigenze
-        String selectSQL = "SELECT * FROM Prodotto WHERE (tipo_cute_target = ? OR tipo_cute_target = 'Tutti') AND (tipo_capello_target = ? OR tipo_capello_target = 'Tutti')";
-        try {
+        String selectSQL = "SELECT * FROM Prodotto WHERE is_attivo = 1 AND (tipo_cute_target = ? OR tipo_cute_target = 'Tutti') AND (tipo_capello_target = ? OR tipo_capello_target = 'Tutti')";        try {
             connection = DriverManagerConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(selectSQL);
             preparedStatement.setString(1, cute);
@@ -111,6 +112,7 @@ public class ProdottoDAO {
                 p.setIdSottocategoria(resultSet.getInt("id_sottocategoria"));
                 p.setTipoCuteTarget(resultSet.getString("tipo_cute_target"));
                 p.setTipoCapelloTarget(resultSet.getString("tipo_capello_target"));
+                p.setAttivo(resultSet.getBoolean("is_attivo"));
                 
                 raccomandati.add(p);
             }
@@ -132,8 +134,8 @@ public class ProdottoDAO {
         
         // Query SQL con JOIN: prende tutti i prodotti la cui sottocategoria appartiene alla macro-categoria specificata
         String selectSQL = "SELECT p.* FROM Prodotto p " +
-                           "JOIN Sottocategoria s ON p.id_sottocategoria = s.id_sottocategoria " +
-                           "WHERE s.id_categoria = ?";
+                "JOIN Sottocategoria s ON p.id_sottocategoria = s.id_sottocategoria " +
+                "WHERE s.id_categoria = ? AND p.is_attivo = 1";
 
         try {
             connection = DriverManagerConnectionPool.getConnection();
@@ -154,6 +156,7 @@ public class ProdottoDAO {
                 p.setIdSottocategoria(resultSet.getInt("id_sottocategoria"));
                 p.setTipoCuteTarget(resultSet.getString("tipo_cute_target"));
                 p.setTipoCapelloTarget(resultSet.getString("tipo_capello_target"));
+                p.setAttivo(resultSet.getBoolean("is_attivo"));
                 
                 prodotti.add(p);
             }
@@ -172,7 +175,7 @@ public class ProdottoDAO {
         ResultSet resultSet = null;
         
         List<Prodotto> prodotti = new ArrayList<>();
-        String selectSQL = "SELECT * FROM Prodotto WHERE id_sottocategoria = ?";
+        String selectSQL = "SELECT * FROM Prodotto WHERE id_sottocategoria = ? AND is_attivo = 1";
 
         try {
             connection = DriverManagerConnectionPool.getConnection();
@@ -193,6 +196,7 @@ public class ProdottoDAO {
                 p.setIdSottocategoria(resultSet.getInt("id_sottocategoria"));
                 p.setTipoCuteTarget(resultSet.getString("tipo_cute_target"));
                 p.setTipoCapelloTarget(resultSet.getString("tipo_capello_target"));
+                p.setAttivo(resultSet.getBoolean("is_attivo"));
                 
                 prodotti.add(p);
             }
@@ -208,10 +212,9 @@ public class ProdottoDAO {
     public synchronized void doSave(Prodotto prodotto) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-
         String insertSQL = "INSERT INTO Prodotto (nome, descrizione, prezzo, quantita_magazzino, "
-                + "immagine_url, fase_utilizzo, id_sottocategoria, tipo_cute_target, tipo_capello_target) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "immagine_url, fase_utilizzo, id_sottocategoria, tipo_cute_target, tipo_capello_target, is_novita, is_attivo, id_utente) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             connection = DriverManagerConnectionPool.getConnection();
@@ -232,10 +235,11 @@ public class ProdottoDAO {
             
             preparedStatement.setString(8, prodotto.getTipoCuteTarget());
             preparedStatement.setString(9, prodotto.getTipoCapelloTarget());
+            preparedStatement.setBoolean(10, prodotto.isNovita());
+            preparedStatement.setBoolean(11, prodotto.isAttivo());
+            preparedStatement.setInt(12, prodotto.getIdUtente());
 
             preparedStatement.executeUpdate();
-
-            connection.commit();
 
         } finally {
             if (preparedStatement != null) preparedStatement.close();
@@ -245,7 +249,7 @@ public class ProdottoDAO {
     
     public List<Prodotto> doRetrieveNovita() {
         List<Prodotto> prodotti = new ArrayList<>();
-        String query = "SELECT * FROM Prodotto WHERE is_novita = 1";
+        String query = "SELECT * FROM Prodotto WHERE is_novita = 1 AND is_attivo = 1";
 
         try (Connection con = DriverManagerConnectionPool.getConnection();
              PreparedStatement ps = con.prepareStatement(query);
@@ -263,7 +267,8 @@ public class ProdottoDAO {
                 p.setIdSottocategoria(rs.getInt("id_sottocategoria"));
                 p.setTipoCuteTarget(rs.getString("tipo_cute_target"));
                 p.setTipoCapelloTarget(rs.getString("tipo_capello_target"));
-                p.setNovita(rs.getBoolean("is_novita")); 
+                p.setNovita(rs.getBoolean("is_novita"));
+                p.setAttivo(rs.getBoolean("is_attivo"));
 
                 prodotti.add(p);
             }
@@ -278,7 +283,7 @@ public class ProdottoDAO {
         PreparedStatement preparedStatement = null;
         int result = 0;
 
-        String deleteSQL = "DELETE FROM Prodotto WHERE id_prodotto = ?";
+        String deleteSQL = "UPDATE Prodotto SET is_attivo = 0 WHERE id_prodotto = ?";
 
         try {
             connection = DriverManagerConnectionPool.getConnection();
@@ -286,7 +291,6 @@ public class ProdottoDAO {
             preparedStatement.setInt(1, idProdotto);
 
             result = preparedStatement.executeUpdate();
-            connection.commit();
 
         } finally {
             if (preparedStatement != null) preparedStatement.close();
@@ -302,7 +306,7 @@ public class ProdottoDAO {
 
         String updateSQL = "UPDATE Prodotto SET nome = ?, descrizione = ?, prezzo = ?, quantita_magazzino = ?, "
                 + "immagine_url = ?, fase_utilizzo = ?, id_sottocategoria = ?, tipo_cute_target = ?, "
-                + "tipo_capello_target = ?, is_novita = ? WHERE id_prodotto = ?";
+                + "tipo_capello_target = ?, is_novita = ?, is_attivo = ? WHERE id_prodotto = ?";
 
         try {
             connection = DriverManagerConnectionPool.getConnection();
@@ -324,15 +328,96 @@ public class ProdottoDAO {
             preparedStatement.setString(8, prodotto.getTipoCuteTarget());
             preparedStatement.setString(9, prodotto.getTipoCapelloTarget());
             preparedStatement.setBoolean(10, prodotto.isNovita());
+            preparedStatement.setBoolean(11, prodotto.isAttivo());
 
-            preparedStatement.setInt(11, prodotto.getIdProdotto());
+            preparedStatement.setInt(12, prodotto.getIdProdotto());
 
             preparedStatement.executeUpdate();
-            connection.commit();
 
         } finally {
             if (preparedStatement != null) preparedStatement.close();
             if (connection != null) DriverManagerConnectionPool.releaseConnection(connection);
         }
+    }
+    
+ // Recupera tutti i prodotti, inclusi quelli cancellati logicamente (Area Amministratore)
+    public synchronized List<Prodotto> doRetrieveAllAdmin() throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        
+        List<Prodotto> prodotti = new ArrayList<>();
+        String selectSQL = "SELECT * FROM Prodotto";
+
+        try {
+            connection = DriverManagerConnectionPool.getConnection();
+            preparedStatement = connection.prepareStatement(selectSQL);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Prodotto p = new Prodotto();
+                p.setIdProdotto(resultSet.getInt("id_prodotto"));
+                p.setNome(resultSet.getString("nome"));
+                p.setDescrizione(resultSet.getString("descrizione"));
+                p.setPrezzo(resultSet.getDouble("prezzo"));
+                p.setQuantitaMagazzino(resultSet.getInt("quantita_magazzino"));
+                p.setImmagineUrl(resultSet.getString("immagine_url"));
+                p.setFaseUtilizzo(resultSet.getString("fase_utilizzo"));
+                p.setIdSottocategoria(resultSet.getInt("id_sottocategoria"));
+                p.setTipoCuteTarget(resultSet.getString("tipo_cute_target"));
+                p.setTipoCapelloTarget(resultSet.getString("tipo_capello_target"));
+                p.setNovita(resultSet.getBoolean("is_novita"));
+                p.setAttivo(resultSet.getBoolean("is_attivo"));
+                p.setIdUtente(resultSet.getInt("id_utente"));
+                
+                prodotti.add(p);
+            }
+        } finally {
+            if (resultSet != null) resultSet.close();
+            if (preparedStatement != null) preparedStatement.close();
+            DriverManagerConnectionPool.releaseConnection(connection);
+        }
+        return prodotti;
+    }
+    
+ // Recupera solo i prodotti inseriti da uno specifico Amministratore
+    public synchronized List<Prodotto> doRetrieveByAdmin(int idAdmin) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        
+        List<Prodotto> prodotti = new ArrayList<>();
+        String selectSQL = "SELECT * FROM Prodotto WHERE id_utente = ?";
+
+        try {
+            connection = DriverManagerConnectionPool.getConnection();
+            preparedStatement = connection.prepareStatement(selectSQL);
+            preparedStatement.setInt(1, idAdmin);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Prodotto p = new Prodotto();
+                p.setIdProdotto(resultSet.getInt("id_prodotto"));
+                p.setNome(resultSet.getString("nome"));
+                p.setDescrizione(resultSet.getString("descrizione"));
+                p.setPrezzo(resultSet.getDouble("prezzo"));
+                p.setQuantitaMagazzino(resultSet.getInt("quantita_magazzino"));
+                p.setImmagineUrl(resultSet.getString("immagine_url"));
+                p.setFaseUtilizzo(resultSet.getString("fase_utilizzo"));
+                p.setIdSottocategoria(resultSet.getInt("id_sottocategoria"));
+                p.setTipoCuteTarget(resultSet.getString("tipo_cute_target"));
+                p.setTipoCapelloTarget(resultSet.getString("tipo_capello_target"));
+                p.setNovita(resultSet.getBoolean("is_novita"));
+                p.setAttivo(resultSet.getBoolean("is_attivo"));
+                p.setIdUtente(resultSet.getInt("id_utente"));
+                
+                prodotti.add(p);
+            }
+        } finally {
+            if (resultSet != null) resultSet.close();
+            if (preparedStatement != null) preparedStatement.close();
+            DriverManagerConnectionPool.releaseConnection(connection);
+        }
+        return prodotti;
     }
 }

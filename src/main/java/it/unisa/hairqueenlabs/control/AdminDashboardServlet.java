@@ -35,7 +35,7 @@ public class AdminDashboardServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
         Utente utenteLoggato = (Utente) session.getAttribute("utente");
 
@@ -46,20 +46,37 @@ public class AdminDashboardServlet extends HttpServlet {
 
         try {
             OrdineDAO ordineDAO = new OrdineDAO();
-            List<Ordine> tuttiOrdini = ordineDAO.doRetrieveAll();
-            request.setAttribute("ordini", tuttiOrdini);
+            List<Ordine> ordini;
+            
+            String mostraOrdini = request.getParameter("mostraOrdini");
+            if ("tutti".equals(mostraOrdini)) {
+                ordini = ordineDAO.doRetrieveAll();
+                request.setAttribute("scopeOrdini", "tutti");
+            } else {
+                ordini = ordineDAO.doRetrieveByUtente(utenteLoggato.getIdUtente());
+                request.setAttribute("scopeOrdini", "miei");
+            }
+            request.setAttribute("ordini", ordini);
 
             ProdottoDAO prodottoDAO = new ProdottoDAO();
-            List<Prodotto> catalogo = prodottoDAO.doRetrieveAll();
+            List<Prodotto> catalogo;
+            String mostra = request.getParameter("mostra");
+            
+            if ("tutti".equals(mostra)) {
+                catalogo = prodottoDAO.doRetrieveAllAdmin();
+                request.setAttribute("scopeVisualizzazione", "tutti");
+            } else {
+                catalogo = prodottoDAO.doRetrieveByAdmin(utenteLoggato.getIdUtente());
+                request.setAttribute("scopeVisualizzazione", "miei");
+            }
             request.setAttribute("catalogo", catalogo);
-
+            
             request.getRequestDispatcher("/WEB-INF/view/admin-dashboard.jsp").forward(request, response);
 
         } catch (SQLException e) {
             throw new ServletException("Errore durante il caricamento della dashboard amministratore", e);
         }
-    }
-
+	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

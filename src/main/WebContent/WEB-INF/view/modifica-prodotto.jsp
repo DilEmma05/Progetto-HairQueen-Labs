@@ -12,7 +12,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Modifica Prodotto - HairQueen Labs</title>
-    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/style.css">
+    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/styles/style.css">
 </head>
 <body>
 
@@ -31,8 +31,8 @@
                 </div>
                 
                 <div class="form-group">
-                    <label>Descrizione *</label>
-                    <textarea name="descrizione" required><%= p.getDescrizione() %></textarea>
+                    <label>Descrizione</label>
+                    <textarea name="descrizione"><%= (p.getDescrizione() != null) ? p.getDescrizione() : "" %></textarea>
                 </div>
                 
                 <div class="form-row">
@@ -47,7 +47,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <label>URL Immagine (es. /img/prodotti/shampoo.png)</label>
+                    <label>URL Immagine (es. /images/prodotti/shampoo.png)</label>
                     <input type="text" name="immagineUrl" value="<%= (p.getImmagineUrl() != null) ? p.getImmagineUrl() : "" %>">
                 </div>
                 
@@ -76,6 +76,11 @@
                 <div class="checkbox-group">
                     <input type="checkbox" name="isNovita" value="true" id="checkNovita" <%= p.isNovita() ? "checked" : "" %>>
                     <label for="checkNovita" class="checkbox-label">Contrassegna come Novità (Mostra nell'Homepage)</label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" name="is_attivo" value="true" id="checkAttivo" <%= p.isAttivo() ? "checked" : "" %>>
+                    <label for="checkAttivo" class="checkbox-label">Prodotto Attivo (Visibile ai clienti nel catalogo)</label>
                 </div>
                 
                 <div class="form-actions">

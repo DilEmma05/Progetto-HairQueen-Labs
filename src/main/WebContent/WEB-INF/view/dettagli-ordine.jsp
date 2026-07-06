@@ -13,7 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Dettagli Ordine #<%= idOrdine %> - HairQueen Labs</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/style.css">
 </head>
 <body>
 

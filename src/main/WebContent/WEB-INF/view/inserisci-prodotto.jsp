@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Inserisci Nuovo Prodotto - Admin</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/style.css">
 </head>
 <body>
 
@@ -40,7 +40,7 @@
 
             <div class="form-group">
                 <label for="immagineUrl">URL Immagine</label>
-                <input type="text" id="immagineUrl" name="immagineUrl" placeholder="es. img/shampoo-nuovo.jpg">
+                <input type="text" id="immagineUrl" name="immagineUrl" placeholder="es. images/shampoo-nuovo.jpg">
             </div>
             
             <div class="form-group">
@@ -69,6 +69,15 @@
                 <input type="number" id="idSottocategoria" name="idSottocategoria" min="1">
             </div>
 
+            <div class="checkbox-group" style="margin-bottom: 10px;">
+                <input type="checkbox" name="isNovita" value="true" id="checkNovita">
+                <label for="checkNovita" class="checkbox-label">Contrassegna come Novità (Mostra nell'Homepage)</label>
+            </div>
+            
+            <div class="checkbox-group" style="margin-bottom: 25px;">
+                <input type="checkbox" name="is_attivo" value="true" id="checkAttivo" checked>
+                <label for="checkAttivo" class="checkbox-label">Pubblica Immediatamente (Visibile ai clienti nel catalogo)</label>
+            </div>
             <button type="submit" class="btn-submit">Salva Prodotto</button>
         </form>
         
