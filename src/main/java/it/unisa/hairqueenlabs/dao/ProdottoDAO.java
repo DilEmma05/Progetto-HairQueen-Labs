@@ -36,6 +36,7 @@ public class ProdottoDAO {
                 p.setTipoCuteTarget(resultSet.getString("tipo_cute_target"));
                 p.setTipoCapelloTarget(resultSet.getString("tipo_capello_target"));
                 p.setNovita(resultSet.getBoolean("is_novita"));
+                p.setAttivo(resultSet.getBoolean("is_attivo"));
                 
                 prodotti.add(p);
             }
@@ -74,6 +75,7 @@ public class ProdottoDAO {
                 p.setFaseUtilizzo(resultSet.getString("fase_utilizzo"));
                 p.setIdSottocategoria(resultSet.getInt("id_sottocategoria"));p.setTipoCuteTarget(resultSet.getString("tipo_cute_target"));
                 p.setTipoCapelloTarget(resultSet.getString("tipo_capello_target"));
+                p.setAttivo(resultSet.getBoolean("is_attivo"));
             }
         } finally {
             if (resultSet != null) resultSet.close();
@@ -110,6 +112,7 @@ public class ProdottoDAO {
                 p.setIdSottocategoria(resultSet.getInt("id_sottocategoria"));
                 p.setTipoCuteTarget(resultSet.getString("tipo_cute_target"));
                 p.setTipoCapelloTarget(resultSet.getString("tipo_capello_target"));
+                p.setAttivo(resultSet.getBoolean("is_attivo"));
                 
                 raccomandati.add(p);
             }
@@ -153,6 +156,7 @@ public class ProdottoDAO {
                 p.setIdSottocategoria(resultSet.getInt("id_sottocategoria"));
                 p.setTipoCuteTarget(resultSet.getString("tipo_cute_target"));
                 p.setTipoCapelloTarget(resultSet.getString("tipo_capello_target"));
+                p.setAttivo(resultSet.getBoolean("is_attivo"));
                 
                 prodotti.add(p);
             }
@@ -192,6 +196,7 @@ public class ProdottoDAO {
                 p.setIdSottocategoria(resultSet.getInt("id_sottocategoria"));
                 p.setTipoCuteTarget(resultSet.getString("tipo_cute_target"));
                 p.setTipoCapelloTarget(resultSet.getString("tipo_capello_target"));
+                p.setAttivo(resultSet.getBoolean("is_attivo"));
                 
                 prodotti.add(p);
             }
@@ -208,9 +213,10 @@ public class ProdottoDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
+        // Aggiunti is_novita e is_attivo alla query
         String insertSQL = "INSERT INTO Prodotto (nome, descrizione, prezzo, quantita_magazzino, "
-                + "immagine_url, fase_utilizzo, id_sottocategoria, tipo_cute_target, tipo_capello_target) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "immagine_url, fase_utilizzo, id_sottocategoria, tipo_cute_target, tipo_capello_target, is_novita, is_attivo) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             connection = DriverManagerConnectionPool.getConnection();
@@ -231,6 +237,8 @@ public class ProdottoDAO {
             
             preparedStatement.setString(8, prodotto.getTipoCuteTarget());
             preparedStatement.setString(9, prodotto.getTipoCapelloTarget());
+            preparedStatement.setBoolean(10, prodotto.isNovita());
+            preparedStatement.setBoolean(11, prodotto.isAttivo());
 
             preparedStatement.executeUpdate();
 
@@ -260,7 +268,8 @@ public class ProdottoDAO {
                 p.setIdSottocategoria(rs.getInt("id_sottocategoria"));
                 p.setTipoCuteTarget(rs.getString("tipo_cute_target"));
                 p.setTipoCapelloTarget(rs.getString("tipo_capello_target"));
-                p.setNovita(rs.getBoolean("is_novita")); 
+                p.setNovita(rs.getBoolean("is_novita"));
+                p.setAttivo(rs.getBoolean("is_attivo"));
 
                 prodotti.add(p);
             }
@@ -298,7 +307,7 @@ public class ProdottoDAO {
 
         String updateSQL = "UPDATE Prodotto SET nome = ?, descrizione = ?, prezzo = ?, quantita_magazzino = ?, "
                 + "immagine_url = ?, fase_utilizzo = ?, id_sottocategoria = ?, tipo_cute_target = ?, "
-                + "tipo_capello_target = ?, is_novita = ? WHERE id_prodotto = ?";
+                + "tipo_capello_target = ?, is_novita = ?, is_attivo = ? WHERE id_prodotto = ?";
 
         try {
             connection = DriverManagerConnectionPool.getConnection();
@@ -320,8 +329,9 @@ public class ProdottoDAO {
             preparedStatement.setString(8, prodotto.getTipoCuteTarget());
             preparedStatement.setString(9, prodotto.getTipoCapelloTarget());
             preparedStatement.setBoolean(10, prodotto.isNovita());
+            preparedStatement.setBoolean(11, prodotto.isAttivo());
 
-            preparedStatement.setInt(11, prodotto.getIdProdotto());
+            preparedStatement.setInt(12, prodotto.getIdProdotto());
 
             preparedStatement.executeUpdate();
 
@@ -358,6 +368,7 @@ public class ProdottoDAO {
                 p.setTipoCuteTarget(resultSet.getString("tipo_cute_target"));
                 p.setTipoCapelloTarget(resultSet.getString("tipo_capello_target"));
                 p.setNovita(resultSet.getBoolean("is_novita"));
+                p.setAttivo(resultSet.getBoolean("is_attivo"));
                 
                 prodotti.add(p);
             }
