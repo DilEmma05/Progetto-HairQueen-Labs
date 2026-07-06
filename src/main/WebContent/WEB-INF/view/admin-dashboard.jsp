@@ -10,6 +10,9 @@
     Utente utente = (Utente) session.getAttribute("utente");
     List<Ordine> ordini = (List<Ordine>) request.getAttribute("ordini");
     List<Prodotto> catalogo = (List<Prodotto>) request.getAttribute("catalogo");
+    
+    // Recupero il parametro per capire se stiamo visualizzando tutti i prodotti o solo quelli dell'admin
+    String scopeVisualizzazione = (String) request.getAttribute("scopeVisualizzazione");
 %>
 
 <!DOCTYPE html>
@@ -87,14 +90,25 @@
         <p>Non ci sono ordini nel sistema.</p>
     <% } %>
 
-    <h2 class="admin-section-title">Gestione Catalogo</h2>
+    <h2 class="admin-section-title">
+        <%= "tutti".equals(scopeVisualizzazione) ? "Gestione Catalogo - Tutti i Prodotti del Sistema" : "Gestione Catalogo - I Miei Prodotti" %>
+    </h2>
     
-    <div class="margin-y-15">
-        <a href="<%= request.getContextPath() %>/inserisci-prodotto" class="btn-nuovo-prodotto">
+    <div class="margin-y-15" style="margin-bottom: 20px;">
+        <a href="<%= request.getContextPath() %>/inserisci-prodotto" class="btn-nuovo-prodotto" style="display: inline-block; margin-right: 15px;">
             <i class="fas fa-plus"></i> Aggiungi Nuovo Prodotto
         </a>
+        
+        <% if ("tutti".equals(scopeVisualizzazione)) { %>
+            <a href="<%= request.getContextPath() %>/admin-dashboard" class="btn-update" style="text-decoration: none; padding: 10px 15px; display: inline-block; background-color: #28a745; border-radius: 4px; color: white;">
+                <i class="fas fa-user"></i> Mostra Solo i Miei Prodotti
+            </a>
+        <% } else { %>
+            <a href="<%= request.getContextPath() %>/admin-dashboard?mostra=tutti" class="btn-update" style="text-decoration: none; padding: 10px 15px; display: inline-block; background-color: #6c757d; border-radius: 4px; color: white;">
+                <i class="fas fa-users"></i> Vedi Prodotti di Tutti gli Utenti
+            </a>
+        <% } %>
     </div>
-
     <% if (catalogo != null && !catalogo.isEmpty()) { %>
         <table>
             <thead>
