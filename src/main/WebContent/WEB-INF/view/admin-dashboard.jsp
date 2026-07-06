@@ -17,7 +17,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Pannello Amministratore - HairQueen Labs</title>
-    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/style.css">
+    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
@@ -168,7 +168,7 @@
     </div>
 </div>
 
-<script src="<%= request.getContextPath() %>/js/admin.js"></script>
+<script src="<%= request.getContextPath() %>/scripts/admin.js"></script>
 
 </body>
 </html>
