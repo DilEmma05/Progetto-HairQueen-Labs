@@ -334,4 +334,42 @@ public class ProdottoDAO {
             if (connection != null) DriverManagerConnectionPool.releaseConnection(connection);
         }
     }
+    
+ // Recupera tutti i prodotti, inclusi quelli cancellati logicamente (Area Amministratore)
+    public synchronized List<Prodotto> doRetrieveAllAdmin() throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        
+        List<Prodotto> prodotti = new ArrayList<>();
+        String selectSQL = "SELECT * FROM Prodotto";
+
+        try {
+            connection = DriverManagerConnectionPool.getConnection();
+            preparedStatement = connection.prepareStatement(selectSQL);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Prodotto p = new Prodotto();
+                p.setIdProdotto(resultSet.getInt("id_prodotto"));
+                p.setNome(resultSet.getString("nome"));
+                p.setDescrizione(resultSet.getString("descrizione"));
+                p.setPrezzo(resultSet.getDouble("prezzo"));
+                p.setQuantitaMagazzino(resultSet.getInt("quantita_magazzino"));
+                p.setImmagineUrl(resultSet.getString("immagine_url"));
+                p.setFaseUtilizzo(resultSet.getString("fase_utilizzo"));
+                p.setIdSottocategoria(resultSet.getInt("id_sottocategoria"));
+                p.setTipoCuteTarget(resultSet.getString("tipo_cute_target"));
+                p.setTipoCapelloTarget(resultSet.getString("tipo_capello_target"));
+                p.setNovita(resultSet.getBoolean("is_novita"));
+                
+                prodotti.add(p);
+            }
+        } finally {
+            if (resultSet != null) resultSet.close();
+            if (preparedStatement != null) preparedStatement.close();
+            DriverManagerConnectionPool.releaseConnection(connection);
+        }
+        return prodotti;
+    }
 }
