@@ -234,8 +234,6 @@ public class ProdottoDAO {
 
             preparedStatement.executeUpdate();
 
-            connection.commit();
-
         } finally {
             if (preparedStatement != null) preparedStatement.close();
             if (connection != null) DriverManagerConnectionPool.releaseConnection(connection);
@@ -285,7 +283,6 @@ public class ProdottoDAO {
             preparedStatement.setInt(1, idProdotto);
 
             result = preparedStatement.executeUpdate();
-            connection.commit();
 
         } finally {
             if (preparedStatement != null) preparedStatement.close();
@@ -327,7 +324,6 @@ public class ProdottoDAO {
             preparedStatement.setInt(11, prodotto.getIdProdotto());
 
             preparedStatement.executeUpdate();
-            connection.commit();
 
         } finally {
             if (preparedStatement != null) preparedStatement.close();
