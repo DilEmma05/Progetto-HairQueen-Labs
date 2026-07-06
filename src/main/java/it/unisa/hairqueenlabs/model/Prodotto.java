@@ -17,6 +17,7 @@ public class Prodotto implements Serializable{
 	private String tipoCapelloTarget;
 	private boolean isNovita;
 	private boolean attivo;
+	private int idUtente;
 	
 	public Prodotto(){
 		
@@ -133,6 +134,14 @@ public class Prodotto implements Serializable{
 
 	public void setAttivo(boolean attivo) {
 	    this.attivo = attivo;
+	}
+	
+	public int getIdUtente() {
+	    return idUtente;
+	}
+
+	public void setIdUtente(int idUtente) {
+	    this.idUtente = idUtente;
 	}
 
 }
