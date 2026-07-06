@@ -27,7 +27,6 @@ public class RecensioneDAO {
             preparedStatement.setInt(4, recensione.getIdProdotto());
 
             preparedStatement.executeUpdate();
-            connection.commit();
 
         } finally {
             if (preparedStatement != null) preparedStatement.close();
