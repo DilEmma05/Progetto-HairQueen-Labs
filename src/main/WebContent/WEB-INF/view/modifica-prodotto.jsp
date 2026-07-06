@@ -31,8 +31,8 @@
                 </div>
                 
                 <div class="form-group">
-                    <label>Descrizione *</label>
-                    <textarea name="descrizione" required><%= p.getDescrizione() %></textarea>
+                    <label>Descrizione</label>
+                    <textarea name="descrizione"><%= (p.getDescrizione() != null) ? p.getDescrizione() : "" %></textarea>
                 </div>
                 
                 <div class="form-row">
@@ -76,6 +76,11 @@
                 <div class="checkbox-group">
                     <input type="checkbox" name="isNovita" value="true" id="checkNovita" <%= p.isNovita() ? "checked" : "" %>>
                     <label for="checkNovita" class="checkbox-label">Contrassegna come Novità (Mostra nell'Homepage)</label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" name="is_attivo" value="true" id="checkAttivo" <%= p.isAttivo() ? "checked" : "" %>>
+                    <label for="checkAttivo" class="checkbox-label">Prodotto Attivo (Visibile ai clienti nel catalogo)</label>
                 </div>
                 
                 <div class="form-actions">
