@@ -46,12 +46,20 @@ public class AdminDashboardServlet extends HttpServlet {
 
         try {
             OrdineDAO ordineDAO = new OrdineDAO();
-            List<Ordine> tuttiOrdini = ordineDAO.doRetrieveAll();
-            request.setAttribute("ordini", tuttiOrdini);
+            List<Ordine> ordini;
+            
+            String mostraOrdini = request.getParameter("mostraOrdini");
+            if ("tutti".equals(mostraOrdini)) {
+                ordini = ordineDAO.doRetrieveAll();
+                request.setAttribute("scopeOrdini", "tutti");
+            } else {
+                ordini = ordineDAO.doRetrieveByUtente(utenteLoggato.getIdUtente());
+                request.setAttribute("scopeOrdini", "miei");
+            }
+            request.setAttribute("ordini", ordini);
 
             ProdottoDAO prodottoDAO = new ProdottoDAO();
             List<Prodotto> catalogo;
-            
             String mostra = request.getParameter("mostra");
             
             if ("tutti".equals(mostra)) {
@@ -61,15 +69,14 @@ public class AdminDashboardServlet extends HttpServlet {
                 catalogo = prodottoDAO.doRetrieveByAdmin(utenteLoggato.getIdUtente());
                 request.setAttribute("scopeVisualizzazione", "miei");
             }
-            
             request.setAttribute("catalogo", catalogo);
+            
             request.getRequestDispatcher("/WEB-INF/view/admin-dashboard.jsp").forward(request, response);
 
         } catch (SQLException e) {
             throw new ServletException("Errore durante il caricamento della dashboard amministratore", e);
         }
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
