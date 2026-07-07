@@ -3,77 +3,39 @@ package it.unisa.hairqueenlabs.model;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Recensione implements Serializable{
+public class Recensione implements Serializable {
+    private static final long serialVersionUID = 1L;
     
-	private static final long serialVersionUID = 1L;
-	private int idRecensione;
+    private int idRecensione;
     private int voto;
     private String testo;
     private Timestamp dataRecensione;
     private int idUtente;
     private int idProdotto;
     
-    public Recensione() {
+    // Campo di utilità per mostrare il nome di chi recensisce senza fare doppie query nella JSP
+    private String nomeUtente;
 
-    }
+    public Recensione() {}
 
-	public Recensione(int idRecensione, int voto, String testo, Timestamp dataRecensione, int idUtente,
-			int idProdotto) {
-		super();
-		this.idRecensione = idRecensione;
-		this.voto = voto;
-		this.testo = testo;
-		this.dataRecensione = dataRecensione;
-		this.idUtente = idUtente;
-		this.idProdotto = idProdotto;
-	}
+    public int getIdRecensione() { return idRecensione; }
+    public void setIdRecensione(int idRecensione) { this.idRecensione = idRecensione; }
 
-	public int getIdRecensione() {
-		return idRecensione;
-	}
+    public int getVoto() { return voto; }
+    public void setVoto(int voto) { this.voto = voto; }
 
-	public void setIdRecensione(int idRecensione) {
-		this.idRecensione = idRecensione;
-	}
+    public String getTesto() { return testo; }
+    public void setTesto(String testo) { this.testo = testo; }
 
-	public int getVoto() {
-		return voto;
-	}
+    public Timestamp getDataRecensione() { return dataRecensione; }
+    public void setDataRecensione(Timestamp dataRecensione) { this.dataRecensione = dataRecensione; }
 
-	public void setVoto(int voto) {
-		this.voto = voto;
-	}
+    public int getIdUtente() { return idUtente; }
+    public void setIdUtente(int idUtente) { this.idUtente = idUtente; }
 
-	public String getTesto() {
-		return testo;
-	}
+    public int getIdProdotto() { return idProdotto; }
+    public void setIdProdotto(int idProdotto) { this.idProdotto = idProdotto; }
 
-	public void setTesto(String testo) {
-		this.testo = testo;
-	}
-
-	public Timestamp getDataRecensione() {
-		return dataRecensione;
-	}
-
-	public void setDataRecensione(Timestamp dataRecensione) {
-		this.dataRecensione = dataRecensione;
-	}
-
-	public int getIdUtente() {
-		return idUtente;
-	}
-
-	public void setIdUtente(int idUtente) {
-		this.idUtente = idUtente;
-	}
-
-	public int getIdProdotto() {
-		return idProdotto;
-	}
-
-	public void setIdProdotto(int idProdotto) {
-		this.idProdotto = idProdotto;
-	}
-    
+    public String getNomeUtente() { return nomeUtente; }
+    public void setNomeUtente(String nomeUtente) { this.nomeUtente = nomeUtente; }
 }
