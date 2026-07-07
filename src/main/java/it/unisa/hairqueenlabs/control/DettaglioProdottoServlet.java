@@ -8,9 +8,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import it.unisa.hairqueenlabs.dao.ProdottoDAO;
+import it.unisa.hairqueenlabs.dao.RecensioneDAO;
 import it.unisa.hairqueenlabs.model.Prodotto;
+import it.unisa.hairqueenlabs.model.Recensione;
 
 /**
  * Servlet implementation class DettaglioProdottoServlet
@@ -24,14 +27,13 @@ public class DettaglioProdottoServlet extends HttpServlet {
      */
     public DettaglioProdottoServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-String idString = request.getParameter("id");
+        String idString = request.getParameter("id");
         
         if (idString != null && !idString.isEmpty()) {
             try {
@@ -42,6 +44,11 @@ String idString = request.getParameter("id");
                 if (prodotto != null) {
                     // Salva il prodotto nella request per passarlo alla JSP
                     request.setAttribute("prodotto", prodotto);
+                    
+                    // MODIFICA: Recupera le recensioni del prodotto e le aggiunge alla request
+                    RecensioneDAO recensioneDAO = new RecensioneDAO();
+                    List<Recensione> listaRecensioni = recensioneDAO.doRetrieveByProdotto(id);
+                    request.setAttribute("recensioni", listaRecensioni);
                     
                     // Invia l'utente alla pagina di dettaglio
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/dettaglio.jsp");
@@ -61,7 +68,6 @@ String idString = request.getParameter("id");
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
