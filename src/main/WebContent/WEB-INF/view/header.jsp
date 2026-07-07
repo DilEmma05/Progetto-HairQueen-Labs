@@ -10,40 +10,47 @@
 </header>
 
 <div class="barra-utente">
-        
-        <a href="<%= request.getContextPath() %>/carrello" class="link-carrello">
-            🛒 Carrello 
-            <span id="cart-badge" class="cart-badge">
-                <% 
-                   it.unisa.hairqueenlabs.model.Carrello c = (it.unisa.hairqueenlabs.model.Carrello) session.getAttribute("carrello");
-                   out.print((c != null) ? c.getNumeroTotaleArticoli() : "0");
-                %>
-            </span>
-        </a>
-
-        <%
-            Utente utente = (Utente) session.getAttribute("utente");
-            if (utente == null) {
-        %>
-                <a href="<%= request.getContextPath() %>/login" class="btn-login">Accedi</a>
-        <%
-            } else {
-        %>
-                <div class="menu-utente-loggato">
-                    <a href="<%= request.getContextPath() %>/profilo" class="link-profilo">
-                        Ciao, <strong><%= utente.getNome() %></strong>
-                    </a>
-                    
-                    <% if ("admin".equalsIgnoreCase(utente.getRuolo())) { %>
-                        <a href="<%= request.getContextPath() %>/admin-dashboard" class="btn-admin">Pannello Admin</a>
-                    <% } %>
-                    
-                    <a href="<%= request.getContextPath() %>/logout" class="btn-logout">Esci</a>
-                </div>
-        <%
-            }
-        %>
+    
+    <div class="container-ricerca">
+        <form action="<%= request.getContextPath() %>/ricerca" method="GET" class="form-ricerca">
+            <input type="text" name="q" placeholder="Cerca prodotti per i tuoi capelli..." required>
+            <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
     </div>
+
+    <a href="<%= request.getContextPath() %>/carrello" class="link-carrello">
+        🛒 Carrello 
+        <span id="cart-badge" class="cart-badge">
+            <% 
+               it.unisa.hairqueenlabs.model.Carrello c = (it.unisa.hairqueenlabs.model.Carrello) session.getAttribute("carrello");
+               out.print((c != null) ? c.getNumeroTotaleArticoli() : "0");
+            %>
+        </span>
+    </a>
+
+    <%
+        Utente utente = (Utente) session.getAttribute("utente");
+        if (utente == null) {
+    %>
+            <a href="<%= request.getContextPath() %>/login" class="btn-login">Accedi | Registrati</a>
+    <%
+        } else {
+    %>
+            <div class="menu-utente-loggato">
+                <a href="<%= request.getContextPath() %>/profilo" class="link-profilo">
+                    Ciao, <strong><%= utente.getNome() %></strong>
+                </a>
+                
+                <% if ("admin".equalsIgnoreCase(utente.getRuolo())) { %>
+                    <a href="<%= request.getContextPath() %>/admin-dashboard" class="btn-admin">Pannello Admin</a>
+                <% } %>
+                
+                <a href="<%= request.getContextPath() %>/logout" class="btn-logout">Esci</a>
+            </div>
+    <%
+        }
+    %>
+</div>
 
 <nav>
     <ul>
