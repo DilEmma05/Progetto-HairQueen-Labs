@@ -464,4 +464,87 @@ public class ProdottoDAO {
         }
         return prodotti;
     }
+    
+    public synchronized List<Prodotto> doRetrieveByFilters(String[] cute, String[] capello, String fasciaPrezzo, String sort) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Prodotto> prodotti = new ArrayList<>();
+
+        StringBuilder query = new StringBuilder("SELECT * FROM Prodotto WHERE is_attivo = 1");
+        List<Object> parametri = new ArrayList<>();
+
+        if (cute != null && cute.length > 0) {
+            query.append(" AND tipo_cute_target IN (");
+            for (int i = 0; i < cute.length; i++) {
+                query.append("?");
+                if (i < cute.length - 1) query.append(", ");
+                parametri.add(cute[i]);
+            }
+            query.append(")");
+        }
+
+        if (capello != null && capello.length > 0) {
+            query.append(" AND tipo_capello_target IN (");
+            for (int i = 0; i < capello.length; i++) {
+                query.append("?");
+                if (i < capello.length - 1) query.append(", ");
+                parametri.add(capello[i]);
+            }
+            query.append(")");
+        }
+
+        if (fasciaPrezzo != null && fasciaPrezzo.contains("-")) {
+            String[] limiti = fasciaPrezzo.split("-");
+            if (limiti.length == 2) {
+                query.append(" AND prezzo >= ? AND prezzo <= ?");
+                parametri.add(Double.parseDouble(limiti[0]));
+                parametri.add(Double.parseDouble(limiti[1]));
+            }
+        }
+
+        if (sort != null) {
+            switch (sort) {
+                case "prezzo_asc": query.append(" ORDER BY prezzo ASC"); break;
+                case "prezzo_desc": query.append(" ORDER BY prezzo DESC"); break;
+                case "nome_asc": query.append(" ORDER BY nome ASC"); break;
+                case "nome_desc": query.append(" ORDER BY nome DESC"); break;
+                default: break;
+            }
+        }
+
+        try {
+            connection = DriverManagerConnectionPool.getConnection();
+            preparedStatement = connection.prepareStatement(query.toString());
+
+            for (int i = 0; i < parametri.size(); i++) {
+                preparedStatement.setObject(i + 1, parametri.get(i));
+            }
+
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Prodotto p = new Prodotto();
+                p.setIdProdotto(resultSet.getInt("id_prodotto"));
+                p.setNome(resultSet.getString("nome"));
+                p.setDescrizione(resultSet.getString("descrizione"));
+                p.setPrezzo(resultSet.getDouble("prezzo"));
+                p.setQuantitaMagazzino(resultSet.getInt("quantita_magazzino"));
+                p.setImmagineUrl(resultSet.getString("immagine_url"));
+                p.setFaseUtilizzo(resultSet.getString("fase_utilizzo"));
+                p.setIdSottocategoria(resultSet.getInt("id_sottocategoria"));
+                p.setTipoCuteTarget(resultSet.getString("tipo_cute_target"));
+                p.setTipoCapelloTarget(resultSet.getString("tipo_capello_target"));
+                p.setNovita(resultSet.getBoolean("is_novita"));
+                p.setAttivo(resultSet.getBoolean("is_attivo"));
+                
+                prodotti.add(p);
+            }
+        } finally {
+            if (resultSet != null) resultSet.close();
+            if (preparedStatement != null) preparedStatement.close();
+            DriverManagerConnectionPool.releaseConnection(connection);
+        }
+        return prodotti;
+    }
 }
