@@ -634,6 +634,152 @@ html {
 .area-dettaglio .prodotto-non-trovato { text-align: center; margin-top: 50px; }
 .area-dettaglio .prodotto-non-trovato h2 { color: var(--colore-errore); margin-bottom: 10px; }
 
+
+/* =========================================
+   SEZIONE RECENSIONI PRODOTTO
+   ========================================= */
+.sezione-recensioni {
+    max-width: 800px;         /* Limita la larghezza per non farla espandere troppo */
+    margin: 60px auto 0 auto; /* Centra la sezione nella pagina */
+    border-top: 1px solid rgba(150, 150, 150, 0.3);
+    padding-top: 40px;
+}
+
+.sezione-recensioni h3 {
+    text-align: center;
+    color: var(--colore-accento);
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+}
+
+.recensione-alert {
+    background-color: rgba(40, 167, 69, 0.2);
+    color: #28a745;
+    border: 1px solid #28a745;
+    text-align: center;
+}
+
+/* Elenco Recensioni Esistenti */
+.lista-recensioni {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Spazio tra una recensione e l'altra */
+}
+
+.recensione-item {
+    background-color: var(--sfondo-card);
+    border: 1px solid rgba(150, 150, 150, 0.2);
+    border-radius: 8px;
+    padding: 20px 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.recensione-autore { 
+    margin-bottom: 10px; 
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: space-between; /* Mette il nome a sinistra e le stelle a destra */
+    align-items: center;
+}
+
+.stelle-valutazione {
+    color: var(--colore-accento);
+    letter-spacing: 2px;
+    font-size: 1.2rem;
+}
+
+.recensione-testo {
+    font-style: italic;
+    margin-bottom: 15px;
+    line-height: 1.5;
+    opacity: 0.9;
+}
+
+.recensione-data { 
+    display: block;
+    text-align: right; /* Data allineata in basso a destra */
+    opacity: 0.5; 
+    font-size: 0.85rem;
+}
+
+.nessuna-recensione {
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 30px;
+    opacity: 0.7;
+    background-color: var(--sfondo-card);
+    padding: 30px;
+    border-radius: 8px;
+}
+
+/* Form Nuova Recensione - Layout più Simpatico */
+.nuova-recensione-box {
+    margin-top: 50px;
+    padding: 30px;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #1e1e1e, #161616);
+    border: 1px solid rgba(212, 175, 55, 0.2); /* Bordo dorato leggero */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+}
+
+.nuova-recensione-box h4 { 
+    margin-bottom: 25px; 
+    text-align: center;
+    font-size: 1.4rem;
+    color: var(--testo-principale);
+}
+
+.form-recensione-voto select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid rgba(150, 150, 150, 0.3);
+    background-color: #121212;
+    color: var(--testo-principale);
+    font-size: 1rem;
+}
+
+.form-recensione-voto select option { background-color: #121212; }
+
+.form-recensione-testo textarea {
+    width: 100%;
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid rgba(150, 150, 150, 0.3);
+    background-color: #121212;
+    color: var(--testo-principale);
+    resize: vertical;
+    font-family: inherit;
+}
+
+.btn-invio-recensione {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 20px auto 0 auto;
+    padding: 15px;
+    border-radius: 30px; /* Bottone più rotondo e simpatico */
+    font-size: 1.1rem;
+}
+
+.avviso-login-recensione {
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.avviso-login-recensione a {
+    color: var(--colore-accento);
+    font-weight: bold;
+    text-decoration: underline;
+    transition: color 0.3s;
+}
+
+.avviso-login-recensione a:hover { color: var(--colore-primario); }
+
+
 /* ==========================================================================
    AREA DETTAGLI ORDINE
    ========================================================================== */
@@ -1460,4 +1606,44 @@ html {
 
 .testo-accento {
     color: var(--colore-accento);
+}
+
+/* =========================================
+   STELLE CLICCABILI (RATING)
+   ========================================= */
+.star-rating {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* Nascondiamo i veri pallini del radio button */
+.star-rating input[type="radio"] {
+    display: none;
+}
+
+/* Stile base delle stelle (spente/grigie) */
+.star-rating label {
+    color: #444; 
+    font-size: 2.2rem;
+    padding: 0 4px;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+/* Colora di dorato la stella selezionata e tutte quelle che la precedono */
+.star-rating input[type="radio"]:checked ~ label {
+    color: var(--colore-accento);
+}
+
+/* Effetto Hover: si colorano le stelle sotto il mouse */
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: #f1c40f; 
+}
+
+/* Piccolo effetto "pop" (ingrandimento) quando passi il mouse su una stella */
+.star-rating label:hover {
+    transform: scale(1.15);
 }
