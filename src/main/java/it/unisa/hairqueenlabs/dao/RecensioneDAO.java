@@ -10,7 +10,7 @@ import it.unisa.hairqueenlabs.model.Recensione;
 
 public class RecensioneDAO {
 
-    // 1. Inserisce una nuova recensione nel database
+    // 1. Inserisce una nuova recensione nel database (Corretto senza commit manuale)
     public synchronized void doSave(Recensione recensione) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -27,6 +27,7 @@ public class RecensioneDAO {
             preparedStatement.setInt(4, recensione.getIdProdotto());
 
             preparedStatement.executeUpdate();
+            // Il commit manuale è stato rimosso per consentire l'autocommit di Tomcat
 
         } finally {
             if (preparedStatement != null) preparedStatement.close();
@@ -34,14 +35,18 @@ public class RecensioneDAO {
         }
     }
 
-    // 2. Recupera tutte le recensioni di un prodotto specifico
+    // 2. Recupera tutte le recensioni di un prodotto specifico (Aggiornato con JOIN)
     public synchronized List<Recensione> doRetrieveByProdotto(int idProdotto) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         
         List<Recensione> recensioni = new ArrayList<>();
-        String selectSQL = "SELECT * FROM Recensione WHERE id_prodotto = ? ORDER BY data_recensione DESC";
+        
+        // Eseguiamo una JOIN con la tabella Utente per recuperare subito il nome dell'autore della recensione
+        String selectSQL = "SELECT r.*, u.nome FROM Recensione r " +
+                           "JOIN Utente u ON r.id_utente = u.id_utente " +
+                           "WHERE r.id_prodotto = ? ORDER BY r.data_recensione DESC";
 
         try {
             connection = DriverManagerConnectionPool.getConnection();
@@ -58,6 +63,7 @@ public class RecensioneDAO {
                 r.setDataRecensione(resultSet.getTimestamp("data_recensione"));
                 r.setIdUtente(resultSet.getInt("id_utente"));
                 r.setIdProdotto(resultSet.getInt("id_prodotto"));
+                r.setNomeUtente(resultSet.getString("nome")); // Mappiamo il nome ricavato dalla JOIN
                 
                 recensioni.add(r);
             }
@@ -68,4 +74,5 @@ public class RecensioneDAO {
         }
         return recensioni;
     }
+    
 }
