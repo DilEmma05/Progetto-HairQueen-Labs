@@ -81,7 +81,9 @@
                                         </span>
                                     </p>
                                     <p class="recensione-testo">
-                                        <%= (r.getTesto() != null && !r.getTesto().trim().isEmpty()) ? r.getTesto() : "Nessun commento scritto." %>
+                                        <%= (r.getTesto() != null && !r.getTesto().trim().isEmpty()) 
+    									? r.getTesto().replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;").replace("'", "&#x27;") 
+    									: "Nessun commento scritto." %>
                                     </p>
                                     <small class="recensione-data">
                                         <%= new java.text.SimpleDateFormat("dd/MM/yyyy").format(r.getDataRecensione()) %>
