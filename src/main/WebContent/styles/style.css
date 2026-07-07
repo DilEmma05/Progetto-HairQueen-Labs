@@ -1520,6 +1520,97 @@ html {
     padding: 40px;
 }
 
+/* =========================================
+   LAYOUT CATALOGO CON SIDEBAR FILTRI
+   ========================================= */
+.layout-catalogo {
+    max-width: 1300px;
+    margin: 40px auto;
+    padding: 0 20px;
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.layout-catalogo .contenitore-prodotti {
+    flex: 1;
+    margin: 0; 
+    padding: 0;
+}
+
+.sidebar-filtri {
+    flex: 0 0 280px;
+    background-color: var(--sfondo-card);
+    border: 1px solid rgba(150, 150, 150, 0.2);
+    border-radius: 8px;
+    padding: 25px;
+    position: sticky;
+    top: 20px;
+}
+
+.sidebar-filtri h3 {
+    color: var(--colore-accento);
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+    border-bottom: 1px solid rgba(150, 150, 150, 0.2);
+    padding-bottom: 10px;
+}
+
+.gruppo-filtro {
+    margin-bottom: 25px;
+}
+
+.gruppo-filtro h4 {
+    color: var(--testo-principale);
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.gruppo-filtro label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    color: #ccc;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.gruppo-filtro label:hover {
+    color: var(--colore-accento);
+}
+
+.btn-applica-filtri {
+    width: 100%;
+    background-color: var(--colore-accento);
+    color: var(--sfondo-principale);
+    border: none;
+    padding: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+.btn-applica-filtri:hover {
+    background-color: #bfa030;
+}
+
+@media (max-width: 900px) {
+    .layout-catalogo {
+        flex-direction: column;
+    }
+    .sidebar-filtri {
+        width: 100%;
+        flex: none;
+        position: static;
+    }
+}
+
 /* ==========================================================================
    HOME PAGE
    ========================================================================== */
@@ -1646,4 +1737,47 @@ html {
 /* Piccolo effetto "pop" (ingrandimento) quando passi il mouse su una stella */
 .star-rating label:hover {
     transform: scale(1.15);
+}
+
+/* =========================================
+   BARRA DI RICERCA
+   ========================================= */
+.container-ricerca {
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+    margin-left: 20px;
+}
+
+.form-ricerca {
+    display: flex;
+    width: 100%;
+    min-width: 350px;
+    height: 40px;
+    border: 1px solid rgba(212, 175, 55, 0.5); 
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.form-ricerca input[type="text"] {
+    flex: 1;
+    padding: 0 20px;
+    background-color: var(--sfondo-card);
+    border: none;
+    color: var(--testo-principale);
+    outline: none;
+    font-size: 0.95rem;
+}
+
+.form-ricerca button {
+    background-color: var(--colore-accento);
+    color: var(--sfondo-principale);
+    border: none;
+    padding: 0 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-ricerca button:hover {
+    background-color: #bfa030;
 }
