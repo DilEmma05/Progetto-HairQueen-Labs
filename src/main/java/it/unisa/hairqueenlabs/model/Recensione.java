@@ -12,8 +12,6 @@ public class Recensione implements Serializable {
     private Timestamp dataRecensione;
     private int idUtente;
     private int idProdotto;
-    
-    // Campo di utilità per mostrare il nome di chi recensisce senza fare doppie query nella JSP
     private String nomeUtente;
 
     public Recensione() {}
