@@ -26,6 +26,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
+
+<% 
+    request.setAttribute("nascondiMenuNavigazione", true); 
+%>
+
+<div class="area-pubblica">
+    <jsp:include page="header.jsp" />
+</div>
+
 <div class="area-admin">
 
 <div class="container">
@@ -37,15 +46,15 @@
         if ("prodottoInserito".equals(messaggioSuccesso)) { 
     %>
         <div class="alert alert-success">
-            &#10004; Nuovo prodotto inserito nel catalogo con successo!
+            <i class="fas fa-check"></i> Nuovo prodotto inserito nel catalogo con successo!
         </div>
     <% } else if ("prodottoEliminato".equals(messaggioSuccesso)) { %>
         <div class="alert alert-danger">
-            &#10004; Prodotto eliminato dal catalogo.
+            <i class="fas fa-check"></i> Prodotto eliminato dal catalogo.
         </div>
     <% } else if ("prodottoModificato".equals(messaggioSuccesso)) { %>
         <div class="alert alert-warning">
-            &#10004; Le modifiche al prodotto sono state salvate con successo!
+            <i class="fas fa-check"></i> Le modifiche al prodotto sono state salvate con successo!
         </div>
     <% } %>
 
@@ -53,55 +62,58 @@
         <%= "tutti".equals(scopeOrdini) ? "Gestione Ordini - Tutti gli Ordini dei Clienti" : "Gestione Ordini - I Miei Ordini Effettuati" %>
     </h2>
 
-    <div class="margin-y-15" style="margin-bottom: 20px;">
+    <div class="margin-y-15">
         <% if ("tutti".equals(scopeOrdini)) { %>
-            <a href="<%= request.getContextPath() %>/admin-dashboard" class="btn-update" style="text-decoration: none; padding: 10px 15px; display: inline-block; background-color: #28a745; border-radius: 4px; color: white;">
+            <a href="<%= request.getContextPath() %>/admin-dashboard" class="btn-update btn-filtro-verde">
                 <i class="fas fa-shopping-bag"></i> Mostra Solo i Miei Ordini
             </a>
         <% } else { %>
-            <a href="<%= request.getContextPath() %>/admin-dashboard?mostraOrdini=tutti" class="btn-update" style="text-decoration: none; padding: 10px 15px; display: inline-block; background-color: #6c757d; border-radius: 4px; color: white;">
+            <a href="<%= request.getContextPath() %>/admin-dashboard?mostraOrdini=tutti" class="btn-update btn-filtro-grigio">
                 <i class="fas fa-globe"></i> Gestisci Ordini Globale (Tutti i Clienti)
             </a>
         <% } %>
     </div>
+    
     <% if (ordini != null && !ordini.isEmpty()) { %>
-        <table>
-            <thead>
-                <tr>
-                    <th>N° Ordine</th>
-                    <th>ID Cliente</th>
-                    <th>Data</th>
-                    <th>Totale</th>
-                    <th>Stato Attuale</th>
-                    <th>Azioni</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% 
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                    for (Ordine o : ordini) { 
-                %>
+        <div class="table-responsive">
+            <table>
+                <thead>
                     <tr>
-                        <td>#<%= o.getIdOrdine() %></td>
-                        <td><%= o.getIdUtente() %></td>
-                        <td><%= (o.getDataOrdine() != null) ? sdf.format(o.getDataOrdine()) : "N/D" %></td>
-                        <td class="testo-totale-ordine"><%= String.format("%.2f", o.getTotale()) %> &euro;</td>
-                        <td class="testo-stato-ordine"><%= o.getStato() %></td>
-                        <td>
-                            <form action="<%= request.getContextPath() %>/aggiorna-stato" method="post" class="form-inline">
-                                <input type="hidden" name="idOrdine" value="<%= o.getIdOrdine() %>">
-                                <select name="nuovoStato" class="select-stato">
-                                    <option value="In elaborazione" <%= "In elaborazione".equals(o.getStato()) ? "selected" : "" %>>In elaborazione</option>
-                                    <option value="Spedito" <%= "Spedito".equals(o.getStato()) ? "selected" : "" %>>Spedito</option>
-                                    <option value="Consegnato" <%= "Consegnato".equals(o.getStato()) ? "selected" : "" %>>Consegnato</option>
-                                </select>
-                                <button type="submit" class="btn-update">Aggiorna</button>
-                            </form>
-                        </td>
+                        <th>N° Ordine</th>
+                        <th>ID Cliente</th>
+                        <th>Data</th>
+                        <th>Totale</th>
+                        <th>Stato Attuale</th>
+                        <th>Azioni</th>
                     </tr>
-                <% } %>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <% 
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                        for (Ordine o : ordini) { 
+                    %>
+                        <tr>
+                            <td>#<%= o.getIdOrdine() %></td>
+                            <td><%= o.getIdUtente() %></td>
+                            <td><%= (o.getDataOrdine() != null) ? sdf.format(o.getDataOrdine()) : "N/D" %></td>
+                            <td class="testo-totale-ordine"><%= String.format("%.2f", o.getTotale()) %> &euro;</td>
+                            <td class="testo-stato-ordine"><%= o.getStato() %></td>
+                            <td>
+                                <form action="<%= request.getContextPath() %>/aggiorna-stato" method="post" class="form-inline">
+                                    <input type="hidden" name="idOrdine" value="<%= o.getIdOrdine() %>">
+                                    <select name="nuovoStato" class="select-stato">
+                                        <option value="In elaborazione" <%= "In elaborazione".equals(o.getStato()) ? "selected" : "" %>>In elaborazione</option>
+                                        <option value="Spedito" <%= "Spedito".equals(o.getStato()) ? "selected" : "" %>>Spedito</option>
+                                        <option value="Consegnato" <%= "Consegnato".equals(o.getStato()) ? "selected" : "" %>>Consegnato</option>
+                                    </select>
+                                    <button type="submit" class="btn-update">Aggiorna</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
     <% } else { %>
         <p>Non ci sono ordini in questa visualizzazione.</p>
     <% } %>
@@ -110,66 +122,68 @@
         <%= "tutti".equals(scopeVisualizzazione) ? "Gestione Catalogo - Tutti i Prodotti del Sistema" : "Gestione Catalogo - I Miei Prodotti" %>
     </h2>
     
-    <div class="margin-y-15" style="margin-bottom: 20px;">
-        <a href="<%= request.getContextPath() %>/inserisci-prodotto" class="btn-nuovo-prodotto" style="display: inline-block; margin-right: 15px;">
+    <div class="margin-y-15">
+        <a href="<%= request.getContextPath() %>/inserisci-prodotto" class="btn-nuovo-prodotto">
             <i class="fas fa-plus"></i> Aggiungi Nuovo Prodotto
         </a>
         
         <% if ("tutti".equals(scopeVisualizzazione)) { %>
-            <a href="<%= request.getContextPath() %>/admin-dashboard" class="btn-update" style="text-decoration: none; padding: 10px 15px; display: inline-block; background-color: #28a745; border-radius: 4px; color: white;">
+            <a href="<%= request.getContextPath() %>/admin-dashboard" class="btn-update btn-filtro-verde">
                 <i class="fas fa-user"></i> Mostra Solo i Miei Prodotti
             </a>
         <% } else { %>
-            <a href="<%= request.getContextPath() %>/admin-dashboard?mostra=tutti" class="btn-update" style="text-decoration: none; padding: 10px 15px; display: inline-block; background-color: #6c757d; border-radius: 4px; color: white;">
+            <a href="<%= request.getContextPath() %>/admin-dashboard?mostra=tutti" class="btn-update btn-filtro-grigio">
                 <i class="fas fa-users"></i> Vedi Prodotti di Tutti gli Utenti
             </a>
         <% } %>
     </div>
     
     <% if (catalogo != null && !catalogo.isEmpty()) { %>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nome Prodotto</th>
-                    <th>Prezzo</th>
-                    <th>Magazzino</th>
-                    <th>Azioni</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% for (Prodotto p : catalogo) { %>
+        <div class="table-responsive">
+            <table>
+                <thead>
                     <tr>
-                        <td><%= p.getIdProdotto() %></td>
-                        <td><strong><%= p.getNome() %></strong></td>
-                        <td><%= String.format("%.2f", p.getPrezzo()) %> &euro;</td>
-                        <td>
-                            <% if (p.getQuantitaMagazzino() <= 5) { %>
-                                <span class="testo-esaurimento"><%= p.getQuantitaMagazzino() %> (In esaurimento)</span>
-                            <% } else { %>
-                                <%= p.getQuantitaMagazzino() %>
-                            <% } %>
-                        </td>
-                        <td>
-                            <div class="container-azioni-tabella">
-                                
-                                <a href="<%= request.getContextPath() %>/modifica-prodotto?id=<%= p.getIdProdotto() %>" class="btn-modifica">
-                                    <i class="fas fa-edit"></i> Modifica
-                                </a>
-                                
-                                <form action="<%= request.getContextPath() %>/EliminaProdottoServlet" method="POST" class="form-inline" id="form-delete-<%= p.getIdProdotto() %>">
-                                    <input type="hidden" name="idProdotto" value="<%= p.getIdProdotto() %>">
-                                    <button type="button" class="btn-elimina" onclick="openDeleteModal(<%= p.getIdProdotto() %>, '<%= p.getNome().replace("'", "\\'") %>')">
-                                        <i class="fas fa-trash"></i> Elimina
-                                    </button>
-                                </form>
-                                
-                            </div>
-                        </td>
+                        <th>ID</th>
+                        <th>Nome Prodotto</th>
+                        <th>Prezzo</th>
+                        <th>Magazzino</th>
+                        <th>Azioni</th>
                     </tr>
-                <% } %>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <% for (Prodotto p : catalogo) { %>
+                        <tr>
+                            <td><%= p.getIdProdotto() %></td>
+                            <td><strong><%= p.getNome() %></strong></td>
+                            <td><%= String.format("%.2f", p.getPrezzo()) %> &euro;</td>
+                            <td>
+                                <% if (p.getQuantitaMagazzino() <= 5) { %>
+                                    <span class="testo-esaurimento"><%= p.getQuantitaMagazzino() %> (In esaurimento)</span>
+                                <% } else { %>
+                                    <%= p.getQuantitaMagazzino() %>
+                                <% } %>
+                            </td>
+                            <td>
+                                <div class="container-azioni-tabella">
+                                    
+                                    <a href="<%= request.getContextPath() %>/modifica-prodotto?id=<%= p.getIdProdotto() %>" class="btn-modifica">
+                                        <i class="fas fa-edit"></i> Modifica
+                                    </a>
+                                    
+                                    <form action="<%= request.getContextPath() %>/EliminaProdottoServlet" method="POST" class="form-inline" id="form-delete-<%= p.getIdProdotto() %>">
+                                        <input type="hidden" name="idProdotto" value="<%= p.getIdProdotto() %>">
+                                        <button type="button" class="btn-elimina" onclick="openDeleteModal(<%= p.getIdProdotto() %>, '<%= p.getNome().replace("'", "\\'") %>')">
+                                            <i class="fas fa-trash"></i> Elimina
+                                        </button>
+                                    </form>
+                                    
+                                </div>
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
     <% } else { %>
         <p>Il catalogo è attualmente vuoto.</p>
     <% } %>
@@ -198,6 +212,8 @@
         </div>
     </div>
 </div>
+
+<jsp:include page="footer.jsp" />
 
 <script src="<%= request.getContextPath() %>/scripts/admin.js"></script>
 

@@ -52,6 +52,13 @@
     %>
 </div>
 
+<%
+    // Recuperiamo il flag impostato nella admin-dashboard
+    Boolean nascondiMenu = (Boolean) request.getAttribute("nascondiMenuNavigazione");
+    
+    // Se il flag è nullo (siamo nelle pagine pubbliche come la Home) o è falso, mostriamo il menu
+    if (nascondiMenu == null || !nascondiMenu) {
+%>
 <nav>
     <ul>
     <li><a href="<%= request.getContextPath() %>/home#ultimi-arrivi">Novità</a></li>
@@ -105,3 +112,6 @@
     <li><a href="<%= request.getContextPath() %>/routine">Trova Routine ✨</a></li>
 </ul>
 </nav>
+<%
+    } // Chiude la condizione if: il menu non verrà renderizzato se nascondiMenu è true
+%>

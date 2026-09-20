@@ -121,7 +121,6 @@ html {
 .area-admin .btn-update { background-color: #3498db; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; }
 .area-admin .btn-update:hover { background-color: #2980b9; }
 
-/* Variante del container solo per il form */
 .area-admin .container-form { max-width: 600px; background-color: #1E1E1E; padding: 30px; border-radius: 8px; margin-top: 40px; }
 .area-admin .titolo-form { text-align: center; }
 .area-admin .form-group { margin-bottom: 15px; }
@@ -135,13 +134,31 @@ html {
 .area-admin .btn-submit:hover { background-color: #c0392b; }
 .area-admin .back-link { display: block; text-align: center; margin-top: 20px; color: #888; text-decoration: none; }
 
+.area-admin .btn-filtro-verde {
+    text-decoration: none;
+    padding: 10px 15px;
+    background-color: #28a745;
+    border-radius: 4px;
+    color: white;
+    display: inline-block;
+}
+.area-admin .btn-filtro-verde:hover { background-color: #218838; }
+
+.area-admin .btn-filtro-grigio {
+    text-decoration: none;
+    padding: 10px 15px;
+    background-color: #6c757d;
+    border-radius: 4px;
+    color: white;
+    display: inline-block;
+}
+.area-admin .btn-filtro-grigio:hover { background-color: #5a6268; }
 
 /* ==========================================================================
    AREA PUBBLICA
    ========================================================================== */
 
 
-/* Barra utente (Carrello e Login) */
 .area-pubblica .barra-utente {
     display: flex;
     justify-content: flex-end;
@@ -1814,7 +1831,8 @@ html {
         order: -1; 
     }
     .form-ricerca {
-        min-width: 100%; 
+        min-width: 0;
+        width: 100%; 
     }
     .area-pubblica nav ul {
         flex-direction: column;
@@ -1872,6 +1890,7 @@ html {
         width: 100%;
         overflow-x: auto;
         display: block;
+        -webkit-overflow-scrolling: touch;
     }
 
     .area-pubblica .hero-content h2 {
@@ -1886,5 +1905,9 @@ html {
     }
     .area-pubblica .carousel-button {
         display: none;
+    }
+    .area-pubblica .contenitore-prodotti {
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
 }
