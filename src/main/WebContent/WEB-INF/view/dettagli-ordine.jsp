@@ -12,6 +12,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
     <title>Dettagli Ordine #<%= idOrdine %> - HairQueen Labs</title>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/style.css">
 </head>

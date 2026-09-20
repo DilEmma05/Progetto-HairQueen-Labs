@@ -9,6 +9,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
     <title>Risultati ricerca per "<%= queryRicerca %>" - HairQueen Labs</title>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
