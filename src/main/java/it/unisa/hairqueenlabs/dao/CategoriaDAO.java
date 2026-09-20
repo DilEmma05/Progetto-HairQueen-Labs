@@ -38,14 +38,12 @@ public class CategoriaDAO {
         return categorie;
     }
 
-    //Recupera le Sottocategorie collegate a una Categoria specifica
     public synchronized List<Sottocategoria> doRetrieveSottocategorie(int idCategoria) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         
         List<Sottocategoria> sottocategorie = new ArrayList<>();
-        // Cerchiamo solo le sottocategorie che appartengono alla categoria passata
         String selectSQL = "SELECT * FROM Sottocategoria WHERE id_categoria = ?";
 
         try {

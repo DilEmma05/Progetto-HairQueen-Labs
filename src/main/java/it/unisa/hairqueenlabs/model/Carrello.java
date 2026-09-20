@@ -27,12 +27,10 @@ public class Carrello implements Serializable{
         elementi.add(new ElementoCarrello(prodotto));
     }
 
-    // Rimuove un prodotto dal carrello
     public void rimuoviProdotto(int idProdotto) {
         elementi.removeIf(elemento -> elemento.getProdotto().getIdProdotto() == idProdotto);
     }
 
-    // Calcola il prezzo totale del carrello
     public double getPrezzoTotale() {
         double totale = 0;
         for (ElementoCarrello elemento : elementi) {

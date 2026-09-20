@@ -1,4 +1,3 @@
-// Recuperiamo tutti gli elementi necessari dal DOM
 const track = document.querySelector('.carousel-track');
 const slides = Array.from(track.children);
 const nextButton = document.querySelector('.carousel-button-right');
@@ -6,19 +5,16 @@ const prevButton = document.querySelector('.carousel-button-left');
 const dotsNav = document.querySelector('.carousel-nav');
 const dots = Array.from(dotsNav.children);
 
-// Funzione universale per spostare la visibilità di una slide
 const moveToSlide = (track, currentSlide, targetSlide) => {
     currentSlide.classList.remove('current-slide');
     targetSlide.classList.add('current-slide');
 }
 
-// Aggiorna l'aspetto dei "pallini" indicatori in basso
 const updateDots = (currentDot, targetDot) => {
     currentDot.classList.remove('current-slide');
     targetDot.classList.add('current-slide');
 }
 
-// Nasconde le freccette se siamo all'inizio o alla fine dello slider
 const hideShowArrows = (slides, prevButton, nextButton, targetIndex) => {
     if (targetIndex === 0) {
         prevButton.classList.add('is-hidden');
@@ -32,9 +28,6 @@ const hideShowArrows = (slides, prevButton, nextButton, targetIndex) => {
     }
 }
 
-//GESTIONE DEGLI EVENTI
-
-//Click su bottone DESTRO (Slide successiva)
 nextButton.addEventListener('click', e => {
     const currentSlide = track.querySelector('.current-slide');
     const nextSlide = currentSlide.nextElementSibling;
@@ -47,7 +40,6 @@ nextButton.addEventListener('click', e => {
     hideShowArrows(slides, prevButton, nextButton, nextIndex);
 });
 
-//Click su bottone SINISTRO (Slide precedente)
 prevButton.addEventListener('click', e => {
     const currentSlide = track.querySelector('.current-slide');
     const prevSlide = currentSlide.previousElementSibling;
@@ -60,7 +52,6 @@ prevButton.addEventListener('click', e => {
     hideShowArrows(slides, prevButton, nextButton, prevIndex);
 });
 
-//Click sui "PALLINI" indicatori
 dotsNav.addEventListener('click', e => {
     const targetDot = e.target.closest('button');
     if (!targetDot) return;
@@ -74,8 +65,6 @@ dotsNav.addEventListener('click', e => {
     updateDots(currentDot, targetDot);
     hideShowArrows(slides, prevButton, nextButton, targetIndex);
 });
-
-//AUTOPLAY CAROUSEL
 
 const TEMPO_AUTOPLAY = 5000;
 let intervalloAutoplay;
@@ -91,12 +80,10 @@ function scorriAutomaticamente() {
     }
 }
 
-// Accende il metronomo
 function avviaAutoplay() {
     intervalloAutoplay = setInterval(scorriAutomaticamente, TEMPO_AUTOPLAY);
 }
 
-// Azzera il metronomo
 function resettaAutoplay(e) {
     if (e && e.isTrusted) {
         clearInterval(intervalloAutoplay); 

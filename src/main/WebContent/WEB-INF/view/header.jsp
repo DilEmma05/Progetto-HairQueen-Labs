@@ -10,10 +10,8 @@
 </header>
 
 <%
-    // Recuperiamo il flag impostato nella admin-dashboard
     Boolean nascondiMenu = (Boolean) request.getAttribute("nascondiMenuNavigazione");
     
-    // Se il flag è nullo (siamo nelle pagine pubbliche) o è falso, mostriamo TUTTA la barra
     if (nascondiMenu == null || !nascondiMenu) {
 %>
 <div class="barra-utente">
@@ -113,5 +111,5 @@
 </ul>
 </nav>
 <%
-    } // Chiude la condizione if: barra utente e menu non verranno renderizzati se il flag è true
+    }
 %>

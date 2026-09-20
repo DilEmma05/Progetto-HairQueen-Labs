@@ -5,7 +5,6 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 
 <%
-    // I dati passati dal Controller (ProfiloServlet)
     Utente utente = (Utente) session.getAttribute("utente");
     List<Ordine> ordini = (List<Ordine>) request.getAttribute("ordini");
 %>

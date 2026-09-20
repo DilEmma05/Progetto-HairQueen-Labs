@@ -10,7 +10,6 @@ import it.unisa.hairqueenlabs.model.Utente;
 
 public class UtenteDAO {
 
-    // Registrazione utente nel database
     public synchronized void doSave(Utente utente) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -37,7 +36,6 @@ public class UtenteDAO {
         }
     }
 
-    // Recupera tutti gli utenti dal database
     public synchronized List<Utente> doRetrieveAll() throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;

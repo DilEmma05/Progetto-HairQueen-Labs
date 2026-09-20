@@ -39,7 +39,6 @@ public class SvuotaCarrelloServlet extends HttpServlet {
 
         session.removeAttribute("carrello");
         
-        // Reindirizza l'utente alla pagina del carrello
         response.sendRedirect("carrello");
 	}
 

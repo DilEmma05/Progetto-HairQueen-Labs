@@ -33,7 +33,6 @@ public class VisualizzaCarrelloServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
         
-        // Recupera il carrello. Se non esiste, ne crea uno vuoto.
         Carrello carrello = (Carrello) session.getAttribute("carrello");
         if (carrello == null) {
             carrello = new Carrello();

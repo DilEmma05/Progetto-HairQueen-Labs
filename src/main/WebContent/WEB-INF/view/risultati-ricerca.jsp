@@ -49,10 +49,10 @@
             </article>
         <%  } 
         } else { %>
-            <div class="messaggio-catalogo-vuoto" style="grid-column: 1 / -1; text-align: center; margin: 50px 0;">
-                <i class="fas fa-search" style="font-size: 3rem; color: #555; margin-bottom: 20px;"></i>
+            <div class="messaggio-catalogo-vuoto">
+                <i class="fas fa-search icona-ricerca-vuota"></i>
                 <h3>Nessun prodotto trovato.</h3>
-                <p>Prova a cercare usando termini diversi o torna al <a href="<%= request.getContextPath() %>/home" style="color: var(--colore-accento);">Catalogo Completo</a>.</p>
+                <p>Prova a cercare usando termini diversi o torna al <a href="<%= request.getContextPath() %>/home" class="link-accento">Catalogo Completo</a>.</p>
             </div>
         <% } %>
     </main>

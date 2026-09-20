@@ -39,7 +39,6 @@ public class RegistrazioneServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Forza la codifica per i caratteri speciali
         request.setCharacterEncoding("UTF-8");
 
         String nome = request.getParameter("nome");

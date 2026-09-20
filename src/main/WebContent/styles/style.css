@@ -1,19 +1,19 @@
 /* ==========================================================================
    INDICE DEL FOGLIO DI STILE (CSS)
    ==========================================================================
-   1.  VARIABILI E STILI GLOBALI (Colori, body, reset, font)
-   2.  COMPONENTI CONDIVISI (Header, Bottoni Full-Width, Tabelle Base)
-   3.  AREA AMMINISTRATORE E FORM (Pannello Admin, Input, Filtri)
-   4.  AREA PUBBLICA - HEADER E MENU (Barra utente, Carrello, Login, Categorie)
-   5.  AREA PUBBLICA - HOMEPAGE (Hero Carousel animato)
-   6.  AREA PUBBLICA - CATALOGO (Griglia prodotti, Card, Banner)
-   7.  AREA AUTENTICAZIONE E UTENTE (Form Login, Registrazione, Errori)
-   8.  AREA CARRELLO E CHECKOUT (Tabella carrello, Totali, Form spedizione)
-   9.  AREA PROFILO UTENTE E ORDINI (Storico ordini, Dettagli fattura)
-   10. AREA DETTAGLIO PRODOTTO E RECENSIONI (Layout 2 colonne, Form stelle)
-   11. ALTRE PAGINE (Filosofia Brand, Info, Trova Routine Quiz)
-   12. COMPONENTI ACCESSORI (Modale Eliminazione, Badge Notifiche, Ricerca)
-   13. MEDIA QUERIES (Responsive Design Mobile e Tablet)
+   1.  VARIABILI E STILI GLOBALI
+   2.  COMPONENTI CONDIVISI 
+   3.  AREA AMMINISTRATORE E FORM 
+   4.  AREA PUBBLICA - HEADER E MENU
+   5.  AREA PUBBLICA - HOMEPAGE
+   6.  AREA PUBBLICA - CATALOGO
+   7.  AREA AUTENTICAZIONE E UTENTE 
+   8.  AREA CARRELLO E CHECKOUT
+   9.  AREA PROFILO UTENTE E ORDINI
+   10. AREA DETTAGLIO PRODOTTO E RECENSIONI
+   11. ALTRE PAGINE
+   12. COMPONENTI ACCESSORI
+   13. MEDIA QUERIES
    ========================================================================== */
 
 /* ==========================================================================
@@ -45,7 +45,7 @@ html {
 }
 
 /* ==========================================================================
-   2. COMPONENTI CONDIVISI (Header, Bottoni, Tabelle)
+   2. COMPONENTI CONDIVISI
    ========================================================================== */
 .area-pubblica header,
 .area-auth header,
@@ -235,8 +235,20 @@ html {
 .area-pubblica nav ul li a { color: var(--testo-principale); text-decoration: none; font-weight: 600; text-transform: uppercase; font-size: 0.9rem; transition: color 0.3s ease; }
 .area-pubblica nav ul li a:hover { color: var(--colore-primario); }
 
-.area-pubblica .dropdown-content { display: none; position: absolute; background-color: #1a1a1a; min-width: 200px; box-shadow: 0px 8px 16px rgba(0,0,0,0.5); z-index: 100; border-top: 2px solid var(--colore-primario); padding: 10px 0; text-align: left; }
-.area-pubblica .dropdown-content a { padding: 12px 20px; display: block; font-size: 0.8rem; text-transform: capitalize; }
+.area-pubblica .dropdown-content { display: none; 
+    position: absolute; 
+    background-color: #1a1a1a; 
+    min-width: 100%; 
+    width: max-content; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.5); 
+    z-index: 100; 
+    border-top: 2px solid var(--colore-primario); 
+    padding: 10px 0; 
+    text-align: center; }
+.area-pubblica .dropdown-content a { padding: 12px 15px; display: block; font-size: 0.8rem; text-transform: capitalize; }
 .area-pubblica .dropdown-content a:hover { background-color: #2c2c2c; color: var(--colore-accento); }
 .area-pubblica nav ul li:hover .dropdown-content { display: block; }
 
@@ -294,7 +306,42 @@ html {
 .banner-sottotitolo { color: #bbb; font-size: 1.1rem; margin-top: 10px; }
 .link-immagine-prodotto { display: block; }
 .form-ajax-carrello { margin-top: 15px; }
-.messaggio-catalogo-vuoto { grid-column: 1 / -1; text-align: center; color: #888; padding: 40px; }
+
+.select-ordinamento {
+    width: 100%; 
+    padding: 10px; 
+    border-radius: 4px; 
+    background-color: var(--sfondo-principale); 
+    color: var(--testo-principale); 
+    border: 1px solid rgba(150, 150, 150, 0.3);
+}
+
+
+.messaggio-catalogo-vuoto { 
+    grid-column: 1 / -1; 
+    width: 100%;
+    text-align: center; 
+    color: #888; 
+    padding: 40px 0; 
+    margin: 20px 0;
+}
+
+
+.icona-ricerca-vuota {
+    font-size: 3rem; 
+    color: #555; 
+    margin-bottom: 20px;
+}
+
+
+.link-accento {
+    color: var(--colore-accento);
+    text-decoration: none;
+    font-weight: bold;
+}
+.link-accento:hover {
+    text-decoration: underline;
+}
 
 .layout-catalogo { max-width: 1300px; margin: 40px auto; padding: 0 20px; display: flex; gap: 30px; align-items: flex-start; }
 .layout-catalogo .contenitore-prodotti { flex: 1; margin: 0; padding: 0; }
@@ -309,7 +356,7 @@ html {
 .btn-applica-filtri:hover { background-color: #bfa030; }
 
 /* ==========================================================================
-   7. AREA AUTENTICAZIONE E UTENTE (Login, Registrazione)
+   7. AREA AUTENTICAZIONE E UTENTE
    ========================================================================== */
 .area-auth { display: flex; flex-direction: column; min-height: 100vh; }
 .area-auth header a { text-decoration: none; }
@@ -532,7 +579,7 @@ html {
 .testo-accento { color: var(--colore-accento); }
 
 /* ==========================================================================
-   12. COMPONENTI ACCESSORI (Modale, Input Checkbox, Badge, Ricerca)
+   12. COMPONENTI ACCESSORI 
    ========================================================================== */
 .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
 .modal-content { background: #1a1a1a; border: 1px solid #333; border-radius: 12px; width: 90%; max-width: 400px; padding: 30px; text-align: center; box-shadow: 0 15px 30px rgba(0,0,0,0.7); animation: modalFadeIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
@@ -569,7 +616,7 @@ html {
 .form-ricerca button:hover { background-color: #bfa030; }
 
 /* ==========================================================================
-   13. MEDIA QUERIES E RESPONSIVE DESIGN (Smartphone e Tablet)
+   13. MEDIA QUERIES E RESPONSIVE DESIGN 
    ========================================================================== */
 @media screen and (max-width: 1000px) {
     .area-checkout .container-checkout { flex-direction: column; }

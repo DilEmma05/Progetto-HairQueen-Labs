@@ -13,11 +13,9 @@ public class DriverManagerConnectionPool {
 
     static {
         try {
-            // Inizializza il contesto JNDI di Tomcat
             Context initCtx = new InitialContext();
             Context envCtx = (Context) initCtx.lookup("java:comp/env");
             
-            // Cerca la risorsa definita nel context.xml
             ds = (DataSource) envCtx.lookup("jdbc/hairqueen");
             
         } catch (NamingException e) {
@@ -25,7 +23,6 @@ public class DriverManagerConnectionPool {
         }
     }
 
-    // Restituisce una connessione pronta dal Pool
     public static Connection getConnection() throws SQLException {
         if (ds == null) {
             throw new SQLException("DataSource non inizializzato. Controlla il context.xml in META-INF.");
@@ -33,7 +30,6 @@ public class DriverManagerConnectionPool {
         return ds.getConnection();
     }
 
-    // Rimette la connessione nel Pool senza distruggerla
     public static void releaseConnection(Connection connection) {
         try {
             if (connection != null && !connection.isClosed()) {

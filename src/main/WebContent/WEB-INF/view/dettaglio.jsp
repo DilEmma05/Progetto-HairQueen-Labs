@@ -104,7 +104,7 @@
                                 <div class="form-group form-recensione-voto">
                                     <label style="display: block; margin-bottom: 10px; font-weight: bold;">Valutazione: </label>
                                     <div class="star-rating">
-                                        <!-- Ordine inverso nel codice per far funzionare il trucco CSS -->
+                                    
                                         <input type="radio" id="star5" name="voto" value="5" required />
                                         <label for="star5" title="5 Stelle - Eccellente"><i class="fas fa-star"></i></label>
                                         

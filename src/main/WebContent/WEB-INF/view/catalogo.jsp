@@ -48,7 +48,7 @@
 
                 <div class="gruppo-filtro">
                     <h4>Ordina per</h4>
-                    <select name="sort" style="width: 100%; padding: 10px; border-radius: 4px; background-color: var(--sfondo-principale); color: var(--testo-principale); border: 1px solid rgba(150, 150, 150, 0.3);">
+                    <select name="sort" class="select-ordinamento">
                         <option value="default" <%= ordSel.equals("default") ? "selected" : "" %>>Più Rilevanti</option>
                         <option value="prezzo_asc" <%= ordSel.equals("prezzo_asc") ? "selected" : "" %>>Prezzo: dal più basso</option>
                         <option value="prezzo_desc" <%= ordSel.equals("prezzo_desc") ? "selected" : "" %>>Prezzo: dal più alto</option>
@@ -125,7 +125,7 @@
                     }
                 } else {
             %>
-                    <p class="messaggio-catalogo-vuoto" style="grid-column: 1 / -1; width: 100%;">
+                    <p class="messaggio-catalogo-vuoto">
                         Nessun prodotto trovato in questa categoria o con i filtri selezionati.
                     </p>
             <%

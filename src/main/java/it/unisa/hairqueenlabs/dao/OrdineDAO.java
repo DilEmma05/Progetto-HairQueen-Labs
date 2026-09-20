@@ -22,7 +22,6 @@ public class OrdineDAO {
             
             connection.setAutoCommit(false);
 
-            //SALVA L'ORDINE PRINCIPALE
             String sqlOrdine = "INSERT INTO Ordine (totale, stato, id_utente) VALUES (?, ?, ?)";
             psOrdine = connection.prepareStatement(sqlOrdine, Statement.RETURN_GENERATED_KEYS);
             psOrdine.setDouble(1, ordine.getTotale());
@@ -31,18 +30,15 @@ public class OrdineDAO {
 
             psOrdine.executeUpdate();
 
-            //RECUPERIAMO L'ID
             rsKeys = psOrdine.getGeneratedKeys();
             int idNuovoOrdine = -1;
             if (rsKeys.next()) {
                 idNuovoOrdine = rsKeys.getInt(1);
             }
 
-            //SALVIAMO I DETTAGLI
             String sqlDettaglio = "INSERT INTO Dettaglio_Ordine (id_ordine, id_prodotto, quantita_acquistata, prezzo_unitario) VALUES (?, ?, ?, ?)";
             psDettaglio = connection.prepareStatement(sqlDettaglio);
 
-            // Facciamo un ciclo per ogni prodotto nel carrello
             for (DettaglioOrdine item : carrello) {
                 psDettaglio.setInt(1, idNuovoOrdine);
                 psDettaglio.setInt(2, item.getIdProdotto());
@@ -56,7 +52,6 @@ public class OrdineDAO {
             return true;
 
         } catch (SQLException e) {
-            // SE C'È UN ERRORE, ANNULLIAMO TUTTO
             if (connection != null) {
                 System.err.println("Errore rilevato: Rollback della transazione in corso...");
                 connection.rollback();
@@ -65,7 +60,6 @@ public class OrdineDAO {
             return false;
             
         } finally {
-            // RIPRISTINIAMO LE IMPOSTAZIONI ORIGINALI E CHUDIAMO I CORRIERI
             if (connection != null) {
                 connection.setAutoCommit(true); 
             }
@@ -76,7 +70,6 @@ public class OrdineDAO {
         }
     }
     
-    //Metodo per recuperare tutti gli ordini di un singolo utente
     public List<Ordine> doRetrieveByUtente(int idUtente) throws SQLException {
         Connection connection = null;
         PreparedStatement ps = null;
@@ -84,7 +77,6 @@ public class OrdineDAO {
         
         List<Ordine> ordiniUtente = new java.util.ArrayList<>();
 
-        //prende tutti gli ordini di questo id, ordinandoli dal più recente al più vecchio
         String query = "SELECT * FROM Ordine WHERE id_utente = ? ORDER BY data_ordine DESC";
 
         try {
@@ -113,7 +105,6 @@ public class OrdineDAO {
         return ordiniUtente;
     }
     
-    // Metodo per recuperare i dettagli di un ordine
     public List<DettaglioOrdine> doRetrieveDettagli(int idOrdine, int idUtente) throws SQLException {
         Connection connection = null;
         PreparedStatement ps = null;
@@ -130,7 +121,7 @@ public class OrdineDAO {
             connection = DriverManagerConnectionPool.getConnection();
             ps = connection.prepareStatement(query);
             ps.setInt(1, idOrdine);
-            ps.setInt(2, idUtente); // Se un utente cerca di vedere l'ordine di un altro, la query restituirà vuoto!
+            ps.setInt(2, idUtente);
             rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -138,7 +129,7 @@ public class OrdineDAO {
                 dett.setIdProdotto(rs.getInt("id_prodotto"));
                 dett.setQuantitaAcquistata(rs.getInt("quantita_acquistata"));
                 dett.setPrezzoUnitario(rs.getDouble("prezzo_unitario"));
-                dett.setNomeProdotto(rs.getString("nome")); // Il campo che abbiamo appena aggiunto!
+                dett.setNomeProdotto(rs.getString("nome"));
                 
                 dettagli.add(dett);
             }
@@ -183,7 +174,6 @@ public class OrdineDAO {
         return tuttiGliOrdini;
     }
     
-    //Metodo per l'admin: aggiorna lo stato di un ordine esistente
     public synchronized boolean doUpdateStato(int idOrdine, String nuovoStato) throws SQLException {
         Connection connection = null;
         PreparedStatement ps = null;

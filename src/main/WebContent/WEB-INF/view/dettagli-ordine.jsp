@@ -3,7 +3,6 @@
 <%@ page import="it.unisa.hairqueenlabs.model.DettaglioOrdine" %>
 
 <%
-    // I dati passati dal Controller
     List<DettaglioOrdine> dettagli = (List<DettaglioOrdine>) request.getAttribute("dettagli");
     Integer idOrdine = (Integer) request.getAttribute("idOrdine");
 %>

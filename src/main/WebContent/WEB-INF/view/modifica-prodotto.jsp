@@ -3,7 +3,6 @@
 <%@ page import="it.unisa.hairqueenlabs.model.Prodotto" %>
 
 <%
-    // Recupero il prodotto passato dal Controller (nessuna logica di redirect qui)
     Prodotto p = (Prodotto) request.getAttribute("prodotto");
 %>
 

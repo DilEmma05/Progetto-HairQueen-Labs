@@ -42,15 +42,12 @@ public class DettaglioProdottoServlet extends HttpServlet {
                 Prodotto prodotto = model.doRetrieveById(id);
                 
                 if (prodotto != null) {
-                    // Salva il prodotto nella request per passarlo alla JSP
                     request.setAttribute("prodotto", prodotto);
                     
-                    // MODIFICA: Recupera le recensioni del prodotto e le aggiunge alla request
                     RecensioneDAO recensioneDAO = new RecensioneDAO();
                     List<Recensione> listaRecensioni = recensioneDAO.doRetrieveByProdotto(id);
                     request.setAttribute("recensioni", listaRecensioni);
                     
-                    // Invia l'utente alla pagina di dettaglio
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/dettaglio.jsp");
                     dispatcher.forward(request, response);
                     return;
@@ -60,7 +57,6 @@ public class DettaglioProdottoServlet extends HttpServlet {
             }
         }
         
-        // Se l'ID manca, non è un numero valido, o il prodotto non esiste nel DB, torna alla home
         response.sendRedirect("home");
 	}
 

@@ -6,12 +6,10 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 
 <%
-    // Dati passati dal Controller (AdminDashboardServlet)
     Utente utente = (Utente) session.getAttribute("utente");
     List<Ordine> ordini = (List<Ordine>) request.getAttribute("ordini");
     List<Prodotto> catalogo = (List<Prodotto>) request.getAttribute("catalogo");
     
-    // Recupero i parametri per capire cosa stiamo visualizzando
     String scopeVisualizzazione = (String) request.getAttribute("scopeVisualizzazione");
     String scopeOrdini = (String) request.getAttribute("scopeOrdini");
 %>

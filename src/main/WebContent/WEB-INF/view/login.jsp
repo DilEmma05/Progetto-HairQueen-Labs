@@ -20,11 +20,9 @@
         <h2>Accedi al tuo account</h2>
 
         <% 
-            // Recuperiamo ENTRAMBI i parametri una sola volta
             String errore = (String) request.getAttribute("errore");
             String successo = (String) request.getAttribute("successo");
-            
-            // Se c'è un errore, stampiamo il blocco rosso
+          
             if (errore != null) { 
         %>
             <div class="messaggio-errore">
@@ -33,7 +31,6 @@
         <% 
             } 
             
-            // Se c'è un successo, stampiamo il blocco verde (ora con classe CSS pulita)
             if (successo != null) { 
         %>
             <div class="messaggio-successo">

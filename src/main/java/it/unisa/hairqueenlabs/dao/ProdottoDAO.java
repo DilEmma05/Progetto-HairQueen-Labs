@@ -48,7 +48,6 @@ public class ProdottoDAO {
         return prodotti;
     }
 
-    //Recupera un singolo prodotto tramite il suo ID
     public synchronized Prodotto doRetrieveById(int idProdotto) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -82,7 +81,7 @@ public class ProdottoDAO {
             if (preparedStatement != null) preparedStatement.close();
             DriverManagerConnectionPool.releaseConnection(connection);
         }
-        return p; // Restituisce il prodotto trovato (o null se l'ID non esiste)
+        return p;
     }
     
     public synchronized List<Prodotto> doRetrieveRaccomandati(String cute, String capello) throws SQLException {
@@ -91,7 +90,6 @@ public class ProdottoDAO {
         ResultSet resultSet = null;
         List<Prodotto> raccomandati = new ArrayList<>();
 
-        // Cerchiamo i prodotti che corrispondono alle esigenze
         String selectSQL = "SELECT * FROM Prodotto WHERE is_attivo = 1 AND (tipo_cute_target = ? OR tipo_cute_target = 'Tutti') AND (tipo_capello_target = ? OR tipo_capello_target = 'Tutti')";        try {
             connection = DriverManagerConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(selectSQL);
@@ -101,7 +99,6 @@ public class ProdottoDAO {
 
             while (resultSet.next()) {
                 Prodotto p = new Prodotto();
-                //Riempiamo l'oggetto con i dati reali del DB
                 p.setIdProdotto(resultSet.getInt("id_prodotto"));
                 p.setNome(resultSet.getString("nome"));
                 p.setDescrizione(resultSet.getString("descrizione"));
@@ -124,7 +121,6 @@ public class ProdottoDAO {
         return raccomandati;
     }
     
- // Recupera i prodotti appartenenti a una macro-categoria passando l'ID della categoria
     public synchronized List<Prodotto> doRetrieveByCategoria(int idCategoria) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -132,7 +128,6 @@ public class ProdottoDAO {
         
         List<Prodotto> prodotti = new ArrayList<>();
         
-        // Query SQL con JOIN: prende tutti i prodotti la cui sottocategoria appartiene alla macro-categoria specificata
         String selectSQL = "SELECT p.* FROM Prodotto p " +
                 "JOIN Sottocategoria s ON p.id_sottocategoria = s.id_sottocategoria " +
                 "WHERE s.id_categoria = ? AND p.is_attivo = 1";
@@ -168,7 +163,6 @@ public class ProdottoDAO {
         return prodotti;
     }
     
- // Recupera i prodotti filtrati per Sottocategoria
     public synchronized List<Prodotto> doRetrieveBySottocategoria(int idSottocategoria) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -208,7 +202,6 @@ public class ProdottoDAO {
         return prodotti;
     }
     
-    // Inserimento di un nuovo prodotto nel database (Area Amministratore)
     public synchronized void doSave(Prodotto prodotto) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -340,7 +333,6 @@ public class ProdottoDAO {
         }
     }
     
- // Recupera tutti i prodotti, inclusi quelli cancellati logicamente (Area Amministratore)
     public synchronized List<Prodotto> doRetrieveAllAdmin() throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -380,7 +372,6 @@ public class ProdottoDAO {
         return prodotti;
     }
     
- // Recupera solo i prodotti inseriti da uno specifico Amministratore
     public synchronized List<Prodotto> doRetrieveByAdmin(int idAdmin) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;

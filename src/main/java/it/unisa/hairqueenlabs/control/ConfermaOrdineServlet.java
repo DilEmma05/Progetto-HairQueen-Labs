@@ -67,7 +67,6 @@ public class ConfermaOrdineServlet extends HttpServlet {
             nuovoOrdine.setStato("In elaborazione");
             nuovoOrdine.setIdUtente(utenteLoggato.getIdUtente()); 
             
-            //Trasforma gli elementi del carrello in Dettagli Ordine per il DB
             List<DettaglioOrdine> listaDettagli = new ArrayList<>();
             
             for (Carrello.ElementoCarrello elemento : carrello.getElementi()) {

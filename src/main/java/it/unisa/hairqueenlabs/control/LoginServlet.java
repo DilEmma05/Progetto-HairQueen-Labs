@@ -56,14 +56,11 @@ public class LoginServlet extends HttpServlet {
             Utente utente = utenteDAO.doRetrieveByEmailAndPassword(email, passwordCriptata);
 
             if (utente != null) {
-                // Login effettuato con successo: salva l'utente in sessione
                 HttpSession session = request.getSession();
                 session.setAttribute("utente", utente);
                 
-                // Reindirizziamo alla home
                 response.sendRedirect("home");
             } else {
-                // Credenziali errate: rimandiamo alla pagina di login con un errore
                 request.setAttribute("errore", "Email o password non validi.");
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/login.jsp");
                 dispatcher.forward(request, response);

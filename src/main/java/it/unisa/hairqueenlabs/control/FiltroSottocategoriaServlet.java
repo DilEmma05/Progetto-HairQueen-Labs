@@ -34,14 +34,12 @@ public class FiltroSottocategoriaServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1. Recuperiamo l'id della sottocategoria passato dall'URL (es. ?id=1)
         String idParam = request.getParameter("id");
         
         if (idParam != null) {
             try {
                 int idSottocategoria = Integer.parseInt(idParam);
                 
-                //Recupero solo i prodotti di questa specifica sottocategoria
                 ProdottoDAO prodottoDAO = new ProdottoDAO();
                 List<Prodotto> prodottiFiltrati = prodottoDAO.doRetrieveBySottocategoria(idSottocategoria);
                 request.setAttribute("listaProdotti", prodottiFiltrati);
