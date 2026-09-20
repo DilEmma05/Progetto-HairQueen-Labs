@@ -9,6 +9,13 @@
     <p>Benvenuti nel tempio della cura dei tuoi capelli</p>
 </header>
 
+<%
+    // Recuperiamo il flag impostato nella admin-dashboard
+    Boolean nascondiMenu = (Boolean) request.getAttribute("nascondiMenuNavigazione");
+    
+    // Se il flag è nullo (siamo nelle pagine pubbliche) o è falso, mostriamo TUTTA la barra
+    if (nascondiMenu == null || !nascondiMenu) {
+%>
 <div class="barra-utente">
     
     <div class="container-ricerca">
@@ -52,13 +59,6 @@
     %>
 </div>
 
-<%
-    // Recuperiamo il flag impostato nella admin-dashboard
-    Boolean nascondiMenu = (Boolean) request.getAttribute("nascondiMenuNavigazione");
-    
-    // Se il flag è nullo (siamo nelle pagine pubbliche come la Home) o è falso, mostriamo il menu
-    if (nascondiMenu == null || !nascondiMenu) {
-%>
 <nav>
     <ul>
     <li><a href="<%= request.getContextPath() %>/home#ultimi-arrivi">Novità</a></li>
@@ -113,5 +113,5 @@
 </ul>
 </nav>
 <%
-    } // Chiude la condizione if: il menu non verrà renderizzato se nascondiMenu è true
+    } // Chiude la condizione if: barra utente e menu non verranno renderizzati se il flag è true
 %>

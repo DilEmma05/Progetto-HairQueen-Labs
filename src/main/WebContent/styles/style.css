@@ -1,5 +1,23 @@
 /* ==========================================================================
-   VARIABILI GLOBALI
+   INDICE DEL FOGLIO DI STILE (CSS)
+   ==========================================================================
+   1.  VARIABILI E STILI GLOBALI (Colori, body, reset, font)
+   2.  COMPONENTI CONDIVISI (Header, Bottoni Full-Width, Tabelle Base)
+   3.  AREA AMMINISTRATORE E FORM (Pannello Admin, Input, Filtri)
+   4.  AREA PUBBLICA - HEADER E MENU (Barra utente, Carrello, Login, Categorie)
+   5.  AREA PUBBLICA - HOMEPAGE (Hero Carousel animato)
+   6.  AREA PUBBLICA - CATALOGO (Griglia prodotti, Card, Banner)
+   7.  AREA AUTENTICAZIONE E UTENTE (Form Login, Registrazione, Errori)
+   8.  AREA CARRELLO E CHECKOUT (Tabella carrello, Totali, Form spedizione)
+   9.  AREA PROFILO UTENTE E ORDINI (Storico ordini, Dettagli fattura)
+   10. AREA DETTAGLIO PRODOTTO E RECENSIONI (Layout 2 colonne, Form stelle)
+   11. ALTRE PAGINE (Filosofia Brand, Info, Trova Routine Quiz)
+   12. COMPONENTI ACCESSORI (Modale Eliminazione, Badge Notifiche, Ricerca)
+   13. MEDIA QUERIES (Responsive Design Mobile e Tablet)
+   ========================================================================== */
+
+/* ==========================================================================
+   1. VARIABILI E STILI GLOBALI
    ========================================================================== */
 :root {
     --sfondo-principale: #121212;
@@ -11,9 +29,6 @@
     --colore-successo: #2ecc71;
 }
 
-/* ==========================================================================
-   STILI GLOBALI
-   ========================================================================== */
 body { 
     background-color: var(--sfondo-principale); 
     color: var(--testo-principale); 
@@ -30,7 +45,7 @@ html {
 }
 
 /* ==========================================================================
-   HEADER CONDIVISO (Pubblica, Auth, Carrello, Checkout, Dettaglio)
+   2. COMPONENTI CONDIVISI (Header, Bottoni, Tabelle)
    ========================================================================== */
 .area-pubblica header,
 .area-auth header,
@@ -53,9 +68,6 @@ html {
     letter-spacing: 2px;
 }
 
-/* ==========================================================================
-   BOTTONI FULL-WIDTH CONDIVISI (Login, Registrazione, Conferma Ordine)
-   ========================================================================== */
 .area-auth .btn-registrati,
 .area-auth .btn-login,
 .area-checkout .btn-conferma {
@@ -79,9 +91,6 @@ html {
     background-color: #bfa030;
 }
 
-/* ==========================================================================
-   TABELLE CONDIVISE (Struttura base per Admin, Carrello, Profilo, Dettagli)
-   ========================================================================== */
 .area-admin table,
 .area-carrello table,
 .area-profilo table,
@@ -108,7 +117,7 @@ html {
 }
 
 /* ==========================================================================
-   AREA AMMINISTRATORE
+   3. AREA AMMINISTRATORE E FORM
    ========================================================================== */
 .area-admin {
     padding: 20px;
@@ -154,1192 +163,6 @@ html {
 }
 .area-admin .btn-filtro-grigio:hover { background-color: #5a6268; }
 
-/* ==========================================================================
-   AREA PUBBLICA
-   ========================================================================== */
-
-
-.area-pubblica .barra-utente {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 20px;
-    padding: 10px 20px;
-    border-bottom: 1px solid #2C2C2C;
-    background-color: var(--sfondo-principale);
-}
-.area-pubblica .link-carrello {
-    color: var(--colore-accento); 
-    text-decoration: none; 
-    font-weight: bold; 
-    font-size: 1rem; 
-    display: flex; 
-    align-items: center; 
-    gap: 5px;
-    position: relative;
-    padding-right: 15px;
-}
-.area-pubblica .btn-login {
-    background-color: var(--colore-primario); color: white; text-decoration: none; padding: 8px 18px; border-radius: 4px; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s;
-}
-.area-pubblica .menu-utente-loggato {
-    display: flex; align-items: center; gap: 15px;
-}
-.area-pubblica .link-profilo {
-    color: #bbb; font-size: 0.95rem; text-decoration: none; transition: 0.3s;
-}
-.area-pubblica .link-profilo:hover { color: var(--colore-primario); }
-.area-pubblica .link-profilo strong { color: var(--testo-principale); }
-.area-pubblica .btn-logout {
-    color: #ff4d4d; text-decoration: none; font-size: 0.9rem; border: 1px solid #ff4d4d; padding: 5px 12px; border-radius: 4px; transition: 0.3s;
-}
-.area-pubblica .btn-logout:hover { background-color: #ff4d4d; color: white; }
-
-/* Navigazione Categorie */
-.area-pubblica nav {
-    background-color: #1a1a1a; padding: 10px 0;
-}
-.area-pubblica nav ul {
-    list-style-type: none; margin: 0; padding: 0; display: flex; justify-content: center; gap: 30px;
-}
-.area-pubblica nav ul li { position: relative; }
-.area-pubblica nav ul li a {
-    color: var(--testo-principale); text-decoration: none; font-weight: 600; text-transform: uppercase; font-size: 0.9rem; transition: color 0.3s ease;
-}
-.area-pubblica nav ul li a:hover { color: var(--colore-primario); }
-
-/* Menu a tendina Categorie */
-.area-pubblica .dropdown-content {
-    display: none; position: absolute; background-color: #1a1a1a; min-width: 200px; box-shadow: 0px 8px 16px rgba(0,0,0,0.5); z-index: 100; border-top: 2px solid var(--colore-primario); padding: 10px 0; text-align: left;
-}
-.area-pubblica .dropdown-content a {
-    padding: 12px 20px; display: block; font-size: 0.8rem; text-transform: capitalize;
-}
-.area-pubblica .dropdown-content a:hover { background-color: #2c2c2c; color: var(--colore-accento); }
-.area-pubblica nav ul li:hover .dropdown-content { display: block; }
-
-
-/* ==========================================================================
-   HERO CAROUSEL INTERATTIVO HOMEPAGE
-   ========================================================================== */
-.area-pubblica .hero-carousel {
-    position: relative;
-    height: 70vh;
-    min-height: 500px;
-    width: 100%;
-    overflow: hidden;
-    border-bottom: 2px solid var(--colore-primario);
-}
-
-.area-pubblica .carousel-track-container {
-    height: 100%;
-    width: 100%;
-}
-
-.area-pubblica .carousel-track {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    height: 100%;
-    width: 100%;
-    animation: slideUp 1.2s ease-out forwards;
-    opacity: 0;
-    transform: translateY(40px);
-}
-
-.area-pubblica .carousel-slide {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 0 8%;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-}
-
-.area-pubblica .carousel-slide.current-slide {
-    opacity: 1;
-    z-index: 1; 
-}
-
-/* Gestione Immagine di Sfondo e Gradiente */
-.area-pubblica .carousel-image {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    object-fit: cover;
-    z-index: -2; 
-}
-
-/* Gradiente scuro sovrapposto per leggere il testo */
-.area-pubblica .carousel-slide::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(to right, rgba(18, 18, 18, 0.95) 0%, rgba(18, 18, 18, 0.1) 100%);
-    z-index: -1; 
-}
-
-/* Stili del testo della Hero */
-.area-pubblica .hero-content { max-width: 700px; }
-.area-pubblica .hero-content h2 { font-size: 4rem; color: var(--colore-accento); margin: 0 0 15px 0; line-height: 1.1; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); }
-.area-pubblica .hero-content p { font-size: 1.3rem; color: var(--testo-principale); margin-bottom: 35px; line-height: 1.6; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); }
-
-.area-pubblica .btn-hero {
-    display: inline-block; background-color: var(--colore-accento); color: var(--sfondo-principale); padding: 15px 35px; font-size: 1.2rem; font-weight: bold; text-transform: uppercase; text-decoration: none; border-radius: 4px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-}
-.area-pubblica .btn-hero:hover { background-color: #bfa030; transform: scale(1.05); box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6); }
-
-/* --- Stili per Frecce e Pallini --- */
-.area-pubblica .carousel-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(26, 26, 26, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: white;
-    font-size: 20px;
-    padding: 15px;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 10;
-    transition: 0.3s;
-}
-.area-pubblica .carousel-button:hover { background-color: var(--colore-primario); border-color: transparent; }
-.area-pubblica .carousel-button-left { left: 20px; }
-.area-pubblica .carousel-button-right { right: 20px; }
-
-/* I pallini indicatori in basso */
-.area-pubblica .carousel-nav {
-    display: flex; justify-content: center; gap: 10px; padding: 15px 0; position: absolute; bottom: 20px; width: 100%; z-index: 10;
-}
-.area-pubblica .carousel-indicator {
-    border: 0; border-radius: 50%; width: 12px; height: 12px; background-color: rgba(255, 255, 255, 0.3); cursor: pointer; transition: 0.3s;
-}
-.area-pubblica .carousel-indicator.current-slide { background-color: var(--colore-accento); box-shadow: 0 0 10px rgba(212, 175, 55, 0.6); }
-
-/* Animazione di entrata e classi di utilità */
-@keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
-.area-pubblica .is-hidden { display: none; }
-
-/* Griglia Prodotti */
-.area-pubblica .contenitore-prodotti {
-    max-width: 1200px; margin: 40px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;
-}
-.area-pubblica .card-prodotto {
-    background-color: var(--sfondo-card); border-radius: 8px; padding: 20px; text-align: center; border: 1px solid #2C2C2C; transition: transform 0.3s ease, border-color 0.3s ease;
-}
-.area-pubblica .card-prodotto:hover {
-    transform: translateY(-5px); border-color: var(--colore-primario);
-}
-.area-pubblica .img-prodotto {
-    max-width: 100%; height: 200px; object-fit: cover; border-radius: 4px; transition: transform 0.3s ease;
-}
-.area-pubblica .img-prodotto:hover { transform: scale(1.05); }
-.area-pubblica .card-prodotto h3 { margin: 15px 0 10px 0; font-size: 1.2rem; }
-.area-pubblica .link-titolo-prodotto { color: inherit; text-decoration: none; transition: color 0.3s ease; }
-.area-pubblica .link-titolo-prodotto:hover { color: var(--colore-primario); }
-.area-pubblica .card-prodotto .prezzo { color: var(--colore-accento); font-size: 1.3rem; font-weight: bold; margin: 10px 0; }
-.area-pubblica .btn-acquista {
-    background-color: var(--colore-accento); color: var(--sfondo-principale); border: none; padding: 10px 20px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 0.85rem; width: 100%; transition: background-color 0.3s ease;
-}
-.area-pubblica .btn-acquista:hover { background-color: #bfa030; }
-
-/* ==========================================================================
-   AREA AUTENTICAZIONE
-   ========================================================================== */
-
-.area-auth {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-
-.area-auth header a { text-decoration: none; }
-
-.area-auth .container-registrazione {
-    max-width: 600px;
-    margin: 40px auto;
-    background-color: var(--sfondo-card);
-    padding: 40px;
-    border-radius: 8px;
-    border: 1px solid #2C2C2C;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-}
-
-.area-auth h2 { 
-    text-align: center; color: var(--testo-principale); border-bottom: 2px solid var(--colore-primario); padding-bottom: 10px; margin-top: 0; margin-bottom: 30px;
-}
-
-.area-auth .riga-doppia { display: flex; gap: 20px; }
-.area-auth .riga-doppia .gruppo-form { flex: 1; }
-
-.area-auth .gruppo-form { margin-bottom: 35px; position: relative; }
-
-.area-auth .gruppo-form label { display: block; margin-bottom: 8px; color: #bbb; font-size: 0.9rem; }
-
-.area-auth .gruppo-form input {
-    width: 100%; padding: 12px; border: 1px solid #333; background-color: #121212;
-    color: white; border-radius: 4px; box-sizing: border-box; font-size: 1rem;
-    transition: border-color 0.3s;
-}
-.area-auth .gruppo-form input:focus { border-color: var(--colore-accento); outline: none; }
-
-/* Stili per la validazione errori */
-.area-auth .input-errore { 
-    border-color: var(--colore-errore) !important; 
-    background-color: rgba(231, 76, 60, 0.05) !important; 
-}
-.area-auth .messaggio-errore-js { 
-    color: var(--colore-errore); 
-    font-size: 0.8rem; 
-    display: none; 
-    font-weight: bold; 
-    position: absolute;
-    top: 100%;
-    left: 0;
-    margin-top: 4px;
-    line-height: 1.2;
-}
-
-
-
-.area-auth .link-login { text-align: center; margin-top: 25px; font-size: 0.95rem; color: #bbb; }
-.area-auth .link-login a { color: var(--colore-primario); text-decoration: none; font-weight: bold; }
-
-/*Regole specifiche per il Login*/
-.area-auth .container-login {
-    max-width: 450px;
-    margin: 60px auto;
-    background-color: var(--sfondo-card);
-    padding: 40px;
-    border-radius: 8px;
-    border: 1px solid #2C2C2C;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-}
-
-
-
-/*Feedback visivi Login*/
-.area-auth .messaggio-errore {
-    background-color: rgba(231, 76, 60, 0.1);
-    color: var(--colore-errore);
-    padding: 10px;
-    border: 1px solid var(--colore-errore);
-    border-radius: 4px;
-    margin-bottom: 20px;
-    text-align: center;
-    font-size: 0.9rem;
-}
-
-.area-auth .messaggio-successo {
-    background-color: rgba(46, 204, 113, 0.1); 
-    color: var(--colore-successo); 
-    padding: 10px; 
-    border: 1px solid var(--colore-successo); 
-    border-radius: 4px; 
-    margin-bottom: 20px; 
-    text-align: center; 
-    font-size: 0.9rem; 
-    font-weight: bold;
-}
-
-.area-auth .link-registrazione { text-align: center; margin-top: 25px; font-size: 0.95rem; color: #bbb; }
-.area-auth .link-registrazione a { color: var(--colore-primario); text-decoration: none; font-weight: bold; }
-.area-auth .link-registrazione a:hover { color: #a55eea; text-decoration: underline; }
-
-/* ==========================================================================
-   AREA CARRELLO
-   ========================================================================== */
-
-
-
-.area-carrello .container-navigazione { max-width: 1000px; margin: 0 auto; padding: 20px; }
-.area-carrello .btn-indietro { color: var(--colore-accento); text-decoration: none; font-weight: bold; }
-.area-carrello .btn-indietro:hover { color: var(--colore-primario); }
-
-.area-carrello .container-carrello {
-    max-width: 1000px; margin: 20px auto; background-color: var(--sfondo-card);
-    padding: 30px; border-radius: 8px; border: 1px solid #2C2C2C;
-}
-
-.area-carrello h2 { border-bottom: 2px solid var(--colore-primario); padding-bottom: 10px; margin-top: 0; }
-
-.area-carrello .messaggio-vuoto { text-align: center; font-size: 1.2rem; color: #888; margin: 40px 0; }
-
-/* Tabella Prodotti Carrello */
-.area-carrello table { margin-bottom: 30px; }
-.area-carrello th { color: var(--colore-accento); font-size: 0.9rem; }
-.area-carrello .img-carrello { width: 80px; height: 80px; object-fit: contain; border-radius: 4px; }
-.area-carrello .nome-prodotto { font-weight: bold; }
-.area-carrello .totale-riga { font-weight: bold; color: var(--colore-primario); }
-
-/* Sezione inferiore*/
-.area-carrello .riepilogo-totale { text-align: right; font-size: 1.5rem; margin-bottom: 20px; }
-.area-carrello .riepilogo-totale span { color: var(--colore-accento); font-weight: bold; }
-
-.area-carrello .azioni-carrello { display: flex; justify-content: flex-end; gap: 15px; }
-.area-carrello .form-svuota { margin: 0; }
-
-/* Bottoni universali dell'area carrello */
-.area-carrello .btn {
-    padding: 12px 25px; border: none; border-radius: 4px;
-    font-weight: bold; text-transform: uppercase; cursor: pointer; transition: 0.3s;
-    text-decoration: none; display: inline-block; text-align: center;
-}
-.area-carrello .btn-primario { background-color: var(--colore-accento); color: var(--sfondo-principale); }
-.area-carrello .btn-primario:hover { background-color: #bfa030; }
-.area-carrello .btn-secondario { background-color: transparent; color: #ff4d4d; border: 1px solid #ff4d4d; }
-.area-carrello .btn-secondario:hover { background-color: #ff4d4d; color: white; }
-
-/* ==========================================================================
-   AREA CHECKOUT
-   ========================================================================== */
-
-
-
-.area-checkout .container-checkout {
-    max-width: 1100px; margin: 40px auto; padding: 0 20px;
-    display: flex; gap: 40px; flex-wrap: wrap;
-}
-
-.area-checkout .sezione-dati, 
-.area-checkout .sezione-riepilogo {
-    background-color: var(--sfondo-card); padding: 30px; 
-    border-radius: 8px; border: 1px solid #2C2C2C;
-}
-
-.area-checkout .sezione-dati { flex: 2; min-width: 350px; }
-.area-checkout .sezione-riepilogo { flex: 1; min-width: 300px; height: fit-content; }
-
-.area-checkout h2 { border-bottom: 2px solid var(--colore-primario); padding-bottom: 10px; margin-top: 0; font-size: 1.5rem; }
-
-/* Form di spedizione */
-.area-checkout .gruppo-form { margin-bottom: 20px; }
-.area-checkout .gruppo-form label { display: block; margin-bottom: 8px; color: #bbb; font-size: 0.9rem; }
-.area-checkout .asterisco { color: var(--colore-errore); font-weight: bold; margin-left: 3px; }
-
-.area-checkout .gruppo-form input, 
-.area-checkout .gruppo-form select {
-    width: 100%; padding: 12px; border: 1px solid #333; background-color: #121212;
-    color: white; border-radius: 4px; box-sizing: border-box; font-size: 1rem;
-    transition: border-color 0.3s;
-}
-.area-checkout .gruppo-form input:focus, 
-.area-checkout .gruppo-form select:focus { border-color: var(--colore-accento); outline: none; }
-
-/* Validazione JavaScript */
-.area-checkout .form-tentato input:invalid, 
-.area-checkout .form-tentato select:invalid {
-    border-color: var(--colore-errore);
-    background-color: rgba(231, 76, 60, 0.05); 
-}
-
-.area-checkout .riga-doppia { display: flex; gap: 20px; }
-.area-checkout .riga-doppia .gruppo-form { flex: 1; }
-
-/* Sezione Riepilogo e Totali */
-.area-checkout .lista-riepilogo { margin-bottom: 20px; max-height: 200px; overflow-y: auto; padding-right: 5px; }
-.area-checkout .item-riepilogo { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 0.95rem; color: #ccc; }
-.area-checkout .spedizione-gratis { color: var(--colore-successo); font-weight: bold; }
-.area-checkout .totale-finalizzato { display: flex; justify-content: space-between; font-size: 1.4rem; font-weight: bold; border-top: 1px solid #333; padding-top: 15px; margin-top: 15px; color: var(--colore-accento); }
-
-
-
-.area-checkout #messaggio-errore {
-    display: none; color: var(--colore-errore); text-align: center; 
-    margin-top: 15px; font-weight: bold; font-size: 0.95rem;
-}
-
-/* Messaggio di carrello vuoto al checkout */
-.area-checkout .carrello-vuoto-checkout { text-align: center; width: 100%; margin-top: 50px; }
-.area-checkout .carrello-vuoto-checkout a { color: var(--colore-accento); text-decoration: none; }
-
-/* ==========================================================================
-   AREA PROFILO
-   ========================================================================== */
-
-.area-profilo .container-profilo { max-width: 900px; margin: 0 auto; }
-
-.area-profilo .header-profilo {
-    text-align: center; padding-bottom: 20px; 
-    border-bottom: 1px solid #2C2C2C; margin-bottom: 30px;
-}
-.area-profilo .header-profilo h1 { color: var(--colore-accento); }
-.area-profilo .email-utente { color: #888; font-size: 0.9rem; }
-
-.area-profilo .titolo-storico { color: var(--colore-accento); margin-bottom: 15px; }
-
-/* Tabella Ordini Profilo */
-.area-profilo table { background-color: var(--sfondo-card); border-radius: 8px; overflow: hidden; }
-.area-profilo th { background-color: #1a1a1a; color: var(--colore-primario); }
-
-.area-profilo tr:hover { background-color: #252525; }
-
-.area-profilo .stato-badge {
-    background-color: rgba(46, 204, 113, 0.1); color: var(--colore-successo); 
-    padding: 5px 10px; border-radius: 20px; 
-    font-size: 0.85rem; font-weight: bold;
-}
-.area-profilo .totale-ordine { font-weight: bold; }
-.area-profilo .colonna-azioni { text-align: right; }
-
-/* Bottone Dettagli Ordine*/
-.area-profilo .btn-dettagli {
-    color: var(--colore-accento); text-decoration: none; font-size: 0.9rem; 
-    border: 1px solid var(--colore-accento); padding: 5px 10px; 
-    border-radius: 4px; transition: 0.3s;
-}
-.area-profilo .btn-dettagli:hover {
-    background-color: var(--colore-accento); color: #121212;
-}
-
-/* Messaggio Nessun Ordine */
-.area-profilo .nessun-ordine {
-    text-align: center; padding: 40px; color: #bbb; 
-    background-color: var(--sfondo-card); border-radius: 8px;
-}
-.area-profilo .nessun-ordine h3 { margin: 0 0 10px 0; }
-
-.area-profilo .btn-home {
-    display: inline-block; margin-top: 20px; color: var(--colore-primario); 
-    text-decoration: none; font-weight: bold;
-}
-
-/* ==========================================================================
-   AREA DETTAGLIO PRODOTTO
-   ========================================================================== */
-
-
-
-.area-dettaglio .container-navigazione { max-width: 1000px; margin: 0 auto; padding: 20px; }
-.area-dettaglio .btn-indietro { color: var(--colore-accento); text-decoration: none; font-weight: bold; font-size: 1.1rem; transition: color 0.3s; }
-.area-dettaglio .btn-indietro:hover { color: var(--colore-primario); }
-
-/* Layout a due colonne per il prodotto */
-.area-dettaglio .container-dettaglio {
-    max-width: 1000px; margin: 0 auto 50px auto; padding: 0 20px; 
-    display: flex; gap: 50px; flex-wrap: wrap; 
-}
-
-.area-dettaglio .colonna-sinistra {
-    flex: 1; min-width: 300px; background-color: var(--sfondo-card); 
-    border-radius: 8px; padding: 30px; border: 1px solid #2C2C2C; 
-    display: flex; justify-content: center; align-items: center;
-}
-.area-dettaglio .colonna-sinistra img { max-width: 100%; max-height: 500px; object-fit: contain; border-radius: 4px; }
-
-.area-dettaglio .colonna-destra { flex: 1; min-width: 300px; display: flex; flex-direction: column; justify-content: center; }
-.area-dettaglio .colonna-destra h2 {
-    font-size: 2.5rem; margin: 0 0 15px 0; border-bottom: 2px solid var(--colore-primario); padding-bottom: 15px;
-}
-.area-dettaglio .colonna-destra .prezzo { color: var(--colore-accento); font-size: 2rem; font-weight: bold; margin: 20px 0; }
-.area-dettaglio .colonna-destra .descrizione { line-height: 1.8; color: #d1d1d1; font-size: 1.1rem; margin-bottom: 40px; }
-
-.area-dettaglio .btn-aggiungi {
-    background-color: var(--colore-accento); color: var(--sfondo-principale); 
-    border: none; padding: 15px 30px; font-size: 1.1rem; font-weight: bold; border-radius: 4px; 
-    cursor: pointer; text-transform: uppercase; transition: background-color 0.3s ease, transform 0.2s ease; 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-}
-.area-dettaglio .btn-aggiungi:hover { background-color: #bfa030; transform: translateY(-2px); }
-
-/* Feedback prodotto non trovato */
-.area-dettaglio .prodotto-non-trovato { text-align: center; margin-top: 50px; }
-.area-dettaglio .prodotto-non-trovato h2 { color: var(--colore-errore); margin-bottom: 10px; }
-
-
-/* =========================================
-   SEZIONE RECENSIONI PRODOTTO
-   ========================================= */
-.sezione-recensioni {
-    max-width: 800px;         /* Limita la larghezza per non farla espandere troppo */
-    margin: 60px auto 0 auto; /* Centra la sezione nella pagina */
-    border-top: 1px solid rgba(150, 150, 150, 0.3);
-    padding-top: 40px;
-}
-
-.sezione-recensioni h3 {
-    text-align: center;
-    color: var(--colore-accento);
-    font-size: 1.8rem;
-    margin-bottom: 30px;
-}
-
-.recensione-alert {
-    background-color: rgba(40, 167, 69, 0.2);
-    color: #28a745;
-    border: 1px solid #28a745;
-    text-align: center;
-}
-
-/* Elenco Recensioni Esistenti */
-.lista-recensioni {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* Spazio tra una recensione e l'altra */
-}
-
-.recensione-item {
-    background-color: var(--sfondo-card);
-    border: 1px solid rgba(150, 150, 150, 0.2);
-    border-radius: 8px;
-    padding: 20px 25px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-.recensione-autore { 
-    margin-bottom: 10px; 
-    font-size: 1.1rem;
-    display: flex;
-    justify-content: space-between; /* Mette il nome a sinistra e le stelle a destra */
-    align-items: center;
-}
-
-.stelle-valutazione {
-    color: var(--colore-accento);
-    letter-spacing: 2px;
-    font-size: 1.2rem;
-}
-
-.recensione-testo {
-    font-style: italic;
-    margin-bottom: 15px;
-    line-height: 1.5;
-    opacity: 0.9;
-}
-
-.recensione-data { 
-    display: block;
-    text-align: right; /* Data allineata in basso a destra */
-    opacity: 0.5; 
-    font-size: 0.85rem;
-}
-
-.nessuna-recensione {
-    text-align: center;
-    font-style: italic;
-    margin-bottom: 30px;
-    opacity: 0.7;
-    background-color: var(--sfondo-card);
-    padding: 30px;
-    border-radius: 8px;
-}
-
-/* Form Nuova Recensione - Layout più Simpatico */
-.nuova-recensione-box {
-    margin-top: 50px;
-    padding: 30px;
-    border-radius: 12px;
-    background: linear-gradient(145deg, #1e1e1e, #161616);
-    border: 1px solid rgba(212, 175, 55, 0.2); /* Bordo dorato leggero */
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
-}
-
-.nuova-recensione-box h4 { 
-    margin-bottom: 25px; 
-    text-align: center;
-    font-size: 1.4rem;
-    color: var(--testo-principale);
-}
-
-.form-recensione-voto select {
-    width: 100%;
-    padding: 12px;
-    border-radius: 6px;
-    border: 1px solid rgba(150, 150, 150, 0.3);
-    background-color: #121212;
-    color: var(--testo-principale);
-    font-size: 1rem;
-}
-
-.form-recensione-voto select option { background-color: #121212; }
-
-.form-recensione-testo textarea {
-    width: 100%;
-    padding: 15px;
-    border-radius: 6px;
-    border: 1px solid rgba(150, 150, 150, 0.3);
-    background-color: #121212;
-    color: var(--testo-principale);
-    resize: vertical;
-    font-family: inherit;
-}
-
-.btn-invio-recensione {
-    display: block;
-    width: 100%;
-    max-width: 300px;
-    margin: 20px auto 0 auto;
-    padding: 15px;
-    border-radius: 30px; /* Bottone più rotondo e simpatico */
-    font-size: 1.1rem;
-}
-
-.avviso-login-recensione {
-    text-align: center;
-    margin: 0;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
-}
-
-.avviso-login-recensione a {
-    color: var(--colore-accento);
-    font-weight: bold;
-    text-decoration: underline;
-    transition: color 0.3s;
-}
-
-.avviso-login-recensione a:hover { color: var(--colore-primario); }
-
-
-/* ==========================================================================
-   AREA DETTAGLI ORDINE
-   ========================================================================== */
-
-.area-dettaglio-ordine .container-dettaglio-ordine { 
-    max-width: 800px; margin: 0 auto; background-color: var(--sfondo-card); 
-    padding: 30px; border-radius: 8px; margin-top: 20px;
-}
-
-.area-dettaglio-ordine h1 { 
-    color: var(--colore-accento); text-align: center; 
-    border-bottom: 1px solid #2C2C2C; padding-bottom: 20px;
-}
-
-.area-dettaglio-ordine table { margin-top: 20px; }
-.area-dettaglio-ordine th { color: var(--colore-primario); }
-
-/* Subtotale evidenziato */
-.area-dettaglio-ordine .subtotale-riga { font-weight: bold; color: var(--colore-accento); }
-
-/* Contenitore bottoni finali */
-.area-dettaglio-ordine .azioni-dettaglio { 
-    display: flex; justify-content: space-between; align-items: center; margin-top: 30px; 
-}
-
-.area-dettaglio-ordine .btn-back { color: var(--colore-primario); text-decoration: none; font-weight: bold; }
-.area-dettaglio-ordine .btn-back:hover { text-decoration: underline; }
-
-/* Bottone Download PDF */
-.area-dettaglio-ordine .btn-fattura {
-    background-color: var(--colore-accento); color: var(--sfondo-principale); 
-    padding: 10px 20px; text-decoration: none; font-weight: bold; 
-    border-radius: 4px; transition: 0.3s; display: inline-block;
-}
-.area-dettaglio-ordine .btn-fattura:hover {
-    background-color: #bfa030;
-}
-
-/* ==========================================================================
-   SEZIONE FILOSOFIA BRAND (PRE-FOOTER)
-   ========================================================================== */
-
-.brand-philosophy {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #111;
-    color: #fff;
-    margin-top: 80px;
-    padding: 0;
-    overflow: hidden;
-}
-
-.philosophy-text {
-    flex: 1;
-    padding: 50px 80px;
-}
-
-.philosophy-text h2 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
-}
-
-.philosophy-text p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    margin-bottom: 30px;
-    color: #ccc;
-}
-
-.btn-outline {
-    display: inline-block;
-    padding: 12px 30px;
-    border: 1px solid #fff;
-    color: #fff;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    letter-spacing: 2px;
-    transition: all 0.3s ease;
-}
-
-.btn-outline:hover {
-    background-color: #fff;
-    color: #111;
-}
-
-.philosophy-image {
-    flex: 1;
-    display: flex;
-}
-
-.philosophy-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* Responsive per i cellulari */
-@media screen and (max-width: 768px) {
-    .brand-philosophy {
-        flex-direction: column;
-    }
-    
-    .philosophy-text {
-        padding: 40px 20px;
-        text-align: center;
-    }
-}
-
-/* =========================================
-   FOOTER GLOBALE
-   ========================================= */
-.site-footer {
-    background-color: #0a0a0a;
-    color: #e0e0e0;
-    padding: 60px 0 20px 0;
-    margin-top: 50px;
-    border-top: 1px solid #222;
-}
-
-.footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 40px;
-    padding: 0 20px;
-}
-
-.footer-col h3 {
-    color: var(--colore-accento);
-    letter-spacing: 2px;
-    margin-bottom: 15px;
-    font-size: 1.5rem;
-}
-
-.footer-col h4 {
-    color: #fff;
-    margin-bottom: 20px;
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.footer-col p {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: #aaa;
-    margin-bottom: 15px;
-}
-
-.footer-col ul {
-    list-style: none;
-    padding: 0;
-}
-
-.footer-col ul li {
-    margin-bottom: 12px;
-}
-
-.footer-col ul li a {
-    color: #aaa;
-    text-decoration: none;
-    font-size: 0.95rem;
-    transition: color 0.3s ease;
-}
-
-.footer-col ul li a:hover {
-    color: var(--colore-accento);
-}
-
-.social-icons {
-    display: flex;
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.social-icons a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background-color: #1a1a1a;
-    color: #fff;
-    border-radius: 50%;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.social-icons a:hover {
-    background-color: var(--colore-accento);
-    transform: translateY(-3px);
-}
-
-.newsletter-form {
-    display: flex;
-    margin-top: 15px;
-}
-
-.newsletter-form input {
-    flex: 1;
-    padding: 12px 15px;
-    border: 1px solid #333;
-    background-color: #111;
-    color: #fff;
-    outline: none;
-}
-
-.newsletter-form button {
-    padding: 0 20px;
-    background-color: var(--colore-accento);
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.newsletter-form button:hover {
-    background-color: #c9a063;
-}
-
-.footer-bottom {
-    text-align: center;
-    margin-top: 50px;
-    padding-top: 20px;
-    border-top: 1px solid #1a1a1a;
-    font-size: 0.85rem;
-    color: #666;
-}
-
-/* =========================================
-   PAGINA INFO / CUSTOMER CARE
-   ========================================= */
-.contenitore-info {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px;
-    color: #e0e0e0;
-}
-
-.info-section {
-    background-color: #111;
-    padding: 40px;
-    margin-bottom: 40px;
-    border-radius: 8px;
-    border: 1px solid #222;
-    scroll-margin-top: 80px; 
-}
-
-.info-section h3 {
-    color: var(--colore-accento);
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #333;
-    padding-bottom: 10px;
-}
-
-.info-section h3 i {
-    margin-right: 10px;
-    color: #fff;
-}
-
-.info-section p {
-    line-height: 1.8;
-    margin-bottom: 15px;
-    font-size: 1.05rem;
-    color: #ccc;
-}
-
-.info-section ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-.info-section ul li {
-    margin-bottom: 10px;
-    color: #ccc;
-}
-
-.info-section ul li strong {
-    color: #fff;
-}
-
-.faq-item {
-    margin-bottom: 25px;
-}
-
-.faq-item h4 {
-    color: #fff;
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-}
-
-/* =========================================
-   PAGINA TROVA ROUTINE (QUIZ)
-   ========================================= */
-.routine-quiz-container, .routine-results-container {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
-}
-
-.quiz-header {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.quiz-header h2 {
-    color: var(--colore-accento);
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-}
-
-.quiz-step {
-    background-color: #111;
-    border: 1px solid #222;
-    padding: 30px;
-    border-radius: 12px;
-    margin-bottom: 30px;
-}
-
-.quiz-step h3 {
-    color: #fff;
-    font-size: 1.3rem;
-    margin-bottom: 20px;
-}
-
-.quiz-options {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
-.option-card input[type="radio"] {
-    display: none;
-}
-
-.option-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 25px 20px;
-    background-color: #1a1a1a;
-    border: 2px solid #333;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.option-content i {
-    font-size: 2rem;
-    color: var(--colore-accento);
-    margin-bottom: 15px;
-}
-
-.option-content strong {
-    color: #fff;
-    font-size: 1.1rem;
-    margin-bottom: 5px;
-}
-
-.option-content small {
-    color: #888;
-    font-size: 0.85rem;
-}
-
-.option-card:hover .option-content {
-    border-color: #555;
-    background-color: #222;
-}
-
-.option-card input[type="radio"]:checked + .option-content {
-    border-color: var(--colore-accento);
-    background-color: #251f15;
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
-}
-
-.btn-quiz-submit {
-    background-color: var(--colore-accento);
-    color: #000;
-    font-weight: bold;
-    font-size: 1.1rem;
-    padding: 15px 40px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    letter-spacing: 1px;
-}
-
-.btn-quiz-submit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
-}
-
-.results-header {
-    text-align: center;
-    background-color: #111;
-    padding: 40px;
-    border-radius: 12px;
-    border: 1px solid #222;
-    margin-bottom: 40px;
-}
-
-.badge-routine {
-    background-color: #222;
-    color: var(--colore-accento);
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.routine-desc {
-    color: #ccc;
-    font-size: 1.1rem;
-    line-height: 1.6;
-    max-width: 600px;
-    margin: 20px auto;
-}
-
-.btn-Ripeti-quiz {
-    display: inline-block;
-    color: #aaa;
-    text-decoration: none;
-    font-size: 0.9rem;
-    margin-top: 10px;
-    transition: color 0.3s;
-}
-.btn-Ripeti-quiz:hover {
-    color: #fff;
-}
-.results-title {
-    color: #fff;
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-/* =========================================
-   BOTTONE PANNELLO ADMIN (HEADER)
-   ========================================= */
-.btn-admin {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 0.95rem;
-    margin-left: 15px;
-    margin-right: 15px;
-    padding: 5px 10px;
-    border: 1px solid #fff;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-}
-
-.btn-admin:hover {
-    background-color: #fff;
-    color: #000;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-}
-
-/* =========================================
-   MODALE (POP-UP) CONFERMA ELIMINAZIONE
-   ========================================= */
-.modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: 2000;
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(4px);
-}
-
-.modal-content {
-    background: #1a1a1a;
-    border: 1px solid #333;
-    border-radius: 12px;
-    width: 90%;
-    max-width: 400px;
-    padding: 30px;
-    text-align: center;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.7);
-    animation: modalFadeIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-@keyframes modalFadeIn {
-    from { opacity: 0; transform: translateY(-30px) scale(0.95); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-.modal-header .warning-icon {
-    font-size: 3.5rem;
-    color: var(--colore-errore);
-    margin-bottom: 15px;
-}
-
-.modal-header h3 {
-    color: #fff;
-    margin-bottom: 15px;
-    font-size: 1.5rem;
-}
-
-.modal-body p {
-    color: #aaa;
-    margin-bottom: 10px;
-}
-
-.modal-body .warning-text {
-    color: var(--colore-errore);
-    font-size: 0.85rem;
-    font-weight: bold;
-    margin-top: 15px;
-    margin-bottom: 25px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.modal-footer {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-
-.btn-modal-annulla {
-    background: #333; color: #fff; border: none; padding: 12px 25px; border-radius: 6px; cursor: pointer; transition: background 0.3s; font-weight: bold;
-}
-.btn-modal-annulla:hover { background: #555; }
-
-.btn-modal-conferma {
-    background: var(--colore-errore); color: #fff; border: none; padding: 12px 25px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.3s; box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
-}
-.btn-modal-conferma:hover { background: #c0392b; transform: translateY(-2px); }
-
-/* =========================================
-   FORM INSERIMENTO E MODIFICA PRODOTTI (AREA ADMIN)
-   ========================================= */
 .form-container { background: #1e1e1e; padding: 40px; border-radius: 8px; margin-top: 20px; }
 .form-group { margin-bottom: 20px; }
 .form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--colore-accento); }
@@ -1361,75 +184,9 @@ html {
 }
 .btn-salva:hover { background-color: #d68910; }
 
-/* =========================================
-   BADGE NOTIFICA CARRELLO (AJAX)
-   ========================================= */
-.cart-badge {
-    position: absolute;
-    top: -8px;
-    right: -5px;
-    background-color: var(--colore-errore);
-    color: white;
-    border-radius: 50%;
-    padding: 3px 6px;
-    font-size: 0.75rem;
-    font-weight: bold;
-    min-width: 12px;
-    text-align: center;
-    line-height: 1;
-    box-shadow: 0px 2px 4px rgba(0,0,0,0.4);
-}
+.admin-section-title { margin-top: 40px; color: var(--colore-accento); border-bottom: 1px solid #333; padding-bottom: 10px; }
 
-/* ==========================================================================
-   AREA CONFERMA ORDINE
-   ========================================================================== */
-.container-conferma-ordine {
-    text-align: center;
-    padding: 100px 20px;
-    min-height: 50vh;
-}
-
-.container-conferma-ordine .icona-successo {
-    font-size: 5rem;
-    color: var(--colore-successo);
-    margin-bottom: 20px;
-}
-
-.container-conferma-ordine .titolo-conferma {
-    color: var(--colore-accento);
-    font-size: 3rem;
-    margin-bottom: 20px;
-    line-height: 1.2;
-}
-
-.container-conferma-ordine .testo-conferma {
-    font-size: 1.2rem;
-    color: #ccc;
-    margin-bottom: 40px;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.6;
-}
-
-/* ==========================================================================
-   PANNELLO AMMINISTRATORE (DASHBOARD)
-   ========================================================================== */
-
-.admin-section-title {
-    margin-top: 40px;
-    color: var(--colore-accento);
-    border-bottom: 1px solid #333;
-    padding-bottom: 10px;
-}
-
-.alert {
-    padding: 15px;
-    border-radius: 4px;
-    margin-bottom: 25px;
-    font-weight: bold;
-    text-align: center;
-}
+.alert { padding: 15px; border-radius: 4px; margin-bottom: 25px; font-weight: bold; text-align: center; }
 .alert-success { background-color: var(--colore-successo); color: #121212; border-left: 5px solid #27ae60; }
 .alert-danger { background-color: var(--colore-errore); color: #fff; border-left: 5px solid #c0392b; }
 .alert-warning { background-color: #f39c12; color: #fff; border-left: 5px solid #d68910; }
@@ -1438,476 +195,429 @@ html {
 .testo-stato-ordine { color: #f1c40f; }
 .testo-esaurimento { color: var(--colore-errore); font-weight: bold; }
 
-.form-inline {
-    display: inline;
-    margin: 0;
-    padding: 0;
-}
+.form-inline { display: inline; margin: 0; padding: 0; }
+.select-stato { padding: 5px; background: #333; color: white; border: none; }
+.container-azioni-tabella { display: flex; gap: 10px; align-items: center; }
 
-.select-stato {
-    padding: 5px;
-    background: #333;
-    color: white;
-    border: none;
-}
-
-.container-azioni-tabella {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-.btn-nuovo-prodotto {
-    background-color: #27ae60;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 4px;
-    display: inline-block;
-}
+.btn-nuovo-prodotto { background-color: #27ae60; color: white; padding: 10px 20px; text-decoration: none; font-weight: bold; border-radius: 4px; display: inline-block; }
 .btn-nuovo-prodotto:hover { background-color: #219150; }
-
-.btn-modifica {
-    background-color: #f39c12;
-    color: #fff;
-    padding: 5px 10px;
-    text-decoration: none;
-    border-radius: 3px;
-    font-weight: bold;
-    font-size: 0.9em;
-}
+.btn-modifica { background-color: #f39c12; color: #fff; padding: 5px 10px; text-decoration: none; border-radius: 3px; font-weight: bold; font-size: 0.9em; }
 .btn-modifica:hover { background-color: #d68910; }
-
-.btn-elimina {
-    background-color: var(--colore-errore);
-    color: #fff;
-    border: none;
-    padding: 6px 10px;
-    border-radius: 3px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 0.9em;
-}
+.btn-elimina { background-color: var(--colore-errore); color: #fff; border: none; padding: 6px 10px; border-radius: 3px; font-weight: bold; cursor: pointer; font-size: 0.9em; }
 .btn-elimina:hover { background-color: #c0392b; }
 
 .margin-y-15 { margin: 15px 0; }
 .container-torna-home { text-align: center; margin-top: 30px; }
 .link-back { color: #bbb; text-decoration: none; }
 .link-back:hover { color: #fff; }
-
 .modal-product-name { color: #fff; font-size: 1.1rem; }
 
 /* ==========================================================================
-   CATALOGO PRODOTTI
+   4. AREA PUBBLICA - HEADER E MENU
    ========================================================================== */
-.banner-catalogo {
-    background-color: #1a1a1a;
-    border-bottom: 1px solid var(--colore-primario);
-    padding: 40px 20px;
-    text-align: center;
-    margin-bottom: 30px;
+.area-pubblica .barra-utente {
+    display: flex; justify-content: flex-end; align-items: center; gap: 20px; padding: 10px 20px; border-bottom: 1px solid #2C2C2C; background-color: var(--sfondo-principale);
 }
+.area-pubblica .link-carrello {
+    color: var(--colore-accento); text-decoration: none; font-weight: bold; font-size: 1rem; display: flex; align-items: center; gap: 5px; position: relative; padding-right: 15px;
+}
+.area-pubblica .btn-login { background-color: var(--colore-primario); color: white; text-decoration: none; padding: 8px 18px; border-radius: 4px; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; }
+.area-pubblica .menu-utente-loggato { display: flex; align-items: center; gap: 15px; }
+.area-pubblica .link-profilo { color: #bbb; font-size: 0.95rem; text-decoration: none; transition: 0.3s; }
+.area-pubblica .link-profilo:hover { color: var(--colore-primario); }
+.area-pubblica .link-profilo strong { color: var(--testo-principale); }
+.area-pubblica .btn-logout { color: #ff4d4d; text-decoration: none; font-size: 0.9rem; border: 1px solid #ff4d4d; padding: 5px 12px; border-radius: 4px; transition: 0.3s; }
+.area-pubblica .btn-logout:hover { background-color: #ff4d4d; color: white; }
 
-.banner-titolo {
-    color: var(--colore-accento);
-    font-size: 2.2rem;
-    letter-spacing: 2px;
-    margin: 0;
-}
+.area-pubblica nav { background-color: #1a1a1a; padding: 10px 0; }
+.area-pubblica nav ul { list-style-type: none; margin: 0; padding: 0; display: flex; justify-content: center; gap: 30px; }
+.area-pubblica nav ul li { position: relative; }
+.area-pubblica nav ul li a { color: var(--testo-principale); text-decoration: none; font-weight: 600; text-transform: uppercase; font-size: 0.9rem; transition: color 0.3s ease; }
+.area-pubblica nav ul li a:hover { color: var(--colore-primario); }
 
-.banner-sottotitolo {
-    color: #bbb;
-    font-size: 1.1rem;
-    margin-top: 10px;
-}
+.area-pubblica .dropdown-content { display: none; position: absolute; background-color: #1a1a1a; min-width: 200px; box-shadow: 0px 8px 16px rgba(0,0,0,0.5); z-index: 100; border-top: 2px solid var(--colore-primario); padding: 10px 0; text-align: left; }
+.area-pubblica .dropdown-content a { padding: 12px 20px; display: block; font-size: 0.8rem; text-transform: capitalize; }
+.area-pubblica .dropdown-content a:hover { background-color: #2c2c2c; color: var(--colore-accento); }
+.area-pubblica nav ul li:hover .dropdown-content { display: block; }
 
-.link-immagine-prodotto {
-    display: block;
-}
-
-.form-ajax-carrello {
-    margin-top: 15px;
-}
-
-.messaggio-catalogo-vuoto {
-    grid-column: 1 / -1;
-    text-align: center;
-    color: #888;
-    padding: 40px;
-}
-
-/* =========================================
-   LAYOUT CATALOGO CON SIDEBAR FILTRI
-   ========================================= */
-.layout-catalogo {
-    max-width: 1300px;
-    margin: 40px auto;
-    padding: 0 20px;
-    display: flex;
-    gap: 30px;
-    align-items: flex-start;
-}
-
-.layout-catalogo .contenitore-prodotti {
-    flex: 1;
-    margin: 0; 
-    padding: 0;
-}
-
-.sidebar-filtri {
-    flex: 0 0 280px;
-    background-color: var(--sfondo-card);
-    border: 1px solid rgba(150, 150, 150, 0.2);
-    border-radius: 8px;
-    padding: 25px;
-    position: sticky;
-    top: 20px;
-}
-
-.sidebar-filtri h3 {
-    color: var(--colore-accento);
-    margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 1.4rem;
-    border-bottom: 1px solid rgba(150, 150, 150, 0.2);
-    padding-bottom: 10px;
-}
-
-.gruppo-filtro {
-    margin-bottom: 25px;
-}
-
-.gruppo-filtro h4 {
-    color: var(--testo-principale);
-    margin-bottom: 15px;
-    font-size: 1.1rem;
-}
-
-.gruppo-filtro label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
-    color: #ccc;
-    cursor: pointer;
-    font-size: 0.95rem;
-    transition: color 0.2s;
-}
-
-.gruppo-filtro label:hover {
-    color: var(--colore-accento);
-}
-
-.btn-applica-filtri {
-    width: 100%;
-    background-color: var(--colore-accento);
-    color: var(--sfondo-principale);
-    border: none;
-    padding: 12px;
-    font-weight: bold;
-    border-radius: 4px;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: background-color 0.3s;
-    margin-top: 10px;
-}
-
-.btn-applica-filtri:hover {
-    background-color: #bfa030;
-}
-
-@media (max-width: 900px) {
-    .layout-catalogo {
-        flex-direction: column;
-    }
-    .sidebar-filtri {
-        width: 100%;
-        flex: none;
-        position: static;
-    }
-}
+.btn-admin { color: #fff; text-decoration: none; font-weight: bold; font-size: 0.95rem; margin-left: 15px; margin-right: 15px; padding: 5px 10px; border: 1px solid #fff; border-radius: 4px; transition: all 0.3s ease; }
+.btn-admin:hover { background-color: #fff; color: #000; box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); }
 
 /* ==========================================================================
-   HOME PAGE
+   5. AREA PUBBLICA - HOMEPAGE E HERO CAROUSEL
    ========================================================================== */
-.titolo-sezione-novita {
-    text-align: center;
-    color: var(--colore-accento);
-    margin-top: 60px;
-    margin-bottom: 10px;
-    font-size: 2.5rem;
-    letter-spacing: 1px;
-}
+.area-pubblica .hero-carousel { position: relative; height: 70vh; min-height: 500px; width: 100%; overflow: hidden; border-bottom: 2px solid var(--colore-primario); }
+.area-pubblica .carousel-track-container { height: 100%; width: 100%; }
+.area-pubblica .carousel-track { padding: 0; margin: 0; list-style: none; height: 100%; width: 100%; animation: slideUp 1.2s ease-out forwards; opacity: 0; transform: translateY(40px); }
+.area-pubblica .carousel-slide { position: absolute; top: 0; bottom: 0; width: 100%; display: flex; align-items: center; justify-content: flex-start; padding: 0 8%; opacity: 0; transition: opacity 1s ease-in-out; }
+.area-pubblica .carousel-slide.current-slide { opacity: 1; z-index: 1; }
+.area-pubblica .carousel-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.area-pubblica .carousel-slide::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(18, 18, 18, 0.95) 0%, rgba(18, 18, 18, 0.1) 100%); z-index: -1; }
+
+.area-pubblica .hero-content { max-width: 700px; }
+.area-pubblica .hero-content h2 { font-size: 4rem; color: var(--colore-accento); margin: 0 0 15px 0; line-height: 1.1; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); }
+.area-pubblica .hero-content p { font-size: 1.3rem; color: var(--testo-principale); margin-bottom: 35px; line-height: 1.6; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); }
+.area-pubblica .btn-hero { display: inline-block; background-color: var(--colore-accento); color: var(--sfondo-principale); padding: 15px 35px; font-size: 1.2rem; font-weight: bold; text-transform: uppercase; text-decoration: none; border-radius: 4px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); }
+.area-pubblica .btn-hero:hover { background-color: #bfa030; transform: scale(1.05); box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6); }
+
+.area-pubblica .carousel-button { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(26, 26, 26, 0.6); border: 1px solid rgba(255, 255, 255, 0.3); color: white; font-size: 20px; padding: 15px; border-radius: 50%; cursor: pointer; z-index: 10; transition: 0.3s; }
+.area-pubblica .carousel-button:hover { background-color: var(--colore-primario); border-color: transparent; }
+.area-pubblica .carousel-button-left { left: 20px; }
+.area-pubblica .carousel-button-right { right: 20px; }
+
+.area-pubblica .carousel-nav { display: flex; justify-content: center; gap: 10px; padding: 15px 0; position: absolute; bottom: 20px; width: 100%; z-index: 10; }
+.area-pubblica .carousel-indicator { border: 0; border-radius: 50%; width: 12px; height: 12px; background-color: rgba(255, 255, 255, 0.3); cursor: pointer; transition: 0.3s; }
+.area-pubblica .carousel-indicator.current-slide { background-color: var(--colore-accento); box-shadow: 0 0 10px rgba(212, 175, 55, 0.6); }
+
+@keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+.area-pubblica .is-hidden { display: none; }
+
+.titolo-sezione-novita { text-align: center; color: var(--colore-accento); margin-top: 60px; margin-bottom: 10px; font-size: 2.5rem; letter-spacing: 1px; }
 
 /* ==========================================================================
-   INPUT PASSWORD
+   6. AREA PUBBLICA - CATALOGO PRODOTTI
    ========================================================================== */
-.password-wrapper {
-    position: relative;
-}
+.area-pubblica .contenitore-prodotti { max-width: 1200px; margin: 40px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+.area-pubblica .card-prodotto { background-color: var(--sfondo-card); border-radius: 8px; padding: 20px; text-align: center; border: 1px solid #2C2C2C; transition: transform 0.3s ease, border-color 0.3s ease; }
+.area-pubblica .card-prodotto:hover { transform: translateY(-5px); border-color: var(--colore-primario); }
+.area-pubblica .img-prodotto { max-width: 100%; height: 200px; object-fit: cover; border-radius: 4px; transition: transform 0.3s ease; }
+.area-pubblica .img-prodotto:hover { transform: scale(1.05); }
+.area-pubblica .card-prodotto h3 { margin: 15px 0 10px 0; font-size: 1.2rem; }
+.area-pubblica .link-titolo-prodotto { color: inherit; text-decoration: none; transition: color 0.3s ease; }
+.area-pubblica .link-titolo-prodotto:hover { color: var(--colore-primario); }
+.area-pubblica .card-prodotto .prezzo { color: var(--colore-accento); font-size: 1.3rem; font-weight: bold; margin: 10px 0; }
+.area-pubblica .btn-acquista { background-color: var(--colore-accento); color: var(--sfondo-principale); border: none; padding: 10px 20px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 0.85rem; width: 100%; transition: background-color 0.3s ease; }
+.area-pubblica .btn-acquista:hover { background-color: #bfa030; }
 
-.input-password-toggle {
-    padding-right: 40px;
-}
+.banner-catalogo { background-color: #1a1a1a; border-bottom: 1px solid var(--colore-primario); padding: 40px 20px; text-align: center; margin-bottom: 30px; }
+.banner-titolo { color: var(--colore-accento); font-size: 2.2rem; letter-spacing: 2px; margin: 0; }
+.banner-sottotitolo { color: #bbb; font-size: 1.1rem; margin-top: 10px; }
+.link-immagine-prodotto { display: block; }
+.form-ajax-carrello { margin-top: 15px; }
+.messaggio-catalogo-vuoto { grid-column: 1 / -1; text-align: center; color: #888; padding: 40px; }
 
-.icon-toggle-password {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    font-size: 1.1rem;
-    color: #bbb;
-    user-select: none;
-    transition: color 0.3s ease;
-}
+.layout-catalogo { max-width: 1300px; margin: 40px auto; padding: 0 20px; display: flex; gap: 30px; align-items: flex-start; }
+.layout-catalogo .contenitore-prodotti { flex: 1; margin: 0; padding: 0; }
 
-.icon-toggle-password:hover {
-    color: var(--colore-primario);
-}
+.sidebar-filtri { flex: 0 0 280px; background-color: var(--sfondo-card); border: 1px solid rgba(150, 150, 150, 0.2); border-radius: 8px; padding: 25px; position: sticky; top: 20px; }
+.sidebar-filtri h3 { color: var(--colore-accento); margin-top: 0; margin-bottom: 20px; font-size: 1.4rem; border-bottom: 1px solid rgba(150, 150, 150, 0.2); padding-bottom: 10px; }
+.gruppo-filtro { margin-bottom: 25px; }
+.gruppo-filtro h4 { color: var(--testo-principale); margin-bottom: 15px; font-size: 1.1rem; }
+.gruppo-filtro label { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; color: #ccc; cursor: pointer; font-size: 0.95rem; transition: color 0.2s; }
+.gruppo-filtro label:hover { color: var(--colore-accento); }
+.btn-applica-filtri { width: 100%; background-color: var(--colore-accento); color: var(--sfondo-principale); border: none; padding: 12px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; transition: background-color 0.3s; margin-top: 10px; }
+.btn-applica-filtri:hover { background-color: #bfa030; }
 
 /* ==========================================================================
-   COMPONENTI FORM 
+   7. AREA AUTENTICAZIONE E UTENTE (Login, Registrazione)
    ========================================================================== */
-.checkbox-group {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-}
+.area-auth { display: flex; flex-direction: column; min-height: 100vh; }
+.area-auth header a { text-decoration: none; }
 
-.checkbox-group input[type="checkbox"] {
-    width: auto;
-}
+.area-auth .container-registrazione { max-width: 600px; margin: 40px auto; background-color: var(--sfondo-card); padding: 40px; border-radius: 8px; border: 1px solid #2C2C2C; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+.area-auth h2 { text-align: center; color: var(--testo-principale); border-bottom: 2px solid var(--colore-primario); padding-bottom: 10px; margin-top: 0; margin-bottom: 30px; }
+.area-auth .riga-doppia { display: flex; gap: 20px; }
+.area-auth .riga-doppia .gruppo-form { flex: 1; }
+.area-auth .gruppo-form { margin-bottom: 35px; position: relative; }
+.area-auth .gruppo-form label { display: block; margin-bottom: 8px; color: #bbb; font-size: 0.9rem; }
+.area-auth .gruppo-form input { width: 100%; padding: 12px; border: 1px solid #333; background-color: #121212; color: white; border-radius: 4px; box-sizing: border-box; font-size: 1rem; transition: border-color 0.3s; }
+.area-auth .gruppo-form input:focus { border-color: var(--colore-accento); outline: none; }
 
-.checkbox-label {
-    margin-bottom: 0;
-    display: inline;
-    color: #fff;
-    font-weight: normal;
-}
+.area-auth .input-errore { border-color: var(--colore-errore) !important; background-color: rgba(231, 76, 60, 0.05) !important; }
+.area-auth .messaggio-errore-js { color: var(--colore-errore); font-size: 0.8rem; display: none; font-weight: bold; position: absolute; top: 100%; left: 0; margin-top: 4px; line-height: 1.2; }
 
-.form-actions {
-    margin-top: 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+.area-auth .link-login { text-align: center; margin-top: 25px; font-size: 0.95rem; color: #bbb; }
+.area-auth .link-login a { color: var(--colore-primario); text-decoration: none; font-weight: bold; }
+.area-auth .container-login { max-width: 450px; margin: 60px auto; background-color: var(--sfondo-card); padding: 40px; border-radius: 8px; border: 1px solid #2C2C2C; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
 
-.link-annulla {
-    color: #bbb;
-    text-decoration: none;
-}
-
-.link-annulla:hover {
-    color: #fff;
-}
+.area-auth .messaggio-errore { background-color: rgba(231, 76, 60, 0.1); color: var(--colore-errore); padding: 10px; border: 1px solid var(--colore-errore); border-radius: 4px; margin-bottom: 20px; text-align: center; font-size: 0.9rem; }
+.area-auth .messaggio-successo { background-color: rgba(46, 204, 113, 0.1); color: var(--colore-successo); padding: 10px; border: 1px solid var(--colore-successo); border-radius: 4px; margin-bottom: 20px; text-align: center; font-size: 0.9rem; font-weight: bold; }
+.area-auth .link-registrazione { text-align: center; margin-top: 25px; font-size: 0.95rem; color: #bbb; }
+.area-auth .link-registrazione a { color: var(--colore-primario); text-decoration: none; font-weight: bold; }
+.area-auth .link-registrazione a:hover { color: #a55eea; text-decoration: underline; }
 
 /* ==========================================================================
-   ROUTINE
+   8. AREA CARRELLO E CHECKOUT
    ========================================================================== */
-.container-submit-quiz {
-    text-align: center;
-    margin-top: 40px;
-}
+.area-carrello .container-navigazione { max-width: 1000px; margin: 0 auto; padding: 20px; }
+.area-carrello .btn-indietro { color: var(--colore-accento); text-decoration: none; font-weight: bold; }
+.area-carrello .btn-indietro:hover { color: var(--colore-primario); }
+.area-carrello .container-carrello { max-width: 1000px; margin: 20px auto; background-color: var(--sfondo-card); padding: 30px; border-radius: 8px; border: 1px solid #2C2C2C; }
+.area-carrello h2 { border-bottom: 2px solid var(--colore-primario); padding-bottom: 10px; margin-top: 0; }
+.area-carrello .messaggio-vuoto { text-align: center; font-size: 1.2rem; color: #888; margin: 40px 0; }
+.area-carrello table { margin-bottom: 30px; }
+.area-carrello th { color: var(--colore-accento); font-size: 0.9rem; }
+.area-carrello .img-carrello { width: 80px; height: 80px; object-fit: contain; border-radius: 4px; }
+.area-carrello .nome-prodotto { font-weight: bold; }
+.area-carrello .totale-riga { font-weight: bold; color: var(--colore-primario); }
+.area-carrello .riepilogo-totale { text-align: right; font-size: 1.5rem; margin-bottom: 20px; }
+.area-carrello .riepilogo-totale span { color: var(--colore-accento); font-weight: bold; }
+.area-carrello .azioni-carrello { display: flex; justify-content: flex-end; gap: 15px; }
+.area-carrello .form-svuota { margin: 0; }
 
-.testo-accento {
-    color: var(--colore-accento);
-}
+.area-carrello .btn { padding: 12px 25px; border: none; border-radius: 4px; font-weight: bold; text-transform: uppercase; cursor: pointer; transition: 0.3s; text-decoration: none; display: inline-block; text-align: center; }
+.area-carrello .btn-primario { background-color: var(--colore-accento); color: var(--sfondo-principale); }
+.area-carrello .btn-primario:hover { background-color: #bfa030; }
+.area-carrello .btn-secondario { background-color: transparent; color: #ff4d4d; border: 1px solid #ff4d4d; }
+.area-carrello .btn-secondario:hover { background-color: #ff4d4d; color: white; }
 
-/* =========================================
-   STELLE CLICCABILI (RATING)
-   ========================================= */
-.star-rating {
-    display: inline-flex;
-    flex-direction: row-reverse;
-    justify-content: flex-end;
-    align-items: center;
-}
+.area-checkout .container-checkout { max-width: 1100px; margin: 40px auto; padding: 0 20px; display: flex; gap: 40px; flex-wrap: wrap; }
+.area-checkout .sezione-dati, .area-checkout .sezione-riepilogo { background-color: var(--sfondo-card); padding: 30px; border-radius: 8px; border: 1px solid #2C2C2C; }
+.area-checkout .sezione-dati { flex: 2; min-width: 350px; }
+.area-checkout .sezione-riepilogo { flex: 1; min-width: 300px; height: fit-content; }
+.area-checkout h2 { border-bottom: 2px solid var(--colore-primario); padding-bottom: 10px; margin-top: 0; font-size: 1.5rem; }
+.area-checkout .gruppo-form { margin-bottom: 20px; }
+.area-checkout .gruppo-form label { display: block; margin-bottom: 8px; color: #bbb; font-size: 0.9rem; }
+.area-checkout .asterisco { color: var(--colore-errore); font-weight: bold; margin-left: 3px; }
+.area-checkout .gruppo-form input, .area-checkout .gruppo-form select { width: 100%; padding: 12px; border: 1px solid #333; background-color: #121212; color: white; border-radius: 4px; box-sizing: border-box; font-size: 1rem; transition: border-color 0.3s; }
+.area-checkout .gruppo-form input:focus, .area-checkout .gruppo-form select:focus { border-color: var(--colore-accento); outline: none; }
+.area-checkout .form-tentato input:invalid, .area-checkout .form-tentato select:invalid { border-color: var(--colore-errore); background-color: rgba(231, 76, 60, 0.05); }
+.area-checkout .riga-doppia { display: flex; gap: 20px; }
+.area-checkout .riga-doppia .gruppo-form { flex: 1; }
+.area-checkout .lista-riepilogo { margin-bottom: 20px; max-height: 200px; overflow-y: auto; padding-right: 5px; }
+.area-checkout .item-riepilogo { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 0.95rem; color: #ccc; }
+.area-checkout .spedizione-gratis { color: var(--colore-successo); font-weight: bold; }
+.area-checkout .totale-finalizzato { display: flex; justify-content: space-between; font-size: 1.4rem; font-weight: bold; border-top: 1px solid #333; padding-top: 15px; margin-top: 15px; color: var(--colore-accento); }
+.area-checkout #messaggio-errore { display: none; color: var(--colore-errore); text-align: center; margin-top: 15px; font-weight: bold; font-size: 0.95rem; }
+.area-checkout .carrello-vuoto-checkout { text-align: center; width: 100%; margin-top: 50px; }
+.area-checkout .carrello-vuoto-checkout a { color: var(--colore-accento); text-decoration: none; }
 
-/* Nascondiamo i veri pallini del radio button */
-.star-rating input[type="radio"] {
-    display: none;
-}
-
-/* Stile base delle stelle (spente/grigie) */
-.star-rating label {
-    color: #444; 
-    font-size: 2.2rem;
-    padding: 0 4px;
-    cursor: pointer;
-    transition: color 0.2s ease, transform 0.2s ease;
-}
-
-/* Colora di dorato la stella selezionata e tutte quelle che la precedono */
-.star-rating input[type="radio"]:checked ~ label {
-    color: var(--colore-accento);
-}
-
-/* Effetto Hover: si colorano le stelle sotto il mouse */
-.star-rating label:hover,
-.star-rating label:hover ~ label {
-    color: #f1c40f; 
-}
-
-/* Piccolo effetto "pop" (ingrandimento) quando passi il mouse su una stella */
-.star-rating label:hover {
-    transform: scale(1.15);
-}
-
-/* =========================================
-   BARRA DI RICERCA
-   ========================================= */
-.container-ricerca {
-    display: flex;
-    align-items: center;
-    margin-right: auto;
-    margin-left: 20px;
-}
-
-.form-ricerca {
-    display: flex;
-    width: 100%;
-    min-width: 350px;
-    height: 40px;
-    border: 1px solid rgba(212, 175, 55, 0.5); 
-    border-radius: 25px;
-    overflow: hidden;
-}
-
-.form-ricerca input[type="text"] {
-    flex: 1;
-    padding: 0 20px;
-    background-color: var(--sfondo-card);
-    border: none;
-    color: var(--testo-principale);
-    outline: none;
-    font-size: 0.95rem;
-}
-
-.form-ricerca button {
-    background-color: var(--colore-accento);
-    color: var(--sfondo-principale);
-    border: none;
-    padding: 0 20px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.form-ricerca button:hover {
-    background-color: #bfa030;
-}
+.container-conferma-ordine { text-align: center; padding: 100px 20px; min-height: 50vh; }
+.container-conferma-ordine .icona-successo { font-size: 5rem; color: var(--colore-successo); margin-bottom: 20px; }
+.container-conferma-ordine .titolo-conferma { color: var(--colore-accento); font-size: 3rem; margin-bottom: 20px; line-height: 1.2; }
+.container-conferma-ordine .testo-conferma { font-size: 1.2rem; color: #ccc; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6; }
 
 /* ==========================================================================
-   LAYOUT RESPONSIVO (BREAK POINTS)
+   9. AREA PROFILO UTENTE E ORDINI
    ========================================================================== */
+.area-profilo .container-profilo { max-width: 900px; margin: 0 auto; }
+.area-profilo .header-profilo { text-align: center; padding-bottom: 20px; border-bottom: 1px solid #2C2C2C; margin-bottom: 30px; }
+.area-profilo .header-profilo h1 { color: var(--colore-accento); }
+.area-profilo .email-utente { color: #888; font-size: 0.9rem; }
+.area-profilo .titolo-storico { color: var(--colore-accento); margin-bottom: 15px; }
 
+.area-profilo table { background-color: var(--sfondo-card); border-radius: 8px; overflow: hidden; }
+.area-profilo th { background-color: #1a1a1a; color: var(--colore-primario); }
+.area-profilo tr:hover { background-color: #252525; }
+.area-profilo .stato-badge { background-color: rgba(46, 204, 113, 0.1); color: var(--colore-successo); padding: 5px 10px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; }
+.area-profilo .totale-ordine { font-weight: bold; }
+.area-profilo .colonna-azioni { text-align: right; }
+.area-profilo .btn-dettagli { color: var(--colore-accento); text-decoration: none; font-size: 0.9rem; border: 1px solid var(--colore-accento); padding: 5px 10px; border-radius: 4px; transition: 0.3s; }
+.area-profilo .btn-dettagli:hover { background-color: var(--colore-accento); color: #121212; }
+.area-profilo .nessun-ordine { text-align: center; padding: 40px; color: #bbb; background-color: var(--sfondo-card); border-radius: 8px; }
+.area-profilo .nessun-ordine h3 { margin: 0 0 10px 0; }
+.area-profilo .btn-home { display: inline-block; margin-top: 20px; color: var(--colore-primario); text-decoration: none; font-weight: bold; }
 
+.area-dettaglio-ordine .container-dettaglio-ordine { max-width: 800px; margin: 0 auto; background-color: var(--sfondo-card); padding: 30px; border-radius: 8px; margin-top: 20px; }
+.area-dettaglio-ordine h1 { color: var(--colore-accento); text-align: center; border-bottom: 1px solid #2C2C2C; padding-bottom: 20px; }
+.area-dettaglio-ordine table { margin-top: 20px; }
+.area-dettaglio-ordine th { color: var(--colore-primario); }
+.area-dettaglio-ordine .subtotale-riga { font-weight: bold; color: var(--colore-accento); }
+.area-dettaglio-ordine .azioni-dettaglio { display: flex; justify-content: space-between; align-items: center; margin-top: 30px; }
+.area-dettaglio-ordine .btn-back { color: var(--colore-primario); text-decoration: none; font-weight: bold; }
+.area-dettaglio-ordine .btn-back:hover { text-decoration: underline; }
+.area-dettaglio-ordine .btn-fattura { background-color: var(--colore-accento); color: var(--sfondo-principale); padding: 10px 20px; text-decoration: none; font-weight: bold; border-radius: 4px; transition: 0.3s; display: inline-block; }
+.area-dettaglio-ordine .btn-fattura:hover { background-color: #bfa030; }
+
+/* ==========================================================================
+   10. AREA DETTAGLIO PRODOTTO E RECENSIONI
+   ========================================================================== */
+.area-dettaglio .container-navigazione { max-width: 1000px; margin: 0 auto; padding: 20px; }
+.area-dettaglio .btn-indietro { color: var(--colore-accento); text-decoration: none; font-weight: bold; font-size: 1.1rem; transition: color 0.3s; }
+.area-dettaglio .btn-indietro:hover { color: var(--colore-primario); }
+
+.area-dettaglio .container-dettaglio { max-width: 1000px; margin: 0 auto 50px auto; padding: 0 20px; display: flex; gap: 50px; flex-wrap: wrap; }
+.area-dettaglio .colonna-sinistra { flex: 1; min-width: 300px; background-color: var(--sfondo-card); border-radius: 8px; padding: 30px; border: 1px solid #2C2C2C; display: flex; justify-content: center; align-items: center; }
+.area-dettaglio .colonna-sinistra img { max-width: 100%; max-height: 500px; object-fit: contain; border-radius: 4px; }
+.area-dettaglio .colonna-destra { flex: 1; min-width: 300px; display: flex; flex-direction: column; justify-content: center; }
+.area-dettaglio .colonna-destra h2 { font-size: 2.5rem; margin: 0 0 15px 0; border-bottom: 2px solid var(--colore-primario); padding-bottom: 15px; }
+.area-dettaglio .colonna-destra .prezzo { color: var(--colore-accento); font-size: 2rem; font-weight: bold; margin: 20px 0; }
+.area-dettaglio .colonna-destra .descrizione { line-height: 1.8; color: #d1d1d1; font-size: 1.1rem; margin-bottom: 40px; }
+.area-dettaglio .btn-aggiungi { background-color: var(--colore-accento); color: var(--sfondo-principale); border: none; padding: 15px 30px; font-size: 1.1rem; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; transition: background-color 0.3s ease, transform 0.2s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+.area-dettaglio .btn-aggiungi:hover { background-color: #bfa030; transform: translateY(-2px); }
+.area-dettaglio .prodotto-non-trovato { text-align: center; margin-top: 50px; }
+.area-dettaglio .prodotto-non-trovato h2 { color: var(--colore-errore); margin-bottom: 10px; }
+
+.sezione-recensioni { max-width: 800px; margin: 60px auto 0 auto; border-top: 1px solid rgba(150, 150, 150, 0.3); padding-top: 40px; }
+.sezione-recensioni h3 { text-align: center; color: var(--colore-accento); font-size: 1.8rem; margin-bottom: 30px; }
+.recensione-alert { background-color: rgba(40, 167, 69, 0.2); color: #28a745; border: 1px solid #28a745; text-align: center; }
+.lista-recensioni { display: flex; flex-direction: column; gap: 20px; }
+.recensione-item { background-color: var(--sfondo-card); border: 1px solid rgba(150, 150, 150, 0.2); border-radius: 8px; padding: 20px 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); }
+.recensione-autore { margin-bottom: 10px; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: center; }
+.stelle-valutazione { color: var(--colore-accento); letter-spacing: 2px; font-size: 1.2rem; }
+.recensione-testo { font-style: italic; margin-bottom: 15px; line-height: 1.5; opacity: 0.9; }
+.recensione-data { display: block; text-align: right; opacity: 0.5; font-size: 0.85rem; }
+.nessuna-recensione { text-align: center; font-style: italic; margin-bottom: 30px; opacity: 0.7; background-color: var(--sfondo-card); padding: 30px; border-radius: 8px; }
+
+.nuova-recensione-box { margin-top: 50px; padding: 30px; border-radius: 12px; background: linear-gradient(145deg, #1e1e1e, #161616); border: 1px solid rgba(212, 175, 55, 0.2); box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4); }
+.nuova-recensione-box h4 { margin-bottom: 25px; text-align: center; font-size: 1.4rem; color: var(--testo-principale); }
+.form-recensione-voto select { width: 100%; padding: 12px; border-radius: 6px; border: 1px solid rgba(150, 150, 150, 0.3); background-color: #121212; color: var(--testo-principale); font-size: 1rem; }
+.form-recensione-voto select option { background-color: #121212; }
+.form-recensione-testo textarea { width: 100%; padding: 15px; border-radius: 6px; border: 1px solid rgba(150, 150, 150, 0.3); background-color: #121212; color: var(--testo-principale); resize: vertical; font-family: inherit; }
+.btn-invio-recensione { display: block; width: 100%; max-width: 300px; margin: 20px auto 0 auto; padding: 15px; border-radius: 30px; font-size: 1.1rem; }
+.avviso-login-recensione { text-align: center; margin: 0; padding: 20px; background-color: rgba(255, 255, 255, 0.05); border-radius: 8px; }
+.avviso-login-recensione a { color: var(--colore-accento); font-weight: bold; text-decoration: underline; transition: color 0.3s; }
+.avviso-login-recensione a:hover { color: var(--colore-primario); }
+
+.star-rating { display: inline-flex; flex-direction: row-reverse; justify-content: flex-end; align-items: center; }
+.star-rating input[type="radio"] { display: none; }
+.star-rating label { color: #444; font-size: 2.2rem; padding: 0 4px; cursor: pointer; transition: color 0.2s ease, transform 0.2s ease; }
+.star-rating input[type="radio"]:checked ~ label { color: var(--colore-accento); }
+.star-rating label:hover, .star-rating label:hover ~ label { color: #f1c40f; }
+.star-rating label:hover { transform: scale(1.15); }
+
+/* ==========================================================================
+   11. ALTRE PAGINE E FOOTER GLOBALE
+   ========================================================================== */
+.brand-philosophy { display: flex; align-items: center; justify-content: space-between; background-color: #111; color: #fff; margin-top: 80px; padding: 0; overflow: hidden; }
+.philosophy-text { flex: 1; padding: 50px 80px; }
+.philosophy-text h2 { font-size: 2.5rem; margin-bottom: 20px; letter-spacing: 1px; }
+.philosophy-text p { font-size: 1.1rem; line-height: 1.8; margin-bottom: 30px; color: #ccc; }
+.btn-outline { display: inline-block; padding: 12px 30px; border: 1px solid #fff; color: #fff; text-decoration: none; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 2px; transition: all 0.3s ease; }
+.btn-outline:hover { background-color: #fff; color: #111; }
+.philosophy-image { flex: 1; display: flex; }
+.philosophy-image img { width: 100%; height: 100%; object-fit: cover; }
+
+.site-footer { background-color: #0a0a0a; color: #e0e0e0; padding: 60px 0 20px 0; margin-top: 50px; border-top: 1px solid #222; }
+.footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; padding: 0 20px; }
+.footer-col h3 { color: var(--colore-accento); letter-spacing: 2px; margin-bottom: 15px; font-size: 1.5rem; }
+.footer-col h4 { color: #fff; margin-bottom: 20px; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; }
+.footer-col p { font-size: 0.9rem; line-height: 1.6; color: #aaa; margin-bottom: 15px; }
+.footer-col ul { list-style: none; padding: 0; }
+.footer-col ul li { margin-bottom: 12px; }
+.footer-col ul li a { color: #aaa; text-decoration: none; font-size: 0.95rem; transition: color 0.3s ease; }
+.footer-col ul li a:hover { color: var(--colore-accento); }
+.social-icons { display: flex; gap: 15px; margin-top: 20px; }
+.social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; background-color: #1a1a1a; color: #fff; border-radius: 50%; text-decoration: none; transition: all 0.3s ease; }
+.social-icons a:hover { background-color: var(--colore-accento); transform: translateY(-3px); }
+.newsletter-form { display: flex; margin-top: 15px; }
+.newsletter-form input { flex: 1; padding: 12px 15px; border: 1px solid #333; background-color: #111; color: #fff; outline: none; }
+.newsletter-form button { padding: 0 20px; background-color: var(--colore-accento); color: #fff; border: none; cursor: pointer; transition: background-color 0.3s ease; }
+.newsletter-form button:hover { background-color: #c9a063; }
+.footer-bottom { text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid #1a1a1a; font-size: 0.85rem; color: #666; }
+
+.contenitore-info { max-width: 900px; margin: 0 auto; padding: 20px; color: #e0e0e0; }
+.info-section { background-color: #111; padding: 40px; margin-bottom: 40px; border-radius: 8px; border: 1px solid #222; scroll-margin-top: 80px; }
+.info-section h3 { color: var(--colore-accento); font-size: 1.8rem; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+.info-section h3 i { margin-right: 10px; color: #fff; }
+.info-section p { line-height: 1.8; margin-bottom: 15px; font-size: 1.05rem; color: #ccc; }
+.info-section ul { list-style: none; padding-left: 0; }
+.info-section ul li { margin-bottom: 10px; color: #ccc; }
+.info-section ul li strong { color: #fff; }
+.faq-item { margin-bottom: 25px; }
+.faq-item h4 { color: #fff; font-size: 1.2rem; margin-bottom: 10px; }
+
+.routine-quiz-container, .routine-results-container { max-width: 800px; margin: 40px auto; padding: 20px; }
+.quiz-header { text-align: center; margin-bottom: 40px; }
+.quiz-header h2 { color: var(--colore-accento); font-size: 2.5rem; margin-bottom: 10px; }
+.quiz-step { background-color: #111; border: 1px solid #222; padding: 30px; border-radius: 12px; margin-bottom: 30px; }
+.quiz-step h3 { color: #fff; font-size: 1.3rem; margin-bottom: 20px; }
+.quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.option-card input[type="radio"] { display: none; }
+.option-content { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 25px 20px; background-color: #1a1a1a; border: 2px solid #333; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; }
+.option-content i { font-size: 2rem; color: var(--colore-accento); margin-bottom: 15px; }
+.option-content strong { color: #fff; font-size: 1.1rem; margin-bottom: 5px; }
+.option-content small { color: #888; font-size: 0.85rem; }
+.option-card:hover .option-content { border-color: #555; background-color: #222; }
+.option-card input[type="radio"]:checked + .option-content { border-color: var(--colore-accento); background-color: #251f15; box-shadow: 0 0 15px rgba(212, 175, 55, 0.1); }
+.btn-quiz-submit { background-color: var(--colore-accento); color: #000; font-weight: bold; font-size: 1.1rem; padding: 15px 40px; border: none; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; letter-spacing: 1px; }
+.btn-quiz-submit:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3); }
+.results-header { text-align: center; background-color: #111; padding: 40px; border-radius: 12px; border: 1px solid #222; margin-bottom: 40px; }
+.badge-routine { background-color: #222; color: var(--colore-accento); padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+.routine-desc { color: #ccc; font-size: 1.1rem; line-height: 1.6; max-width: 600px; margin: 20px auto; }
+.btn-Ripeti-quiz { display: inline-block; color: #aaa; text-decoration: none; font-size: 0.9rem; margin-top: 10px; transition: color 0.3s; }
+.btn-Ripeti-quiz:hover { color: #fff; }
+.results-title { color: #fff; font-size: 1.8rem; margin-bottom: 20px; text-align: center; }
+.container-submit-quiz { text-align: center; margin-top: 40px; }
+.testo-accento { color: var(--colore-accento); }
+
+/* ==========================================================================
+   12. COMPONENTI ACCESSORI (Modale, Input Checkbox, Badge, Ricerca)
+   ========================================================================== */
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
+.modal-content { background: #1a1a1a; border: 1px solid #333; border-radius: 12px; width: 90%; max-width: 400px; padding: 30px; text-align: center; box-shadow: 0 15px 30px rgba(0,0,0,0.7); animation: modalFadeIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+@keyframes modalFadeIn { from { opacity: 0; transform: translateY(-30px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.modal-header .warning-icon { font-size: 3.5rem; color: var(--colore-errore); margin-bottom: 15px; }
+.modal-header h3 { color: #fff; margin-bottom: 15px; font-size: 1.5rem; }
+.modal-body p { color: #aaa; margin-bottom: 10px; }
+.modal-body .warning-text { color: var(--colore-errore); font-size: 0.85rem; font-weight: bold; margin-top: 15px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; }
+.modal-footer { display: flex; justify-content: center; gap: 15px; }
+.btn-modal-annulla { background: #333; color: #fff; border: none; padding: 12px 25px; border-radius: 6px; cursor: pointer; transition: background 0.3s; font-weight: bold; }
+.btn-modal-annulla:hover { background: #555; }
+.btn-modal-conferma { background: var(--colore-errore); color: #fff; border: none; padding: 12px 25px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.3s; box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3); }
+.btn-modal-conferma:hover { background: #c0392b; transform: translateY(-2px); }
+
+.password-wrapper { position: relative; }
+.input-password-toggle { padding-right: 40px; }
+.icon-toggle-password { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.1rem; color: #bbb; user-select: none; transition: color 0.3s ease; }
+.icon-toggle-password:hover { color: var(--colore-primario); }
+
+.checkbox-group { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+.checkbox-group input[type="checkbox"] { width: auto; }
+.checkbox-label { margin-bottom: 0; display: inline; color: #fff; font-weight: normal; }
+
+.form-actions { margin-top: 30px; display: flex; justify-content: space-between; align-items: center; }
+.link-annulla { color: #bbb; text-decoration: none; }
+.link-annulla:hover { color: #fff; }
+
+.cart-badge { position: absolute; top: -8px; right: -5px; background-color: var(--colore-errore); color: white; border-radius: 50%; padding: 3px 6px; font-size: 0.75rem; font-weight: bold; min-width: 12px; text-align: center; line-height: 1; box-shadow: 0px 2px 4px rgba(0,0,0,0.4); }
+
+.container-ricerca { display: flex; align-items: center; margin-right: auto; margin-left: 20px; }
+.form-ricerca { display: flex; width: 100%; min-width: 350px; height: 40px; border: 1px solid rgba(212, 175, 55, 0.5); border-radius: 25px; overflow: hidden; }
+.form-ricerca input[type="text"] { flex: 1; padding: 0 20px; background-color: var(--sfondo-card); border: none; color: var(--testo-principale); outline: none; font-size: 0.95rem; }
+.form-ricerca button { background-color: var(--colore-accento); color: var(--sfondo-principale); border: none; padding: 0 20px; cursor: pointer; transition: background-color 0.3s; }
+.form-ricerca button:hover { background-color: #bfa030; }
+
+/* ==========================================================================
+   13. MEDIA QUERIES E RESPONSIVE DESIGN (Smartphone e Tablet)
+   ========================================================================== */
 @media screen and (max-width: 1000px) {
-    .area-checkout .container-checkout {
-        flex-direction: column;
-    }
+    .area-checkout .container-checkout { flex-direction: column; }
     .area-checkout .sezione-dati, 
-    .area-checkout .sezione-riepilogo {
-        width: 100%;
-    }
+    .area-checkout .sezione-riepilogo { width: 100%; }
 }
 
+@media screen and (max-width: 768px) {
+    .brand-philosophy { flex-direction: column; }
+    .philosophy-text { padding: 40px 20px; text-align: center; }
+}
+
+@media screen and (max-width: 900px) {
+    .layout-catalogo { flex-direction: column; }
+    .sidebar-filtri { width: 100%; flex: none; position: static; }
+}
 
 @media screen and (max-width: 550px) {
+    .barra-utente { display: flex; flex-wrap: wrap; justify-content: center; text-align: center; }
+    .container-ricerca { width: 100%; margin-left: 0; margin-bottom: 15px; order: -1; }
+    .form-ricerca { min-width: 0; width: 100%; }
     
-    
-    .barra-utente {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        text-align: center;
-    }
-    .container-ricerca {
-        width: 100%;
-        margin-left: 0;
-        margin-bottom: 15px;
-        order: -1; 
-    }
-    .form-ricerca {
-        min-width: 0;
-        width: 100%; 
-    }
-    .area-pubblica nav ul {
-        flex-direction: column;
-        gap: 0;
-    }
-    .area-pubblica nav ul li {
-        width: 100%; 
-        border-bottom: 1px solid #333;
-    }
-    .area-pubblica nav ul li a {
-        display: block;
-        padding: 15px;
-    }
-    .area-pubblica .dropdown-content {
-        position: static;
-        width: 100%;
-        box-shadow: none;
-    }
+    .area-pubblica nav ul { flex-direction: column; gap: 0; }
+    .area-pubblica nav ul li { width: 100%; border-bottom: 1px solid #333; }
+    .area-pubblica nav ul li a { display: block; padding: 15px; }
+    .area-pubblica .dropdown-content { position: static; width: 100%; box-shadow: none; }
 
-    .footer-container {
-        display: block;
-    }
-    .footer-col {
-        width: 100%; 
-        margin-bottom: 30px;
-        text-align: center;
-    }
-    .social-icons {
-        justify-content: center;
-    }
+    .footer-container { display: block; }
+    .footer-col { width: 100%; margin-bottom: 30px; text-align: center; }
+    .social-icons { justify-content: center; }
 
-    .area-dettaglio .container-dettaglio {
-        flex-direction: column;
-        gap: 20px;
-    }
+    .area-dettaglio .container-dettaglio { flex-direction: column; gap: 20px; }
     .area-dettaglio .colonna-sinistra,
-    .area-dettaglio .colonna-destra {
-        width: 100%; 
-        min-width: 100%;
-    }
+    .area-dettaglio .colonna-destra { width: 100%; min-width: 100%; }
 
     .area-auth .riga-doppia,
     .area-admin .form-row,
-    .area-checkout .riga-doppia {
-        flex-direction: column;
-        gap: 0;
-    }
+    .area-checkout .riga-doppia { flex-direction: column; gap: 0; }
+    
     .area-auth .gruppo-form,
     .area-admin .flex-1,
-    .area-checkout .gruppo-form {
-        width: 100%; 
-    }
+    .area-checkout .gruppo-form { width: 100%; }
 
-    .table-responsive {
-        width: 100%;
-        overflow-x: auto;
-        display: block;
-        -webkit-overflow-scrolling: touch;
-    }
+    .table-responsive { width: 100%; overflow-x: auto; display: block; -webkit-overflow-scrolling: touch; }
 
-    .area-pubblica .hero-content h2 {
-        font-size: 2.5rem;
-    }
-    .area-pubblica .hero-content p {
-        font-size: 1rem;
-    }
-    .area-pubblica .btn-hero {
-        width: 100%;
-        text-align: center;
-    }
-    .area-pubblica .carousel-button {
-        display: none;
-    }
-    .area-pubblica .contenitore-prodotti {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
+    .area-pubblica .hero-content h2 { font-size: 2.5rem; }
+    .area-pubblica .hero-content p { font-size: 1rem; }
+    .area-pubblica .btn-hero { width: 100%; text-align: center; }
+    .area-pubblica .carousel-button { display: none; }
+    .area-pubblica .contenitore-prodotti { grid-template-columns: 1fr; gap: 20px; }
 }
