@@ -25,9 +25,9 @@ function validaCampo(input, errorDiv, regex) {
     }
 }
 
-emailInput.addEventListener('input', () => validaCampo(emailInput, emailError, emailRegex));
-pwdInput.addEventListener('input', () => validaCampo(pwdInput, pwdError, pwdRegex));
-telInput.addEventListener('input', () => validaCampo(telInput, telError, telRegex));
+emailInput.addEventListener('change', () => validaCampo(emailInput, emailError, emailRegex));
+pwdInput.addEventListener('change', () => validaCampo(pwdInput, pwdError, pwdRegex));
+telInput.addEventListener('change', () => validaCampo(telInput, telError, telRegex));
 
 togglePassword.addEventListener('click', function () {
     const type = pwdInput.getAttribute('type') === 'password' ? 'text' : 'password';
