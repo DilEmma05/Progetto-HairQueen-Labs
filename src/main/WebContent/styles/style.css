@@ -1781,3 +1781,110 @@ html {
 .form-ricerca button:hover {
     background-color: #bfa030;
 }
+
+/* ==========================================================================
+   LAYOUT RESPONSIVO (BREAK POINTS)
+   ========================================================================== */
+
+
+@media screen and (max-width: 1000px) {
+    .area-checkout .container-checkout {
+        flex-direction: column;
+    }
+    .area-checkout .sezione-dati, 
+    .area-checkout .sezione-riepilogo {
+        width: 100%;
+    }
+}
+
+
+@media screen and (max-width: 550px) {
+    
+    
+    .barra-utente {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+    }
+    .container-ricerca {
+        width: 100%;
+        margin-left: 0;
+        margin-bottom: 15px;
+        order: -1; 
+    }
+    .form-ricerca {
+        min-width: 100%; 
+    }
+    .area-pubblica nav ul {
+        flex-direction: column;
+        gap: 0;
+    }
+    .area-pubblica nav ul li {
+        width: 100%; 
+        border-bottom: 1px solid #333;
+    }
+    .area-pubblica nav ul li a {
+        display: block;
+        padding: 15px;
+    }
+    .area-pubblica .dropdown-content {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+    }
+
+    .footer-container {
+        display: block;
+    }
+    .footer-col {
+        width: 100%; 
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    .social-icons {
+        justify-content: center;
+    }
+
+    .area-dettaglio .container-dettaglio {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .area-dettaglio .colonna-sinistra,
+    .area-dettaglio .colonna-destra {
+        width: 100%; 
+        min-width: 100%;
+    }
+
+    .area-auth .riga-doppia,
+    .area-admin .form-row,
+    .area-checkout .riga-doppia {
+        flex-direction: column;
+        gap: 0;
+    }
+    .area-auth .gruppo-form,
+    .area-admin .flex-1,
+    .area-checkout .gruppo-form {
+        width: 100%; 
+    }
+
+    .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+        display: block;
+    }
+
+    .area-pubblica .hero-content h2 {
+        font-size: 2.5rem;
+    }
+    .area-pubblica .hero-content p {
+        font-size: 1rem;
+    }
+    .area-pubblica .btn-hero {
+        width: 100%;
+        text-align: center;
+    }
+    .area-pubblica .carousel-button {
+        display: none;
+    }
+}
