@@ -195,4 +195,57 @@ public class OrdineDAO {
 
         return (result > 0);
     }
+    
+    public List<Ordine> doRetrieveByFiltriAdmin(String dataInizio, String dataFine, String idClienteStr) throws SQLException {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Ordine> ordiniFiltrati = new java.util.ArrayList<>();
+
+        StringBuilder query = new StringBuilder("SELECT * FROM Ordine WHERE 1=1");
+        List<Object> parametri = new java.util.ArrayList<>();
+
+        if (dataInizio != null && !dataInizio.isEmpty()) {
+            query.append(" AND DATE(data_ordine) >= ?");
+            parametri.add(dataInizio);
+        }
+        if (dataFine != null && !dataFine.isEmpty()) {
+            query.append(" AND DATE(data_ordine) <= ?");
+            parametri.add(dataFine);
+        }
+        if (idClienteStr != null && !idClienteStr.isEmpty()) {
+            query.append(" AND id_utente = ?");
+            parametri.add(Integer.parseInt(idClienteStr));
+        }
+
+        query.append(" ORDER BY data_ordine DESC");
+
+        try {
+            connection = DriverManagerConnectionPool.getConnection();
+            ps = connection.prepareStatement(query.toString());
+
+            for (int i = 0; i < parametri.size(); i++) {
+                ps.setObject(i + 1, parametri.get(i));
+            }
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Ordine ordine = new Ordine();
+                ordine.setIdOrdine(rs.getInt("id_ordine"));
+                ordine.setDataOrdine(rs.getTimestamp("data_ordine"));
+                ordine.setTotale(rs.getDouble("totale"));
+                ordine.setStato(rs.getString("stato"));
+                ordine.setIdUtente(rs.getInt("id_utente"));
+
+                ordiniFiltrati.add(ordine);
+            }
+        } finally {
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
+            if (connection != null) DriverManagerConnectionPool.releaseConnection(connection);
+        }
+
+        return ordiniFiltrati;
+    }
 }

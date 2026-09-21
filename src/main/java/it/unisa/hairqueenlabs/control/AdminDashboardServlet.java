@@ -49,7 +49,18 @@ public class AdminDashboardServlet extends HttpServlet {
             List<Ordine> ordini;
             
             String mostraOrdini = request.getParameter("mostraOrdini");
-            if ("tutti".equals(mostraOrdini)) {
+            String dataInizio = request.getParameter("dataInizio");
+            String dataFine = request.getParameter("dataFine");
+            String idCliente = request.getParameter("idCliente");
+
+            boolean isFiltroAttivo = (dataInizio != null && !dataInizio.isEmpty()) || 
+                                     (dataFine != null && !dataFine.isEmpty()) || 
+                                     (idCliente != null && !idCliente.isEmpty());
+
+            if (isFiltroAttivo) {
+                ordini = ordineDAO.doRetrieveByFiltriAdmin(dataInizio, dataFine, idCliente);
+                request.setAttribute("scopeOrdini", "filtrati");
+            } else if ("tutti".equals(mostraOrdini)) {
                 ordini = ordineDAO.doRetrieveAll();
                 request.setAttribute("scopeOrdini", "tutti");
             } else {

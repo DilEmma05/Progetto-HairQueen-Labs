@@ -29,15 +29,17 @@
     request.setAttribute("nascondiMenuNavigazione", true); 
 %>
 
-<div class="area-pubblica">
-    <jsp:include page="header.jsp" />
-</div>
-
 <div class="area-admin">
 
 <div class="container">
     <h1>Dashboard Amministratore</h1>
     <p>Benvenuto, Admin <%= utente.getNome() %>.</p>
+    
+    <!-- LINK RAPIDI DI NAVIGAZIONE -->
+    <div class="container-link-rapidi">
+        <a href="#sezione-ordini" class="btn-update btn-filtro-grigio"><i class="fas fa-arrow-down"></i> Vai a Ordini</a>
+        <a href="#sezione-catalogo" class="btn-update btn-filtro-grigio"><i class="fas fa-arrow-down"></i> Vai a Catalogo</a>
+    </div>
     
     <% 
         String messaggioSuccesso = request.getParameter("successo");
@@ -56,7 +58,7 @@
         </div>
     <% } %>
 
-    <h2 class="admin-section-title">
+    <h2 id="sezione-ordini" class="admin-section-title">
         <%= "tutti".equals(scopeOrdini) ? "Gestione Ordini - Tutti gli Ordini dei Clienti" : "Gestione Ordini - I Miei Ordini Effettuati" %>
     </h2>
 
@@ -71,6 +73,32 @@
             </a>
         <% } %>
     </div>
+    
+    <% if ("tutti".equals(scopeOrdini) || "filtrati".equals(scopeOrdini)) { %>
+        <div class="pannello-filtri-admin">
+            <form action="<%= request.getContextPath() %>/admin-dashboard" method="GET" class="form-inline form-filtri-inline">
+                <input type="hidden" name="mostraOrdini" value="tutti">
+                
+                <div>
+                    <label for="dataInizio" class="etichetta-filtro">Da data:</label>
+                    <input type="date" id="dataInizio" name="dataInizio" value="<%= request.getParameter("dataInizio") != null ? request.getParameter("dataInizio") : "" %>" class="input-filtro-admin">
+                </div>
+                
+                <div>
+                    <label for="dataFine" class="etichetta-filtro">A data:</label>
+                    <input type="date" id="dataFine" name="dataFine" value="<%= request.getParameter("dataFine") != null ? request.getParameter("dataFine") : "" %>" class="input-filtro-admin">
+                </div>
+                
+                <div>
+                    <label for="idCliente" class="etichetta-filtro">ID Cliente:</label>
+                    <input type="number" id="idCliente" name="idCliente" placeholder="Es. 2" value="<%= request.getParameter("idCliente") != null ? request.getParameter("idCliente") : "" %>" class="input-filtro-admin input-id-cliente">
+                </div>
+                
+                <button type="submit" class="btn-update">Filtra Ordini</button>
+                <a href="<%= request.getContextPath() %>/admin-dashboard?mostraOrdini=tutti" class="btn-update btn-filtro-grigio">Reset</a>
+            </form>
+        </div>
+    <% } %>
     
     <% if (ordini != null && !ordini.isEmpty()) { %>
         <div class="table-responsive">
@@ -116,7 +144,7 @@
         <p>Non ci sono ordini in questa visualizzazione.</p>
     <% } %>
 
-    <h2 class="admin-section-title">
+    <h2 id="sezione-catalogo" class="admin-section-title">
         <%= "tutti".equals(scopeVisualizzazione) ? "Gestione Catalogo - Tutti i Prodotti del Sistema" : "Gestione Catalogo - I Miei Prodotti" %>
     </h2>
     
@@ -210,8 +238,6 @@
         </div>
     </div>
 </div>
-
-<jsp:include page="footer.jsp" />
 
 <script src="<%= request.getContextPath() %>/scripts/admin.js"></script>
 
