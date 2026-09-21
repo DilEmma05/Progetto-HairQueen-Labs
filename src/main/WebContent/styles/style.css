@@ -712,4 +712,25 @@ html {
     .form-filtri-inline { flex-direction: column; align-items: stretch; gap: 10px; }
     .input-filtro-admin, .input-id-cliente { width: 100%; }
     .container-link-rapidi { flex-direction: column; gap: 10px; }
+    
+    .area-profilo table,
+    .area-dettaglio-ordine table,
+    .area-carrello table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+    }
+
+    .area-dettaglio-ordine .azioni-dettaglio {
+        flex-direction: column-reverse;
+        gap: 20px;
+        align-items: stretch;
+    }
+
+    .area-dettaglio-ordine .btn-fattura {
+        width: 100%;
+        text-align: center;
+    }
 }
