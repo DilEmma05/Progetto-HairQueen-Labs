@@ -16,7 +16,7 @@
     <div class="container container-form">
         <h1 class="titolo-form">Aggiungi al Catalogo</h1>
         
-        <form action="<%= request.getContextPath() %>/inserisci-prodotto" method="POST">
+        <form action="<%= request.getContextPath() %>/inserisci-prodotto" method="POST" enctype="multipart/form-data">
             
             <div class="form-group">
                 <label for="nome">Nome Prodotto *</label>
@@ -40,8 +40,8 @@
             </div>
 
             <div class="form-group">
-                <label for="immagineUrl">URL Immagine</label>
-                <input type="text" id="immagineUrl" name="immagineUrl" placeholder="es. images/shampoo-nuovo.jpg">
+                <label for="immagineFile">Carica Immagine Prodotto</label>
+                <input type="file" id="immagineFile" name="immagineFile" accept="image/*">
             </div>
             
             <div class="form-group">
@@ -70,12 +70,12 @@
                 <input type="number" id="idSottocategoria" name="idSottocategoria" min="1">
             </div>
 
-            <div class="checkbox-group" style="margin-bottom: 10px;">
+            <div class="checkbox-group margin-b-10">
                 <input type="checkbox" name="isNovita" value="true" id="checkNovita">
                 <label for="checkNovita" class="checkbox-label">Contrassegna come Novità (Mostra nell'Homepage)</label>
             </div>
             
-            <div class="checkbox-group" style="margin-bottom: 25px;">
+            <div class="checkbox-group margin-b-25">
                 <input type="checkbox" name="is_attivo" value="true" id="checkAttivo" checked>
                 <label for="checkAttivo" class="checkbox-label">Pubblica Immediatamente (Visibile ai clienti nel catalogo)</label>
             </div>

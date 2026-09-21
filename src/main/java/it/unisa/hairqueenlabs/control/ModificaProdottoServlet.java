@@ -1,13 +1,17 @@
 package it.unisa.hairqueenlabs.control;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 
 import it.unisa.hairqueenlabs.dao.ProdottoDAO;
@@ -18,22 +22,26 @@ import it.unisa.hairqueenlabs.model.Utente;
  * Servlet implementation class ModificaProdottoServlet
  */
 @WebServlet("/modifica-prodotto")
+@MultipartConfig(
+    fileSizeThreshold = 1024 * 1024 * 2,  
+    maxFileSize = 1024 * 1024 * 10,       
+    maxRequestSize = 1024 * 1024 * 50     
+)
 public class ModificaProdottoServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
     public ModificaProdottoServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
         Utente utenteLoggato = (Utente) session.getAttribute("utente");
 
         if (utenteLoggato == null || !"ADMIN".equalsIgnoreCase(utenteLoggato.getRuolo())) {
@@ -61,13 +69,13 @@ public class ModificaProdottoServlet extends HttpServlet {
         } else {
             response.sendRedirect("admin-dashboard");
         }
-	}
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
         Utente utenteLoggato = (Utente) session.getAttribute("utente");
 
         if (utenteLoggato == null || !"ADMIN".equalsIgnoreCase(utenteLoggato.getRuolo())) {
@@ -82,7 +90,6 @@ public class ModificaProdottoServlet extends HttpServlet {
             p.setDescrizione(request.getParameter("descrizione"));
             p.setPrezzo(Double.parseDouble(request.getParameter("prezzo")));
             p.setQuantitaMagazzino(Integer.parseInt(request.getParameter("quantitaMagazzino")));
-            p.setImmagineUrl(request.getParameter("immagineUrl"));
             p.setFaseUtilizzo(request.getParameter("faseUtilizzo"));
             
             String idSottoCat = request.getParameter("idSottocategoria");
@@ -97,6 +104,27 @@ public class ModificaProdottoServlet extends HttpServlet {
             String isAttivoStr = request.getParameter("is_attivo");
             p.setAttivo(isAttivoStr != null);
 
+            Part filePart = request.getPart("immagineFile");
+            String fileName = (filePart != null) ? Paths.get(filePart.getSubmittedFileName()).getFileName().toString() : "";
+            
+            String immagineUrlFinale = "";
+
+            if (fileName != null && !fileName.isEmpty()) {
+                String uploadPath = getServletContext().getRealPath("") + File.separator + "images";
+                
+                File uploadDir = new File(uploadPath);
+                if (!uploadDir.exists()) {
+                    uploadDir.mkdir();
+                }
+                
+                filePart.write(uploadPath + File.separator + fileName);
+                immagineUrlFinale = "images/" + fileName;
+            } else {
+                immagineUrlFinale = request.getParameter("vecchiaImmagineUrl");
+            }
+            
+            p.setImmagineUrl(immagineUrlFinale);
+
             ProdottoDAO dao = new ProdottoDAO();
             dao.doUpdate(p);
 
@@ -106,6 +134,6 @@ public class ModificaProdottoServlet extends HttpServlet {
             e.printStackTrace();
             response.sendRedirect("admin-dashboard?errore=modificaFallita");
         }
-	}
+    }
 
 }

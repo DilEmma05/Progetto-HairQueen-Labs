@@ -22,8 +22,9 @@
         <p>Aggiorna i dettagli del prodotto e clicca su Salva.</p>
         
         <div class="form-container">
-            <form action="<%= request.getContextPath() %>/modifica-prodotto" method="POST">
+            <form action="<%= request.getContextPath() %>/modifica-prodotto" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="idProdotto" value="<%= p.getIdProdotto() %>">
+                <input type="hidden" name="vecchiaImmagineUrl" value="<%= (p.getImmagineUrl() != null) ? p.getImmagineUrl() : "" %>">
                 
                 <div class="form-group">
                     <label>Nome Prodotto *</label>
@@ -47,8 +48,16 @@
                 </div>
                 
                 <div class="form-group">
-                    <label>URL Immagine (es. /images/prodotti/shampoo.png)</label>
-                    <input type="text" name="immagineUrl" value="<%= (p.getImmagineUrl() != null) ? p.getImmagineUrl() : "" %>">
+                    <label>Sostituisci Immagine Prodotto (Lascia vuoto per mantenere quella attuale)</label>
+                    
+                    <% if(p.getImmagineUrl() != null && !p.getImmagineUrl().isEmpty()) { %>
+                        <div class="preview-immagine-corrente">
+                            <img src="<%= request.getContextPath() %>/<%= p.getImmagineUrl() %>" alt="Immagine attuale" class="img-preview">
+                            <p class="testo-preview">Immagine attuale</p>
+                        </div>
+                    <% } %>
+                    
+                    <input type="file" name="immagineFile" accept="image/*">
                 </div>
                 
                 <div class="form-row">

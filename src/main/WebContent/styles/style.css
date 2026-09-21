@@ -212,7 +212,6 @@ html {
 .link-back:hover { color: #fff; }
 .modal-product-name { color: #fff; font-size: 1.1rem; }
 
-/* --- NUOVE CLASSI PER FILTRI E LINK ADMIN DASHBOARD --- */
 .container-link-rapidi { 
     display: flex; 
     gap: 15px; 
@@ -246,6 +245,13 @@ html {
 .input-id-cliente { 
     width: 100px; 
 }
+
+.margin-b-10 { margin-bottom: 10px; }
+.margin-b-25 { margin-bottom: 25px; }
+
+.preview-immagine-corrente { margin-bottom: 10px; }
+.img-preview { max-height: 100px; border: 1px solid #ddd; border-radius: 4px; }
+.testo-preview { font-size: 12px; color: #666; margin-top: 5px; margin-bottom: 5px; }
 
 /* ==========================================================================
    4. AREA PUBBLICA - HEADER E MENU
