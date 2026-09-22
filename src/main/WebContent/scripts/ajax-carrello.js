@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             badge.innerText = jsonResponse.totaleArticoli;
                         }
 
-                        btnSubmit.innerHTML = "✔ Aggiunto";
+                        btnSubmit.innerHTML = "Aggiunto";
                         btnSubmit.style.backgroundColor = "#27ae60"; 
                         btnSubmit.style.color = "white";
                         btnSubmit.disabled = true; 
