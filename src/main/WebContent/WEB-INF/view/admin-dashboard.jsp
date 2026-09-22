@@ -35,7 +35,6 @@
     <h1>Dashboard Amministratore</h1>
     <p>Benvenuto, Admin <%= utente.getNome() %>.</p>
     
-    <!-- LINK RAPIDI DI NAVIGAZIONE -->
     <div class="container-link-rapidi">
         <a href="#sezione-ordini" class="btn-update btn-filtro-grigio"><i class="fas fa-arrow-down"></i> Vai a Ordini</a>
         <a href="#sezione-catalogo" class="btn-update btn-filtro-grigio"><i class="fas fa-arrow-down"></i> Vai a Catalogo</a>
